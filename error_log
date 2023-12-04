@@ -1,0 +1,4 @@
+[02-Dec-2023 10:09:10 Asia/Jakarta] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /home1/kreasin3/gea-stg.kreasinusantara.co.id/application/libraries/PHPExcel/Shared/String.php on line 529
+[02-Dec-2023 10:29:01 Asia/Jakarta] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /home1/kreasin3/gea-stg.kreasinusantara.co.id/application/libraries/PHPExcel/Shared/String.php on line 529
+[02-Dec-2023 10:33:10 Asia/Jakarta] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /home1/kreasin3/gea-stg.kreasinusantara.co.id/application/libraries/PHPExcel/Shared/String.php on line 536
+[02-Dec-2023 10:34:25 Asia/Jakarta] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /home1/kreasin3/gea-stg.kreasinusantara.co.id/application/libraries/PHPExcel/Calculation.php on line 2186
