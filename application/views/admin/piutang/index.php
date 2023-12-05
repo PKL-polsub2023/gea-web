@@ -70,7 +70,7 @@
                                                         <a href="<?= base_url('piutang/pending/' . $u['mastercustomer_id']) ?>" class="btn btn-warning btn-sm">Pending</a>                                                     
                                                         <a href="<?= base_url('piutang/unpayed/' . $u['mastercustomer_id']) ?>" class="btn btn-danger btn-sm">Unpayed</a>                                                      -->
                                                         <a href="<?= base_url('piutang/invoice/' . $u['mastercustomer_id']) ?>" class="btn btn-info btn-sm">Invoice</a>   
-                                                        <a href="<?= base_url('piutang/pdfinvoice/' . $u['mastercustomer_id']) ?>" class="btn btn-success btn-sm" target="_blank">PDF Invoice</a>                                                     
+                                                        <a href="<?= base_url('piutang/isiinvoice/' . $u['mastercustomer_id']) ?>" class="btn btn-success btn-sm" target="_blank">PDF Invoice</a>                                                     
                                                         
                                                     </td>
 
@@ -80,7 +80,6 @@
                                                 <?php }}?>
                                             </tbody> 
                                         </table>
-
                                     </div>
                                 </div> 
                             </div> <!-- end col -->

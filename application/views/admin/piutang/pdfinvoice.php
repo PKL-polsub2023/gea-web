@@ -133,13 +133,14 @@
                 <th  style="width:400px">
                     <table>
                         <tr>    
-                            <td  class="data">No Invoice : </td>
+                            <td  class="data">No Invoice : <?= $no_invoice;?></td>
+                            
                         </tr>
                         <tr>
-                            <td  class="data">Tanggal :</td>
+                            <td  class="data">Tanggal : <?= $tanggal; ?></td>
                         </tr>
                         <tr>
-                            <td  class="data">Due Date :</td>
+                            <td  class="data">Due Date : <?= $dd;?></td>
                         </tr>
                         <tr>
                             <td  class="data">No PO :</td>
@@ -162,10 +163,10 @@
                     foreach($datamaster as $u){  
             ?>        
             <tr>
-                <td class="data2" style="width:5%;text-align:center;;border-left:1px solid black;border-bottom:1px solid black;"></td>
-                <td class="data2" style="width:40%;border-bottom:1px solid black;"></td>
-                <td class="data2" style="width:10%;border-bottom:1px solid black;"></td>
-                <td class="data2" style="width:10%;border-bottom:1px solid black;"></td>
+                <td class="data2" style="width:5%;text-align:center;;border-left:1px solid black;border-bottom:1px solid black;">1</td>
+                <td class="data2" style="width:40%;border-bottom:1px solid black;"><?php echo "Tagihan".$u['namaperusahaan']." ".$u['tanggalkirim'] ?></td>
+                <td class="data2" style="width:10%;border-bottom:1px solid black;"><?php echo $u['total'] ?></td>
+                <td class="data2" style="width:10%;border-bottom:1px solid black;">-</td>
                 <td class="data2" style="width:30%;border-bottom:1px solid black;"><?php echo $u['total'] ?></td>
             </tr>
             <?php }}?>
@@ -189,15 +190,19 @@
             </tr>
             <tr>
                 <td class="total" colspan="2"> &nbsp;&nbsp; Discount</td>
-                <td style="border-bottom:1px solid black">: </td>
+                <td style="border-bottom:1px solid black">: 0 </td>
             </tr>
             <tr>
                 <td class="total" colspan="2"> &nbsp;&nbsp; Pajak</td>
-                <td style="border-bottom:1px solid black">: </td>
+                <td style="border-bottom:1px solid black">: 0 </td>
             </tr>
             <tr>
                 <td class="total" colspan="2"> &nbsp;&nbsp; Biaya Pengiriman</td>
-                <td style="border-bottom:1px solid black">: </td>
+                <td style="border-bottom:1px solid black">: 0 </td>
+            </tr>
+            <tr>
+                <td class="total" colspan="2"> &nbsp;&nbsp; Total</td>
+                <td style="border-bottom:1px solid black">: <?php echo $total ?> </td>
             </tr>
         </table>
 

@@ -19,7 +19,7 @@ class Piutang extends CI_Controller {
             'datamaster'		=> $this->Piutang_Model->Lihatmaster()
         );
 
-		$this->load->view('layout/header');
+	  $this->load->view('layout/header');
         $this->load->view('layout/sidebar');
         $this->load->view('admin/piutang/index',$data);
         $this->load->view('layout/footer');
@@ -59,6 +59,7 @@ class Piutang extends CI_Controller {
       }
 
       public function invoice($mastercustomer_id){
+
             $data = array(
                   'datamaster' => $this->Piutang_Model->LihatMasterInvoice($mastercustomer_id),
             );
@@ -617,6 +618,16 @@ class Piutang extends CI_Controller {
         }
 
         public function pdfinvoice($mastercustomer_id){
+            // $chek = $this->Piutang_Model->chekinvoice($mastercustomer_id);
+            // echo $chek;
+            // if ($chek == null) {
+            //       $data=array(
+            //             'no_invoice'                  => $this->input->post('no_invoice'),
+            //             'mastercustomer_id'                  => $mastercustomer_id,
+            //         );      
+                
+            // $this->db->insert('dt_invoice', $data);       
+            // }
             $detailData =  $this->Piutang_Model->Detail($mastercustomer_id);     
             $getData =  $this->Piutang_Model->LihatMasterInvoice($mastercustomer_id);     
             $total = 0;
@@ -658,18 +669,32 @@ class Piutang extends CI_Controller {
                   }
             }
 
-                  $total_terbilang = ucwords(terbilang($total));
-
+            $total_terbilang = ucwords(terbilang($total));
 
             $data = array(
                   'datamaster' => $this->Piutang_Model->LihatMasterInvoice($mastercustomer_id),
                   'total' => $total,
                   'terbilang' => $total_terbilang,
                   'detail' => $detailData,
+                  'no_invoice'=>$this->input->post('no_invoice'),
+                  'tanggal'=>$this->input->post('tanggal'),
+                  'dd'=>$this->input->post('dd'),
             );
 
             $this->load->view('admin/piutang/pdfinvoice',$data);
       
+      }
+      public function isiinvoice($mastercustomer_id)
+      {
+      
+            $data = array(
+                  'id' => $mastercustomer_id,
+                  
+            );
+       $this->load->view('layout/header');
+        $this->load->view('layout/sidebar');
+        $this->load->view('admin/piutang/invoicee', $data);
+        $this->load->view('layout/footer'); 
       }
 }
 

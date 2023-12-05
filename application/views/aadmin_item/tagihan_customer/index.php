@@ -71,7 +71,7 @@
 
                                                         <a href="<?= base_url('tagihan_customer/ubah/' . $u['tagihan_customer_id']) ?>" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>                                                     
                                                         <a onclick="return confirm('apakah anda yakin?')" href="<?= base_url('tagihan_customer/hapus/' . $u['tagihan_customer_id']) ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
-                                                        <a href="<?= base_url('tagihan_customer/pdf/' . $u['tagihan_customer_id']) ?>" class="btn btn-primary btn-sm"><i class="fa fa-download"></i>PDF</a>                                                     
+                                                        <!-- <a href="<?= base_url('tagihan_customer/pdf/' . $u['tagihan_customer_id']) ?>" class="btn btn-primary btn-sm"><i class="fa fa-download"></i>PDF</a>                                                      -->
                                                     </td>
 
                                     

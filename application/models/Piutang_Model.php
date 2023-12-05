@@ -48,6 +48,19 @@ class Piutang_Model extends CI_Model{
 
 	}
 
+	public function ChekInvoice($mastercustomer_id){	
+
+		$query = $this->db->query("
+                  SELECT COUNT(id_invoice) FROM dt_invoice
+                  WHERE mastercustomer_id = '".$mastercustomer_id."'
+            ");
+
+		return $query->result_array();
+
+	}
+
+	
+
       public function LihatMasterInvoice($mastercustomer_id){	
 
 		$query = $this->db->query("
