@@ -49,6 +49,7 @@
                                                 <th>Total Volume Gas</th>
                                                 
                                                 <th>Jumlah Tagihan</th>
+                                                <th>Status</th>
 
                                                 <th style="text-align:center">Tindakan</th>                                            
                                             </tr>
@@ -68,10 +69,12 @@
                                                     <td><?php echo $u['tekananakhir'] - $u['tekananawal']?></td>
 
                                                     <td><?php echo $u['total'] ?></td>
+                                                    <td><?php echo $u['statushutang'] ?></td>
                                                     <td style="text-align:center">
                                                             <!-- <a href="#" class="btn btn-info btn-sm" >View</a>                                                      -->
                                                             <a href="<?= base_url('piutang/cetakinvoice/' . $u['tagihan_customer_id']) ?>" class="btn btn-success btn-sm" >Statement</a>                                                     
-                                                            <a href="<?= base_url('piutang/cetakba/' . $u['tagihan_customer_id']) ?>" class="btn btn-success btn-sm" >Berita Acara</a>                                                     
+                                                            <a href="<?= base_url('piutang/cetakba/' . $u['tagihan_customer_id']) ?>" class="btn btn-success btn-sm" >Berita Acara</a> 
+                                                            <a href="<?= base_url('piutang/isiinvoice_satuan/' . $u['tagihan_customer_id']) ?>" class="btn btn-success btn-sm" target="_blank">PDF Invoice</a>                                                       
                                                     </td>
 
                                     

@@ -124,7 +124,7 @@
                             <td class="data">Kepada Yth :</td>
                         </tr>
                         <tr>
-                        <td class="data"><?= $detail['namaperusahaan'];?></td>
+                        <td class="data"><?= $u['namaperusahaan'];?></td>
                         </tr>
                     </table>
                 </th>
@@ -158,10 +158,7 @@
                 <th style="width:10%" class="data2">Discount</th>
                 <th style="width:30%" class="data2">Total</th>
             </tr>
-            <?php                                                 
-                if($datamaster){
-                    foreach($datamaster as $u){  
-            ?>        
+         
             <tr>
                 <td class="data2" style="width:5%;text-align:center;;border-left:1px solid black;border-bottom:1px solid black;">1</td>
                 <td class="data2" style="width:40%;border-bottom:1px solid black;"><?php echo "Tagihan ".$u['namaperusahaan']." ".$u['tanggalkirim'] ?></td>
@@ -169,7 +166,6 @@
                 <td class="data2" style="width:10%;border-bottom:1px solid black;">-</td>
                 <td class="data2" style="width:30%;border-bottom:1px solid black;"><?php echo $u['total'] ?></td>
             </tr>
-            <?php }}?>
             <tr>
                 <td colspan="2" rowspan="5">
                 <p  class="norek">

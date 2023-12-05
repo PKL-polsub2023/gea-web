@@ -60,11 +60,18 @@ class Piutang extends CI_Controller {
 
       public function invoice($mastercustomer_id){
 
+            $getData = $this->Piutang_Model->LihatMasterInvoice($mastercustomer_id);
+
+            foreach ($getData as &$u) {
+                  if ($u['statushutang'] == "Y") {
+                      $u['statushutang'] = "sudah bayar";
+                  } else {
+                      $u['statushutang'] = "belum bayar";
+                  }
+              }
             $data = array(
-                  'datamaster' => $this->Piutang_Model->LihatMasterInvoice($mastercustomer_id),
+                  'datamaster' => $getData,
             );
-
-
             $this->load->view('layout/header');
             $this->load->view('layout/sidebar');
             $this->load->view('admin/piutang/invoice',$data);
@@ -694,6 +701,70 @@ class Piutang extends CI_Controller {
        $this->load->view('layout/header');
         $this->load->view('layout/sidebar');
         $this->load->view('admin/piutang/invoicee', $data);
+        $this->load->view('layout/footer'); 
+      }
+
+
+      public function pdfinvoicesatuan($tagihan_customer_id)
+      {     
+      $getData = $this->Piutang_Model->DetailTagihan($tagihan_customer_id);
+      function terbilang($angka)
+      {
+            $angka = floatval($angka);
+            $bilangan = array(
+                  '', 'satu', 'dua', 'tiga', 'empat', 'lima',
+                  'enam', 'tujuh', 'delapan', 'sembilan', 'sepuluh', 'sebelas'
+            );
+            if ($angka < 12) {
+                  return $bilangan[$angka];
+            } elseif ($angka < 20) {
+                  return terbilang($angka - 10) . ' belas';
+            } elseif ($angka < 100) {
+                  return terbilang($angka / 10) . ' puluh ' . terbilang($angka % 10);
+            } elseif ($angka < 200) {
+                  return 'seratus ' . terbilang($angka - 100);
+            } elseif ($angka < 1000) {
+                  return terbilang($angka / 100) . ' ratus ' . terbilang($angka % 100);
+            } elseif ($angka < 2000) {
+                  return 'seribu ' . terbilang($angka - 1000);
+            } elseif ($angka < 1000000) {
+                  return terbilang($angka / 1000) . ' ribu ' . terbilang($angka % 1000);
+            } elseif ($angka < 1000000000) {
+                  return terbilang($angka / 1000000) . ' juta ' . terbilang($angka % 1000000);
+            } elseif ($angka < 1000000000000) {
+                  return terbilang($angka / 1000000000) . ' milyar ' . terbilang($angka % 1000000000);
+            } else {
+                  return 'Angka terlalu besar';
+            }
+      }
+
+      $total = $getData['total']; 
+      $total_terbilang = ucwords(terbilang($total));;
+
+      $data = array(
+            'u' => $getData,
+            'total' => $total,
+            'terbilang' => $total_terbilang,
+            'no_invoice' => $this->input->post('no_invoice'),
+            'tanggal' => $this->input->post('tanggal'),
+            'dd' => $this->input->post('dd'),
+      );
+
+
+      $this->load->view('admin/piutang/pdfinvoice_satuan', $data);
+      }
+
+
+      public function isiinvoice_satuan($mastercustomer_id)
+      {
+      
+            $data = array(
+                  'id' => $mastercustomer_id,
+                  
+            );
+       $this->load->view('layout/header');
+        $this->load->view('layout/sidebar');
+        $this->load->view('admin/piutang/input-invoicesatuan', $data);
         $this->load->view('layout/footer'); 
       }
 }
