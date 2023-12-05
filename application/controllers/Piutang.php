@@ -9,15 +9,23 @@ class Piutang extends CI_Controller {
 		parent::__construct();
 		$this->load->helper('url');
 		$this->load->model('Piutang_Model');
+            $this->load->model('Tagihan_customer_model');
             $this->load->library('session');
             $this->load->library('Pdf');
 	}
 
 	public function index()
-	{     
-        $data = array( 
-            'datamaster'		=> $this->Piutang_Model->Lihatmaster()
-        );
+	{    
+            
+            $getData = $this->Piutang_Model->Lihatmaster();
+
+            foreach ($getData as &$datas) {
+                $datas['jumlah_tagihan'] = $this->Tagihan_customer_model->count($datas['mastercustomer_id']);
+            }
+            
+            $data = array( 
+                'datamaster' => $getData,
+            );
 
 	  $this->load->view('layout/header');
         $this->load->view('layout/sidebar');

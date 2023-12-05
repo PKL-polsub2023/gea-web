@@ -85,6 +85,20 @@ class Tagihan_customer_model extends CI_Model{
             return $data;
       }
 
+	  public function count($id){	
+
+		$query = $this->db->query("
+		SELECT *, dt_tagihan_customer.tekananawal as tawal, dt_tagihan_customer.tekananakhir as takhir  FROM dt_tagihan_customer
+			JOIN dt_mastercustomer ON dt_mastercustomer.mastercustomer_id = dt_tagihan_customer.mastercustomer_id
+			JOIN dt_suratjalan_customer ON dt_suratjalan_customer.suratjalan_customer_id = dt_tagihan_customer.suratjalan_customer_id
+			JOIN dt_datakwitansi ON dt_datakwitansi.datakwitansi_id = dt_suratjalan_customer.datakwitansi_id 
+		WHERE dt_tagihan_customer.mastercustomer_id = '".$id."'; ");
+	
+		return $query->num_rows(); 
+	
+	}
+	
+
     
 
 

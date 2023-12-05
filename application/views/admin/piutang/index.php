@@ -69,9 +69,14 @@
                                                         <!-- <a href="<?= base_url('piutang/paid/' . $u['mastercustomer_id']) ?>" class="btn btn-success btn-sm">Paid</a>                                                     
                                                         <a href="<?= base_url('piutang/pending/' . $u['mastercustomer_id']) ?>" class="btn btn-warning btn-sm">Pending</a>                                                     
                                                         <a href="<?= base_url('piutang/unpayed/' . $u['mastercustomer_id']) ?>" class="btn btn-danger btn-sm">Unpayed</a>                                                      -->
-                                                        <a href="<?= base_url('piutang/invoice/' . $u['mastercustomer_id']) ?>" class="btn btn-info btn-sm">Invoice</a>   
-                                                        <a href="<?= base_url('piutang/isiinvoice/' . $u['mastercustomer_id']) ?>" class="btn btn-success btn-sm" target="_blank">PDF Invoice</a>                                                     
-                                                        
+                                                        <!-- <a href="<?= base_url('piutang/invoice/' . $u['mastercustomer_id']) ?>" class="btn btn-info btn-sm">Invoice</a>   
+                                                        <a href="<?= base_url('piutang/isiinvoice/' . $u['mastercustomer_id']) ?>" class="btn btn-success btn-sm" target="_blank">PDF Invoice</a>                                                      -->
+                                                        <?php if ($u['jumlah_tagihan'] > 0) { ?>
+                                                            <a href="<?= base_url('piutang/invoice/' . $u['mastercustomer_id']) ?>" class="btn btn-info btn-sm">Invoice</a>   
+                                                            <a href="<?= base_url('piutang/isiinvoice/' . $u['mastercustomer_id']) ?>" class="btn btn-success btn-sm" target="_blank">PDF Invoice</a>                                                     
+                                                        <?php } else { ?>
+                                                            <span>Tidak ada tagihan</span>
+                                                        <?php } ?>
                                                     </td>
 
                                     
