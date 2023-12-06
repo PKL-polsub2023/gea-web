@@ -12,6 +12,7 @@ class Laporan_Balance_Sheet extends CI_Controller {
         $this->load->library('Pdf');
         //$this->load->helper('html');
 		$this->load->model('Laporan_Balance_Sheet_Model');
+		$this->load->library('session');
 	}
 
 	public function index()
@@ -20,11 +21,20 @@ class Laporan_Balance_Sheet extends CI_Controller {
         // $data = array( 
         //     'databyjurnal'				=> $this->Laporan_Balance_Sheet_Model->databyjurnal(),		
         // );      
-
-		$this->load->view('layout/header');
-        $this->load->view('layout/sidebar');
-        $this->load->view('admin/laporan_balance_sheet/index');
-        $this->load->view('layout/footer');
+		$role = $this->session->userdata('role');
+        if($role == "akuntan")
+		{
+			$this->load->view('layout/header');
+			$this->load->view('layout/sidebar');
+			$this->load->view('admin/laporan_balance_sheet/index');
+			$this->load->view('layout/footer');
+		}else{
+			$this->load->view('pimpinan/header');
+			$this->load->view('pimpinan/sidebar');
+			$this->load->view('pimpinan-content/laporan_balance_sheet/index');
+			$this->load->view('pimpinan/footer');
+		}
+		
 	}
 
 	function cetakpdf(){   
@@ -176,7 +186,12 @@ class Laporan_Balance_Sheet extends CI_Controller {
 		//$data['bulan'] = ($bulan) ? nama_bulan($bulan) : FALSE;
 		//$data['tahun'] = $this->uri->segment(4);
 		$data['neraca_data'] = $this->get_neraca_data($tgl_awal,$tgl_akhir);
-		$this->load->view('admin/laporan_balance_sheet/neraca', $data);
+		if($role == "akuntan"){
+			$this->load->view('admin/laporan_balance_sheet/neraca', $data);
+		}else{
+			$this->load->view('pimpinan-content/laporan_balance_sheet/neraca', $data);
+		}
+		
 	}
 	
 	function get_neraca_data($tgl_awal,$tgl_akhir)

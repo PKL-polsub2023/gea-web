@@ -11,6 +11,7 @@ class Laporan_profit_lost extends CI_Controller {
 		$this->load->helper('menu_helper');
 		$this->load->library('Pdf');
 		$this->load->model('Laporan_Profit_Lost_Model');
+        $this->load->library('session');
 	}
 
 	public function index()
@@ -20,10 +21,20 @@ class Laporan_profit_lost extends CI_Controller {
         //     'databyjurnal'				=> $this->Laporan_Profit_Lost_Model->databyjurnal(),		
         // );      
 
-		$this->load->view('layout/header');
-        $this->load->view('layout/sidebar');
-        $this->load->view('admin/laporan_profit_lost/index');
-        $this->load->view('layout/footer');
+        $role = $this->session->userdata('role');
+        if($role == "akuntan")
+        {
+            $this->load->view('layout/header');
+            $this->load->view('layout/sidebar');
+            $this->load->view('admin/laporan_profit_lost/index');
+            $this->load->view('layout/footer');
+        }else{
+            $this->load->view('pimpinan/header');
+            $this->load->view('pimpinan/sidebar');
+            $this->load->view('pimpinan-content/laporan_profit_lost/index');
+            $this->load->view('pimpinan/footer');
+        }
+		
 	}
 
 	function cetakpdf(){      
