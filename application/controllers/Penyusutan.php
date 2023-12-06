@@ -20,10 +20,20 @@ class Penyusutan extends CI_Controller {
             'datapenyusutan'		=> $this->Penyusutan_Model->lihatpenyusutan()
         );       
 
-		$this->load->view('layout/header');
-        $this->load->view('layout/sidebar');
-        $this->load->view('admin/penyusutan/index',$data);
-        $this->load->view('layout/footer');
+        $role = $this->session->userdata('role');
+        if($role == "akuntan")
+        {
+            $this->load->view('layout/header');
+            $this->load->view('layout/sidebar');
+            $this->load->view('admin/penyusutan/index',$data);
+            $this->load->view('layout/footer');
+        }else{
+            $this->load->view('pimpinan/header');
+            $this->load->view('pimpinan/sidebar');
+            $this->load->view('pimpinan-content/penyusutan/index',$data);
+            $this->load->view('pimpinan/footer');
+        }
+		
 	} 
 
     public function tambah()
@@ -152,10 +162,19 @@ class Penyusutan extends CI_Controller {
             'detail_penyusutan'		=> $this->Penyusutan_Model->lihat_detail_penyusutan($no_jurnal),
         ); 
 	
-        $this->load->view('layout/header');
-        $this->load->view('layout/sidebar');
-        $this->load->view('admin/penyusutan/detail', $data);
-        $this->load->view('layout/footer');
+        $role = $this->session->userdata('role');
+        if($role == "akuntan"){
+            $this->load->view('layout/header');
+            $this->load->view('layout/sidebar');
+            $this->load->view('admin/penyusutan/detail', $data);
+            $this->load->view('layout/footer');
+        }else{
+            $this->load->view('pimpinan/header');
+            $this->load->view('pimpinan/sidebar');
+            $this->load->view('pimpinan-content/penyusutan/detail', $data);
+            $this->load->view('pimpinan/footer');
+        }
+     
 	}
 
     public function edit($no_jurnal)

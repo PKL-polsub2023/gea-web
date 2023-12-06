@@ -14,14 +14,25 @@ class Data_kwitansi extends CI_Controller {
 
 	public function index()
 	{     
+        $role = $this->session->userdata('role');
         $data = array( 
-            'datamaster'		=> $this->Datakwitansi_model->Lihatmaster()
+            'datamaster'		=> $this->Datakwitansi_model->Lihatmaster(),
         );
 
-		$this->load->view('aadmin_layout/header');
-        $this->load->view('aadmin_layout/sidebar');
-        $this->load->view('aadmin_item/datakwitansi/index',$data);
-        $this->load->view('aadmin_layout/footer');
+        if($role == "admin")
+        {
+            $this->load->view('aadmin_layout/header');
+            $this->load->view('aadmin_layout/sidebar');
+            $this->load->view('aadmin_item/datakwitansi/index',$data);
+            $this->load->view('aadmin_layout/footer');
+        }else if ($role == "pimpinan"){
+            $this->load->view('pimpinan/header');
+            $this->load->view('pimpinan/sidebar');
+            $this->load->view('pimpinan_item/datakwitansi/index',$data);
+            $this->load->view('pimpinan/footer');
+        }
+
+		
 	} 
 
 

@@ -20,10 +20,20 @@ class Daftar_aktiva extends CI_Controller {
             'datadaftaraktiva'		=> $this->Daftar_Aktiva_Model->lihatdaftaraktiva()
         );       
 
-		$this->load->view('layout/header');
-        $this->load->view('layout/sidebar');
-        $this->load->view('admin/daftar_aktiva/index',$data);
-        $this->load->view('layout/footer');
+        $role = $this->session->userdata('role');
+        if($role == "akuntan")
+        {
+            $this->load->view('layout/header');
+            $this->load->view('layout/sidebar');
+            $this->load->view('admin/daftar_aktiva/index',$data);
+            $this->load->view('layout/footer');
+        }else{
+            $this->load->view('pimpinan/header');
+            $this->load->view('pimpinan/sidebar');
+            $this->load->view('pimpinan-content/daftar_aktiva/index',$data);
+            $this->load->view('pimpinan/footer');
+        }
+	
 	} 
 
     public function tambah()
@@ -151,11 +161,22 @@ class Daftar_aktiva extends CI_Controller {
             'jurnalmasuk'               => $this->Daftar_Aktiva_Model->lihat_no_jurnal($no_jurnal),
             'detail_daftar_aktiva'		=> $this->Daftar_Aktiva_Model->lihat_detail_daftar_aktiva($no_jurnal),
         ); 
+
+        $role = $this->session->userdata('role');
+        if($role == "akuntan")
+        {
+            $this->load->view('layout/header');
+            $this->load->view('layout/sidebar');
+            $this->load->view('admin/daftar_aktiva/detail', $data);
+            $this->load->view('layout/footer');
+        }else{
+            $this->load->view('pimpinan/header');
+            $this->load->view('pimpinan/sidebar');
+            $this->load->view('pimpinan-content/daftar_aktiva/detail', $data);
+            $this->load->view('pimpinan/footer');
+        }
 	
-        $this->load->view('layout/header');
-        $this->load->view('layout/sidebar');
-        $this->load->view('admin/daftar_aktiva/detail', $data);
-        $this->load->view('layout/footer');
+      
 	}
 
     public function edit($no_jurnal)

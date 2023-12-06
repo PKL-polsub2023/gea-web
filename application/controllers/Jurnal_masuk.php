@@ -20,10 +20,20 @@ class Jurnal_masuk extends CI_Controller {
             'datajurnalmasuk'		=> $this->Jurnal_Masuk_Model->Lihatjurnalmasuk()
         );       
 
-		$this->load->view('layout/header');
-        $this->load->view('layout/sidebar');
-        $this->load->view('admin/jurnal_masuk/index',$data);
-        $this->load->view('layout/footer');
+        $role = $this->session->userdata('role');
+        if($role == "akuntan")
+        {
+            $this->load->view('layout/header');
+            $this->load->view('layout/sidebar');
+            $this->load->view('admin/jurnal_masuk/index',$data);
+            $this->load->view('layout/footer');
+        }else{
+            $this->load->view('pimpinan/header');
+            $this->load->view('pimpinan/sidebar');
+            $this->load->view('pimpinan-content/jurnal_masuk/index',$data);
+            $this->load->view('pimpinan/footer');
+        }
+		
 	} 
 
     public function tambah()
@@ -166,11 +176,20 @@ class Jurnal_masuk extends CI_Controller {
             'jurnalmasuk'               => $this->Jurnal_Masuk_Model->lihat_no_jurnal($no_jurnal),
             'detail_jurnal_masuk'		=> $this->Jurnal_Masuk_Model->lihat_detail_jurnal($no_jurnal),
         ); 
-	
-        $this->load->view('layout/header');
-        $this->load->view('layout/sidebar');
-        $this->load->view('admin/jurnal_masuk/detail', $data);
-        $this->load->view('layout/footer');
+        
+        $role = $this->session->userdata('role');
+        if($role == "akuntan"){
+            $this->load->view('layout/header');
+            $this->load->view('layout/sidebar');
+            $this->load->view('admin/jurnal_masuk/detail', $data);
+            $this->load->view('layout/footer');
+        }else{
+            $this->load->view('pimpinan/header');
+            $this->load->view('pimpinan/sidebar');
+            $this->load->view('pimpinan-content/jurnal_masuk/detail', $data);
+            $this->load->view('pimpinan/footer');
+        }
+       
 	}
 
     public function edit($no_jurnal)

@@ -27,10 +27,19 @@ class Piutang extends CI_Controller {
                 'datamaster' => $getData,
             );
 
-	  $this->load->view('layout/header');
-        $this->load->view('layout/sidebar');
-        $this->load->view('admin/piutang/index',$data);
-        $this->load->view('layout/footer');
+            $role = $this->session->userdata('role');
+
+            if($role == "akuntan"){
+                  $this->load->view('layout/header');
+                  $this->load->view('layout/sidebar');
+                  $this->load->view('admin/piutang/index',$data);
+                  $this->load->view('layout/footer');
+            }else{
+                  $this->load->view('pimpinan/header');
+                  $this->load->view('pimpinan/sidebar');
+                  $this->load->view('pimpinan-content/piutang/index',$data);
+                  $this->load->view('pimpinan/footer');
+            }
 	} 
 
       public function paid($mastercustomer_id){
@@ -80,10 +89,21 @@ class Piutang extends CI_Controller {
             $data = array(
                   'datamaster' => $getData,
             );
-            $this->load->view('layout/header');
-            $this->load->view('layout/sidebar');
-            $this->load->view('admin/piutang/invoice',$data);
-            $this->load->view('layout/footer');
+
+            $role = $this->session->userdata('role');
+
+            if($role == "akuntan"){
+                  $this->load->view('layout/header');
+                  $this->load->view('layout/sidebar');
+                  $this->load->view('admin/piutang/invoice',$data);
+                  $this->load->view('layout/footer');
+            }else{
+                  $this->load->view('pimpinan/header');
+                  $this->load->view('pimpinan/sidebar');
+                  $this->load->view('pimpinan-content/piutang/invoice',$data);
+                  $this->load->view('pimpinan/footer');
+            }
+           
       }
 
       function cetakinvoice($tagihan_customer_id){   

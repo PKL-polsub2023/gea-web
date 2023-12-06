@@ -20,10 +20,20 @@ class Selisih_kurs extends CI_Controller {
             'dataselisihkurs'		=> $this->Selisih_Kurs_Model->Lihatselisihkurs()
         );       
 
-		$this->load->view('layout/header');
-        $this->load->view('layout/sidebar');
-        $this->load->view('admin/selisih_kurs/index',$data);
-        $this->load->view('layout/footer');
+        $role = $this->session->userdata('role');
+        if($role == "akuntan")
+        {
+            $this->load->view('layout/header');
+            $this->load->view('layout/sidebar');
+            $this->load->view('admin/selisih_kurs/index',$data);
+            $this->load->view('layout/footer');
+        }else{
+            $this->load->view('pimpinan/header');
+            $this->load->view('pimpinan/sidebar');
+            $this->load->view('pimpinan-content/selisih_kurs/index',$data);
+            $this->load->view('pimpinan/footer');
+        }
+		
 	} 
 
     public function tambah()
@@ -152,10 +162,20 @@ class Selisih_kurs extends CI_Controller {
             'detail_selisih_kurs'		=> $this->Selisih_Kurs_Model->lihat_detail_selisih_kurs($no_jurnal),
         ); 
 	
-        $this->load->view('layout/header');
-        $this->load->view('layout/sidebar');
-        $this->load->view('admin/selisih_kurs/detail', $data);
-        $this->load->view('layout/footer');
+        $role = $this->session->userdata('role');
+        if($role == "akuntan")
+        {
+            $this->load->view('layout/header');
+            $this->load->view('layout/sidebar');
+            $this->load->view('admin/selisih_kurs/detail', $data);
+            $this->load->view('layout/footer');
+        }else{
+            $this->load->view('pimpinan/header');
+            $this->load->view('pimpinan/sidebar');
+            $this->load->view('pimpinan-content/selisih_kurs/detail', $data);
+            $this->load->view('pimpinan/footer');
+        }
+      
 	}
 
     public function edit($no_jurnal)

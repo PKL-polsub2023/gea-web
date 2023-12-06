@@ -18,10 +18,20 @@ class Hutang extends CI_Controller {
             'datamaster'		=> $this->Hutang_model->Lihatmaster()
         );
 
-		$this->load->view('layout/header');
-        $this->load->view('layout/sidebar');
-        $this->load->view('admin/hutang/index',$data);
-        $this->load->view('layout/footer');
+        $role = $this->session->userdata('role');
+        
+        if($role == "akuntan"){
+            $this->load->view('layout/header');
+            $this->load->view('layout/sidebar');
+            $this->load->view('admin/hutang/index',$data);
+            $this->load->view('layout/footer');
+        }else{
+            $this->load->view('pimpinan/header');
+            $this->load->view('pimpinan/sidebar');
+            $this->load->view('pimpinan-content/hutang/index',$data);
+            $this->load->view('pimpinan/footer');
+        }
+	 
 	} 
 
 
@@ -104,11 +114,22 @@ class Hutang extends CI_Controller {
                 //'saldoawal'       => $this->Saldo_Awal_Model->lihat_no_jurnal($no_jurnal),
                 'edit'		        => $this->Hutang_model->ubah($id)
             ); 
+
+            $role = $this->session->userdata('role');
+        
+            if($role == "akuntan"){
+                  $this->load->view('layout/header');
+                  $this->load->view('layout/sidebar');
+                  $this->load->view('admin/hutang/detail', $data);
+                  $this->load->view('layout/footer');
+            }else{
+                  $this->load->view('pimpinan/header');
+                  $this->load->view('pimpinan/sidebar');
+                  $this->load->view('pimpinan-content/hutang/detail', $data);
+                  $this->load->view('pimpinan/footer');
+            }
           
-            $this->load->view('layout/header');
-            $this->load->view('layout/sidebar');
-            $this->load->view('admin/hutang/detail', $data);
-            $this->load->view('layout/footer');
+          
           }
 
 }

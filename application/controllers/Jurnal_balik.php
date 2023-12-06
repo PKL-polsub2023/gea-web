@@ -20,10 +20,20 @@ class Jurnal_balik extends CI_Controller {
             'datajurnalbalik'		=> $this->Jurnal_Balik_Model->Lihatjurnalbalik()
         );       
 
-		$this->load->view('layout/header');
-        $this->load->view('layout/sidebar');
-        $this->load->view('admin/jurnal_balik/index',$data);
-        $this->load->view('layout/footer');
+        $role = $this->session->userdata('role');
+        if($role == "akuntan")
+        {
+            $this->load->view('layout/header');
+            $this->load->view('layout/sidebar');
+            $this->load->view('admin/jurnal_balik/index',$data);
+            $this->load->view('layout/footer');
+        }else{
+            $this->load->view('pimpinan/header');
+            $this->load->view('pimpinan/sidebar');
+            $this->load->view('pimpinan-content/jurnal_balik/index',$data);
+            $this->load->view('pimpinan/footer');
+        }
+		
 	} 
 
     public function tambah()
@@ -151,11 +161,23 @@ class Jurnal_balik extends CI_Controller {
             'jurnalmasuk'               => $this->Jurnal_Balik_Model->lihat_no_jurnal($no_jurnal),
             'detail_jurnal_balik'		=> $this->Jurnal_Balik_Model->lihat_detail_jurnal($no_jurnal),
         ); 
+
+        $role = $this->session->userdata('role');
+        
+        if($role == "akuntan")
+        {
+            $this->load->view('layout/header');
+            $this->load->view('layout/sidebar');
+            $this->load->view('admin/jurnal_balik/detail', $data);
+            $this->load->view('layout/footer');
+        }else{
+            $this->load->view('pimpinan/header');
+            $this->load->view('pimpinan/sidebar');
+            $this->load->view('pimpinan-content/jurnal_balik/detail', $data);
+            $this->load->view('pimpinan/footer');
+        }
 	
-        $this->load->view('layout/header');
-        $this->load->view('layout/sidebar');
-        $this->load->view('admin/jurnal_balik/detail', $data);
-        $this->load->view('layout/footer');
+       
 	}
 
     public function edit($no_jurnal)

@@ -19,10 +19,20 @@ class Suratjalan_customer extends CI_Controller {
             'datamaster'		=> $this->Suratjalan_customer_model->Lihatmaster()
         );
 
-		$this->load->view('aadmin_layout/header');
-        $this->load->view('aadmin_layout/sidebar');
-        $this->load->view('aadmin_item/suratjalan_customer/index',$data);
-        $this->load->view('aadmin_layout/footer');
+        $role = $this->session->userdata('role');
+
+        if($role == "admin"){
+            $this->load->view('aadmin_layout/header');
+            $this->load->view('aadmin_layout/sidebar');
+            $this->load->view('aadmin_item/suratjalan_customer/index',$data);
+            $this->load->view('aadmin_layout/footer');
+        }else if($role == "pimpinan"){
+            $this->load->view('pimpinan/header');
+            $this->load->view('pimpinan/sidebar');
+            $this->load->view('pimpinan_item/suratjalan_customer/index',$data);
+            $this->load->view('pimpinan/footer');
+        }
+		
 	} 
 
 

@@ -18,10 +18,20 @@ class Master_customer extends CI_Controller {
             'datamaster'		=> $this->Master_Customer_Model->Lihatmaster()
         );
 
-		$this->load->view('layout/header');
-        $this->load->view('layout/sidebar');
-        $this->load->view('admin/mastercustomer/index',$data);
-        $this->load->view('layout/footer');
+        $role = $this->session->userdata('role');
+        if($role == "akuntan")
+        {
+            $this->load->view('layout/header');
+            $this->load->view('layout/sidebar');
+            $this->load->view('admin/mastercustomer/index',$data);
+            $this->load->view('layout/footer');
+        }else{
+            $this->load->view('pimpinan/header');
+            $this->load->view('pimpinan/sidebar');
+            $this->load->view('pimpinan-content/mastercustomer/index',$data);
+            $this->load->view('pimpinan/footer');
+        }
+		
 	} 
 
 

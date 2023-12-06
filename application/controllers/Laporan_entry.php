@@ -11,19 +11,30 @@ class Laporan_entry extends CI_Controller {
 		$this->load->helper('menu_helper');
 		$this->load->library('Pdf');
 		$this->load->model('Laporan_Entry_Model');
+        $this->load->library('session');
 	}
 
 	public function index()
 	{
 
+
         $data = array( 
             'databyjurnal'				=> $this->Laporan_Entry_Model->databyjurnal(),		
         );      
 
-		$this->load->view('layout/header');
-        $this->load->view('layout/sidebar');
-        $this->load->view('admin/laporan_entry/index',$data);
-        $this->load->view('layout/footer');
+        $role = $this->session->userdata('role');
+        if($role == "akuntan"){
+            $this->load->view('layout/header');
+            $this->load->view('layout/sidebar');
+            $this->load->view('admin/laporan_entry/index',$data);
+            $this->load->view('layout/footer');
+        }else{
+            $this->load->view('pimpinan/header');
+            $this->load->view('pimpinan/sidebar');
+            $this->load->view('pimpinan-content/laporan_entry/index',$data);
+            $this->load->view('pimpinan/footer');
+        }
+		
 	}
 
 	function cetakpdf(){      

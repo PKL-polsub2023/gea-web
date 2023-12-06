@@ -21,11 +21,20 @@ class Saldo_awal extends CI_Controller {
             'datasaldoawal'		=> $this->Saldo_Awal_Model->Lihatsaldoawal()
         );       
        
-
-		$this->load->view('layout/header');
-        $this->load->view('layout/sidebar');
-        $this->load->view('admin/saldo_awal/index',$data);
-        $this->load->view('layout/footer');
+        $role = $this->session->userdata('role');
+        
+        if($role == "akuntan"){
+            $this->load->view('layout/header');
+            $this->load->view('layout/sidebar');
+            $this->load->view('admin/saldo_awal/index',$data);
+            $this->load->view('layout/footer');
+        }else{
+            $this->load->view('pimpinan/header');
+            $this->load->view('pimpinan/sidebar');
+            $this->load->view('pimpinan-content/saldo_awal/index',$data);
+            $this->load->view('pimpinan/footer');
+        }
+		
 	} 
 
     public function tambah()

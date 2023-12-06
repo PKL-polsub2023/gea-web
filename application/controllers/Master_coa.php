@@ -23,11 +23,21 @@ class Master_coa extends CI_Controller {
         $data = array( 
             'datamastercoa'		=> $this->Master_COA_Model->Lihatmastercoa()
         );
+        $role = $this->session->userdata('role');
 
-		$this->load->view('layout/header');
-        $this->load->view('layout/sidebar');
-        $this->load->view('admin/mastercoa/index',$data);
-        $this->load->view('layout/footer');
+        if($role == "akuntan")
+        {
+            $this->load->view('layout/header');
+            $this->load->view('layout/sidebar');
+            $this->load->view('admin/mastercoa/index',$data);
+            $this->load->view('layout/footer');
+        }else{
+            $this->load->view('pimpinan/header');
+            $this->load->view('pimpinan/sidebar');
+            $this->load->view('pimpinan-content/mastercoa/index',$data);
+            $this->load->view('pimpinan/footer');
+        }
+		
 	} 
 
 

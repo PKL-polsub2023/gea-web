@@ -153,6 +153,7 @@ input[type="submit"] {
   <select name="role" id="role">
     <option value="akuntan">Akuntan</option>
     <option value="admin">Admin</option>
+    <option value="pimpinan">Pimpinan</option>
   </select>
   <div id="button">
     <input type="submit" value="Login">
