@@ -104,6 +104,12 @@
 
 
                            
+                            <li>
+                                <a href="<?php echo base_url()?>/Acountmanajer" class="waves-effect">
+                                    <i class="ti-receipt"></i>
+                                    <span>User Management</span>
+                                </a>
+                            </li>
 
 
                             <li>
