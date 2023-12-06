@@ -9,6 +9,7 @@ class Hutang extends CI_Controller {
 		parent::__construct();
 		$this->load->helper('url');
 		$this->load->model('Hutang_model');
+            $this->load->model('Datakwitansi_model');
         $this->load->library('session');
 	}
 
@@ -37,10 +38,15 @@ class Hutang extends CI_Controller {
 
     public function ubah($id){		
 
-        $data = array( 
+      $data = array( 
             //'saldoawal'       => $this->Saldo_Awal_Model->lihat_no_jurnal($no_jurnal),
-            'edit'		        => $this->Hutang_model->ubah($id)
+            'edit'		        => $this->Datakwitansi_model->ubah($id)
         ); 
+	
+      //   $data = array( 
+      //       //'saldoawal'       => $this->Saldo_Awal_Model->lihat_no_jurnal($no_jurnal),
+      //       'edit'		        => $this->Hutang_model->ubah($id)
+      //   ); 
 	
         $this->load->view('layout/header');
         $this->load->view('layout/sidebar');
@@ -73,11 +79,11 @@ class Hutang extends CI_Controller {
 
       public function validasi_y($id){
             $data = array(
-                  "statushutang" => "Y"
+                  "status" => "Y"
             );
 
-            $this->db->where("tagihan_customer_id", $id);
-            $this->db->update("dt_tagihan_customer", $data);
+            $this->db->where("datakwitansi_id", $id);
+            $this->db->update("dt_datakwitansi", $data);
             redirect("hutang");
       }
 
@@ -110,10 +116,14 @@ class Hutang extends CI_Controller {
 
       public function detail($id){		
 
+            // $data = array( 
+            //     //'saldoawal'       => $this->Saldo_Awal_Model->lihat_no_jurnal($no_jurnal),
+            //     'edit'		        => $this->Hutang_model->ubah($id)
+            // ); 
             $data = array( 
-                //'saldoawal'       => $this->Saldo_Awal_Model->lihat_no_jurnal($no_jurnal),
-                'edit'		        => $this->Hutang_model->ubah($id)
-            ); 
+                  //'saldoawal'       => $this->Saldo_Awal_Model->lihat_no_jurnal($no_jurnal),
+                  'edit'		        => $this->Datakwitansi_model->ubah($id)
+              ); 
 
             $role = $this->session->userdata('role');
         

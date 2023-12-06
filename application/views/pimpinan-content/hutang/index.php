@@ -22,7 +22,7 @@
                                     <div class="float-end d-none d-md-block">
                                         <div class="dropdown">                                                                
 
-                                            <!-- <a class="btn btn-primary" href="<?php echo base_url()?>tagihan_customer/tambah" role="button">Tambah Tagihan Customer</a> -->
+                                            <!-- <a class="btn btn-primary" href="<?php echo base_url()?>datakwitansi/tambah" role="button">Tambah Tagihan Customer</a> -->
 
                                         </div>
                                     </div>
@@ -71,9 +71,9 @@
                                                     <td><?php echo $u['lokasispbg'] ?></td>
                                                     <td><?php echo $u['volumegas'] ?></td>
                                                     <td><?php echo $u['total'] ?></td>
-                                                    <td><?php echo ($u['statushutang'] == 'N') ? "belum bayar" : "dibayar";?></td>
+                                                    <td><?php echo ($u['status'] == 'N') ? "belum bayar" : "dibayar";?></td>
                                                     <td style="text-align:center">
-                                                            <a href="<?= base_url('hutang/detail/' . $u['tagihan_customer_id']) ?>" class="btn btn-info btn-sm" style="width:35px;"><i class="fas fa-eye"></i></a>                                                     
+                                                            <a href="<?= base_url('hutang/detail/' . $u['datakwitansi_id']) ?>" class="btn btn-info btn-sm" style="width:35px;"><i class="fas fa-eye"></i></a>                                                     
 
                                                         
                                                     </td>

@@ -117,7 +117,7 @@
                                             <div class="col-md-2">
                                                 <div class="d-none d-md-block">
                                                     <div class="dropdown">  
-                                                        <input name="tagihan_customer_id" value="<?= $edit['tagihan_customer_id'];?>" type="hidden">
+                                                        <input name="datakwitansi_id" value="<?= $edit['datakwitansi_id'];?>" type="hidden">
                                                         <button type="button" value="Go Back" onclick="history.back(-1)" class="btn btn-warning btn-mini">Kembali</button>
                                                     </div>
                                                 </div>
