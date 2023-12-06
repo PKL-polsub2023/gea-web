@@ -11,6 +11,7 @@ class laporan_Account_Ledger extends CI_Controller {
 		$this->load->helper('menu_helper');
 		$this->load->library('Pdf');
 		$this->load->model('Laporan_Account_Ledger_Model');
+        $this->load->library('session');
 	}
 
 	public function index()
@@ -21,10 +22,20 @@ class laporan_Account_Ledger extends CI_Controller {
         //     'datarekening'				=> $this->Laporan_Account_Ledger_Model->datarekening(),	
         // );      
 
-		$this->load->view('layout/header');
-        $this->load->view('layout/sidebar');
-        $this->load->view('admin/laporan_account_ledger/index');
-        $this->load->view('layout/footer');
+        
+        $role = $this->session->userdata('role');
+        if($role == "akuntan"){
+            $this->load->view('layout/header');
+            $this->load->view('layout/sidebar');
+            $this->load->view('admin/laporan_account_ledger/index');
+            $this->load->view('layout/footer');
+        }else{
+            $this->load->view('pimpinan/header');
+            $this->load->view('pimpinan/sidebar');
+            $this->load->view('pimpinan-content/laporan_account_ledger/index');
+            $this->load->view('pimpinan/footer');
+        }
+	
 	}
 
 
@@ -70,7 +81,14 @@ class laporan_Account_Ledger extends CI_Controller {
 
 
             }
+               
+        $role = $this->session->userdata('role');
+        if($role == "akuntan"){
             $this->load->view('admin/laporan_account_ledger/view_data',$d);
+        }else{
+            $this->load->view('pimpinan-content/laporan_account_ledger/view_data',$d);
+        }
+           
         
 		
 	}

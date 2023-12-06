@@ -15,14 +15,14 @@ class Laporan_Profit_Lost_Model extends CI_Model
     {
         # code...
         $query = $this->db->query(
-        "SELECT a.id_kelompokakun,a.kode,a.nama,a.kategori,b.nama AS status FROM dt_mastercoa a LEFT JOIN dt_kelompokakun b ON a.id_kelompokakun = b.id_kelompokakun");
+        "SELECT a.id_kelompokakun,a.kode,a.nama,b.nama AS status FROM dt_mastercoa a LEFT JOIN dt_kelompokakun b ON a.id_kelompokakun = b.id_kelompokakun");
         return $query->result_array();
     }
 
     function getSaldoAwal_ByKode($periode)
     {
         $query = $this->db->query(
-            "SELECT saldo_normal, saldo_akhir, debit, kredit, periode, kode,b.nama, kategori, b.id_kelompokakun, c.nama as status 
+            "SELECT saldo_normal, saldo_akhir, debit, kredit, periode, kode,b.nama, b.id_kelompokakun, c.nama as status 
             FROM dt_saldo_awal a 
             LEFT JOIN dt_mastercoa b ON a.mastercoa_id = b.mastercoa_id 
             LEFT JOIN dt_kelompokakun c ON c.id_kelompokakun = b.id_kelompokakun 

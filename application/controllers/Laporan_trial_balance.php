@@ -11,6 +11,7 @@ class Laporan_trial_balance extends CI_Controller {
 		$this->load->helper('menu_helper');
 		$this->load->library('Pdf');
 		$this->load->model('Laporan_Trial_Balance_Model');
+        $this->load->library('session');
 	}
 
 	public function index()
@@ -19,11 +20,19 @@ class Laporan_trial_balance extends CI_Controller {
         // $data = array( 
         //     'databyjurnal'				=> $this->Laporan_Trial_Balance_Model->databyjurnal(),		
         // );      
-
-		$this->load->view('layout/header');
-        $this->load->view('layout/sidebar');
-        $this->load->view('admin/laporan_trial_balance/index');
-        $this->load->view('layout/footer');
+        $role = $this->session->userdata('role');
+        if($role == "akuntan"){
+            $this->load->view('layout/header');
+            $this->load->view('layout/sidebar');
+            $this->load->view('admin/laporan_trial_balance/index');
+            $this->load->view('layout/footer');
+        }else{
+            $this->load->view('pimpinan/header');
+            $this->load->view('pimpinan/sidebar');
+            $this->load->view('pimpinan-content/laporan_trial_balance/index');
+            $this->load->view('pimpinan/footer');
+        }
+		
 	}
 
 	function cetakpdf(){      
