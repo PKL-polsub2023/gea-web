@@ -68,7 +68,7 @@
                 * 4 - Pendapatan
                 * 5 - Beban
                 */
-                if ($coa['id_kelompokakun'] == 1 && $coa['kategori'] == 1) {
+                if ($coa['id_kelompokakun'] == 1) {
                     $saldo = 0;
                     foreach ($saldoAwal as $key => $s_awal) {
                         if ($coa['kode'] == $s_awal['kode']) {

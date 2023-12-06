@@ -44,19 +44,19 @@
                         <div class="navbar-brand-box">
                             <a href="<?php echo base_url()?>dashboard" class="logo logo-dark">
                                 <span class="logo-sm">
-                                    <img src="<?php echo base_url()?>/assets/images/logo-sm.png" alt="" height="22">
+                                     <img src="<?php echo base_url()?>/assets/logo/gea.png" alt="" height="50">
                                 </span>
                                 <span class="logo-lg">
-                                    <img src="<?php echo base_url()?>/assets/images/logo-dark.png" alt="" height="17">
+                                <img src="<?php echo base_url()?>/assets/logo/gea.png" alt="" height="50">
                                 </span>
                             </a>
 
                             <a href="<?php echo base_url()?>dashboard" class="logo logo-light">
                                 <span class="logo-sm">
-                                    <img src="<?php echo base_url()?>/assets/images/logo-sm.png" alt="" height="22">
+                                     <img src="<?php echo base_url()?>/assets/logo/gea.png" alt="" height="50">
                                 </span>
                                 <span class="logo-lg">
-                                    <img src="<?php echo base_url()?>/assets/images/logo-light.png" alt="" height="18">
+                                <img src="<?php echo base_url()?>/assets/logo/gea.png" alt="" height="50">
                                 </span>
                             </a>
                         </div>

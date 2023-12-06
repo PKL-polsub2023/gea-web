@@ -6,7 +6,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-12">
-                                Copyright © <script>document.write(new Date().getFullYear())</script> Mutiara<span class="d-none d-sm-inline-block"> Softindo <i class="mdi mdi-heart text-danger"></i>.</span>
+                                Copyright © <script>document.write(new Date().getFullYear())</script> PT GEA<span class="d-none d-sm-inline-block">.</span>
                             </div>
                         </div>
                     </div>
