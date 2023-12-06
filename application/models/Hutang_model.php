@@ -10,14 +10,20 @@ class Hutang_model extends CI_Model{
 
     public function Lihatmaster(){	
 
+		// $query = $this->db->query("
+        //           SELECT * FROM dt_tagihan_customer
+        //           JOIN dt_mastercustomer ON dt_mastercustomer.mastercustomer_id = dt_tagihan_customer.mastercustomer_id
+        //           JOIN dt_suratjalan_customer ON dt_suratjalan_customer.suratjalan_customer_id = dt_tagihan_customer.suratjalan_customer_id
+        //           JOIN dt_datakwitansi ON dt_datakwitansi.datakwitansi_id = dt_suratjalan_customer.datakwitansi_id
+		// 	JOIN dt_mastersupplier ON dt_mastersupplier.mastersupplier_id = dt_datakwitansi.mastersupplier_id
+        //           ORDER BY tagihan_customer_id DESC
+        //     ");
+
+		// return $query->result_array();
 		$query = $this->db->query("
-                  SELECT * FROM dt_tagihan_customer
-                  JOIN dt_mastercustomer ON dt_mastercustomer.mastercustomer_id = dt_tagihan_customer.mastercustomer_id
-                  JOIN dt_suratjalan_customer ON dt_suratjalan_customer.suratjalan_customer_id = dt_tagihan_customer.suratjalan_customer_id
-                  JOIN dt_datakwitansi ON dt_datakwitansi.datakwitansi_id = dt_suratjalan_customer.datakwitansi_id
-			JOIN dt_mastersupplier ON dt_mastersupplier.mastersupplier_id = dt_datakwitansi.mastersupplier_id
-                  ORDER BY tagihan_customer_id DESC
-            ");
+		SELECT * FROM dt_datakwitansi 
+		JOIN dt_mastersupplier ON dt_mastersupplier.mastersupplier_id = dt_datakwitansi.mastersupplier_id 
+		ORDER BY dt_datakwitansi.datakwitansi_id DESC");
 
 		return $query->result_array();
 

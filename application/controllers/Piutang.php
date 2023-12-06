@@ -751,6 +751,26 @@ class Piutang extends CI_Controller {
         $this->load->view('layout/footer'); 
       }
 
+      public function validasi_y($id){
+            $data = array(
+                  "statushutang" => "Y"
+            );
+
+            $this->db->where("tagihan_customer_id", $id);
+            $this->db->update("dt_tagihan_customer", $data);
+            redirect("piutang");
+      }
+
+      // public function validasi_n($id){
+      //       $data = array(
+      //             "status" => "N"
+      //       );
+
+      //       $this->db->where("datakwitansi_id", $id);
+      //       $this->db->update("dt_datakwitansi", $data);
+      //       redirect("data_kwitansi");
+      // }
+
 
       public function pdfinvoicesatuan($tagihan_customer_id)
       {     
