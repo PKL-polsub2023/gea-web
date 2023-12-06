@@ -40,12 +40,12 @@
 
                                                         <div class="mb-4">
                                                             <label class="form-label" for="input-mask">Tanggal</label>
-                                                            <input id="input-mask" name="tanggal" class="form-control input-mask">                                                            
+                                                            <input id="input-mask" name="tanggal" class="form-control input-mask" type="date">                                                            
                                                         </div>
                                                         
                                                         <div class="mb-4">
                                                             <label class="form-label" for="input-mask">Due Date</label>
-                                                            <input id="input-mask" name="dd" class="form-control input-mask">                                                            
+                                                            <input id="input-mask" name="dd" class="form-control input-mask" type="date">                                                            
                                                         </div>   
                                                         
                                                     </div>

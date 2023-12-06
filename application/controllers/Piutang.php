@@ -643,6 +643,19 @@ class Piutang extends CI_Controller {
                 
             // $this->db->insert('dt_invoice', $data);       
             // }
+            $bulam = ['01' => 'Jan',
+                      '02' => 'Feb',
+                      '03' => 'Mar',
+                      '04' => 'Apr',
+                      '05' => 'Mei',
+                      '06' => 'Jun',
+                      '07' => 'Jul',
+                        '08' => 'Ags',
+                        '09' => 'Sep',
+                        '10' => 'Oct',
+                        '11' => 'Nov',
+                        '12' => 'Des'];
+
             $detailData =  $this->Piutang_Model->Detail($mastercustomer_id);     
             $getData =  $this->Piutang_Model->LihatMasterInvoice($mastercustomer_id);     
             $total = 0;
@@ -685,6 +698,12 @@ class Piutang extends CI_Controller {
             }
 
             $total_terbilang = ucwords(terbilang($total));
+            $tanggal = $this->input->post('tanggal');
+            $tanggal1 = explode("-", $tanggal);
+            $tanggal2 = $tanggal1[2]."-".$bulam[$tanggal1[1]]."-".$tanggal1[0];
+            $dd = $this->input->post('dd');
+            $dd1 = explode("-", $dd);
+            $dd2 = $dd1[2]."-".$bulam[$dd1[1]]."-".$dd1[0];
 
             $data = array(
                   'datamaster' => $this->Piutang_Model->LihatMasterInvoice($mastercustomer_id),
@@ -692,8 +711,8 @@ class Piutang extends CI_Controller {
                   'terbilang' => $total_terbilang,
                   'detail' => $detailData,
                   'no_invoice'=>$this->input->post('no_invoice'),
-                  'tanggal'=>$this->input->post('tanggal'),
-                  'dd'=>$this->input->post('dd'),
+                  'tanggal'=>$tanggal2,
+                  'dd'=>$dd,
             );
 
             $this->load->view('admin/piutang/pdfinvoice',$data);
@@ -715,6 +734,18 @@ class Piutang extends CI_Controller {
 
       public function pdfinvoicesatuan($tagihan_customer_id)
       {     
+            $bulam = ['01' => 'Jan',
+            '02' => 'Feb',
+            '03' => 'Mar',
+            '04' => 'Apr',
+            '05' => 'Mei',
+            '06' => 'Jun',
+            '07' => 'Jul',
+              '08' => 'Ags',
+              '09' => 'Sep',
+              '10' => 'Oct',
+              '11' => 'Nov',
+              '12' => 'Des'];
       $getData = $this->Piutang_Model->DetailTagihan($tagihan_customer_id);
       function terbilang($angka)
       {
@@ -749,13 +780,19 @@ class Piutang extends CI_Controller {
       $total = $getData['total']; 
       $total_terbilang = ucwords(terbilang($total));;
 
+      $tanggal = $this->input->post('tanggal');
+      $tanggal1 = explode("-", $tanggal);
+      $tanggal2 = $tanggal1[2]."-".$bulam[$tanggal1[1]]."-".$tanggal1[0];
+      $dd = $this->input->post('dd');
+      $dd1 = explode("-", $dd);
+      $dd2 = $dd1[2]."-".$bulam[$dd1[1]]."-".$dd1[0];
       $data = array(
             'u' => $getData,
             'total' => $total,
             'terbilang' => $total_terbilang,
             'no_invoice' => $this->input->post('no_invoice'),
-            'tanggal' => $this->input->post('tanggal'),
-            'dd' => $this->input->post('dd'),
+            'tanggal' => $tanggal2,
+            'dd' => $dd,
       );
 
 
