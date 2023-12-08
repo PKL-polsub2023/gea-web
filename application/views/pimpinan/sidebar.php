@@ -58,7 +58,9 @@
                                     <li><a href="<?php echo base_url()?>profil_perusahaan">Master Data Perusahaan</a></li>     
                                     <li><a href="<?php echo base_url()?>master_coa">Master COA</a></li>                                
                                     <li><a href="<?php echo base_url()?>master_supplier">Master Supplier</a></li>                                
-                                    <li><a href="<?php echo base_url()?>master_customer">Master Customer</a></li>                                
+                                    <li><a href="<?php echo base_url()?>master_customer">Master Customer</a></li>   
+                                    <li><a href="<?php echo base_url()?>master_kendaraan">Master Kendaraan</a></li> 
+                                    <li><a href="<?php echo base_url()?>master_driver">Master Driver</a></li>                             
                                     <!-- <li><a href="<?php echo base_url()?>master_rekening">Master Rekening GEA</a></li>                                 -->
                                 </ul>
                             </li>
