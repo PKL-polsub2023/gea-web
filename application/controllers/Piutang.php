@@ -10,6 +10,7 @@ class Piutang extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->model('Piutang_Model');
             $this->load->model('Tagihan_customer_model');
+            $this->load->model('Master_Customer_Model');
             $this->load->library('session');
             $this->load->library('Pdf');
 	}
@@ -25,6 +26,7 @@ class Piutang extends CI_Controller {
             
             $data = array( 
                 'datamaster' => $getData,
+                'customer' =>       $this->Master_Customer_Model->lihatmaster(),
             );
 
             $role = $this->session->userdata('role');
@@ -677,7 +679,7 @@ class Piutang extends CI_Controller {
                         '12' => 'Des'];
 
             $detailData =  $this->Piutang_Model->Detail($mastercustomer_id);     
-            $getData =  $this->Piutang_Model->LihatMasterInvoice($mastercustomer_id);     
+            $getData =  $this->Piutang_Model->LihatMasterInvoice($mastercustomer_id);    
             $total = 0;
 
             foreach ($getData as $invoice) {
@@ -732,7 +734,7 @@ class Piutang extends CI_Controller {
                   'detail' => $detailData,
                   'no_invoice'=>$this->input->post('no_invoice'),
                   'tanggal'=>$tanggal2,
-                  'dd'=>$dd,
+                  'dd'=>$dd2,
             );
 
             $this->load->view('admin/piutang/pdfinvoice',$data);
@@ -818,7 +820,8 @@ class Piutang extends CI_Controller {
       }
 
       $total = $getData['total']; 
-      $total_terbilang = ucwords(terbilang($total));;
+      $total_terbilang = ucwords(terbilang($total));
+      $total_rupiah = "Rp " . number_format($total, 0, ',', '.');
 
       $tanggal = $this->input->post('tanggal');
       $tanggal1 = explode("-", $tanggal);
@@ -828,11 +831,11 @@ class Piutang extends CI_Controller {
       $dd2 = $dd1[2]."-".$bulam[$dd1[1]]."-".$dd1[0];
       $data = array(
             'u' => $getData,
-            'total' => $total,
+            'total' => $total_rupiah,
             'terbilang' => $total_terbilang,
             'no_invoice' => $this->input->post('no_invoice'),
             'tanggal' => $tanggal2,
-            'dd' => $dd,
+            'dd' => $dd2,
       );
 
 
@@ -851,6 +854,162 @@ class Piutang extends CI_Controller {
         $this->load->view('layout/sidebar');
         $this->load->view('admin/piutang/input-invoicesatuan', $data);
         $this->load->view('layout/footer'); 
+      }
+
+      public function selectInvoice()
+      {
+            $fromdate =  $this->input->post('fromdate');
+            $todate =  $this->input->post('todate');
+            $mastercustomer_id =  $this->input->post('mastercustomer_id');
+            $statushutang =  $this->input->post('statushutang');
+
+            $jumlahPiutang = $this->Tagihan_customer_model->count($mastercustomer_id);
+
+            if($statushutang == "All")
+            {
+                  $data = [
+                        'datamaster' => $this->Piutang_Model->selectInvoice($mastercustomer_id, $fromdate, $todate),
+                        'fromdate' => $fromdate,
+                        'todate' => $todate,
+                        'mastercustomer_id' => $mastercustomer_id,
+                        'statushutang' => $statushutang,
+                        'jumlahPiutang' => $jumlahPiutang,
+                  ];
+            }else{
+                  $data = [
+                        'datamaster' => $this->Piutang_Model->selectInvoice2($mastercustomer_id, $fromdate, $todate, $statushutang),
+                        'fromdate' => $fromdate,
+                        'todate' => $todate,
+                        'mastercustomer_id' => $mastercustomer_id,
+                        'statushutang' => $statushutang,
+                        'jumlahPiutang' => $jumlahPiutang,
+                  ];
+            }
+
+           
+            $this->load->view('layout/header');
+            $this->load->view('layout/sidebar');
+            $this->load->view('admin/piutang/selectInvoice',$data);
+            $this->load->view('layout/footer');
+
+      }
+
+      public function printSelectInvoice(){
+            // $chek = $this->Piutang_Model->chekinvoice($mastercustomer_id);
+            // echo $chek;
+            // if ($chek == null) {
+            //       $data=array(
+            //             'no_invoice'                  => $this->input->post('no_invoice'),
+            //             'mastercustomer_id'                  => $mastercustomer_id,
+            //         );      
+                
+            // $this->db->insert('dt_invoice', $data);       
+            // }
+
+            $fromdate =  $this->input->post('fromdate');
+            $todate =  $this->input->post('todate');
+            $mastercustomer_id =  $this->input->post('mastercustomer_id');
+            $statushutang =  $this->input->post('statushutang');
+
+
+            $bulam = ['01' => 'Jan',
+                      '02' => 'Feb',
+                      '03' => 'Mar',
+                      '04' => 'Apr',
+                      '05' => 'Mei',
+                      '06' => 'Jun',
+                      '07' => 'Jul',
+                        '08' => 'Ags',
+                        '09' => 'Sep',
+                        '10' => 'Oct',
+                        '11' => 'Nov',
+                        '12' => 'Des'];
+
+
+            $detailData =  $this->Piutang_Model->Detail($mastercustomer_id);     
+            if($statushutang == "All")
+            {
+                  $getData =  $this->Piutang_Model->selectInvoice($mastercustomer_id, $fromdate, $todate);   
+            }else{
+                  $getData =  $this->Piutang_Model->selectInvoice2($mastercustomer_id, $fromdate, $todate, $statushutang);
+            }
+         
+            $total = 0;
+
+            foreach ($getData as $invoice) {
+            if (isset($invoice['total'])) {
+                  $total += $invoice['total'];
+                  $invoice['total'] = "Rp " . number_format($invoice['total'], 0, ',', '.');
+            } 
+            $datamaster[] = $invoice;
+             }
+
+            function terbilang($angka) {
+                  $angka = floatval($angka);
+                  $bilangan = array(
+                  '', 'satu', 'dua', 'tiga', 'empat', 'lima',
+                  'enam', 'tujuh', 'delapan', 'sembilan', 'sepuluh', 'sebelas'
+                  );
+                  if ($angka < 12) {
+                  return $bilangan[$angka];
+                  } elseif ($angka < 20) {
+                  return terbilang($angka - 10) . ' belas';
+                  } elseif ($angka < 100) {
+                  return terbilang($angka / 10) . ' puluh ' . terbilang($angka % 10);
+                  } elseif ($angka < 200) {
+                  return ' seratus ' . terbilang($angka - 100);
+                  } elseif ($angka < 1000) {
+                  return terbilang($angka / 100) . ' ratus ' . terbilang($angka % 100);
+                  } elseif ($angka < 2000) {
+                  return ' seribu ' . terbilang($angka - 1000);
+                  } elseif ($angka < 1000000) {
+                  return terbilang($angka / 1000) . ' ribu ' . terbilang($angka % 1000);
+                  } elseif ($angka < 1000000000) {
+                  return terbilang($angka / 1000000) . ' juta ' . terbilang($angka % 1000000);
+                  } elseif ($angka < 1000000000000) {
+                  return terbilang($angka / 1000000000) . ' miliar ' . terbilang($angka % 1000000000);
+                  } elseif ($angka < 1000000000000000) {
+                  return terbilang($angka / 1000000000000) . ' triliun ' . terbilang($angka % 1000000000000);
+                  } else {
+                  return 'Angka terlalu besar';
+                  }
+            }
+
+            $total_terbilang = ucwords(terbilang($total));
+            $total_rupiah = "Rp " . number_format($total, 0, ',', '.');
+            $tanggal = $this->input->post('tanggal');
+            $tanggal1 = explode("-", $tanggal);
+            $tanggal2 = $tanggal1[2]."-".$bulam[$tanggal1[1]]."-".$tanggal1[0];
+            $dd = $this->input->post('dd');
+            $dd1 = explode("-", $dd);
+            $dd2 = $dd1[2]."-".$bulam[$dd1[1]]."-".$dd1[0];
+
+            if($statushutang == "All")
+            {
+                  $data = array(
+                        'datamaster' => $datamaster,
+                        'total' => $total_rupiah,
+                        'terbilang' => $total_terbilang,
+                        'detail' => $detailData,
+                        'no_invoice'=>$this->input->post('no_invoice'),
+                        'tanggal'=>$tanggal2,
+                        'dd'=>$dd2,
+                  );
+            }else{
+                  $data = array(
+                        'datamaster' => $datamaster,
+                        'total' => $total_rupiah,
+                        'terbilang' => $total_terbilang,
+                        'detail' => $detailData,
+                        'no_invoice'=>$this->input->post('no_invoice'),
+                        'tanggal'=>$tanggal2,
+                        'dd'=>$dd2,
+                  );
+            }
+          
+
+            $this->load->view('admin/piutang/pdfinvoice',$data);
+      
       }
 }
 

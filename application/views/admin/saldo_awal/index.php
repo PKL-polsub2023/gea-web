@@ -208,8 +208,12 @@
 
                                                 <?php                                                 
                                                 $no = 0;
+                                                $totalDebit = 0;
+                                                $totalKredit = 0;
                                                     if($datasaldoawal){
                                                         foreach($datasaldoawal as $u){  
+                                                            $totalDebit += $u['debit'];
+                                                            $totalKredit += $u['kredit'];
                                                 ?>                                                            
                                                 <tr>
                                                     <td style="width: 1%;text-align:center"><?php echo ++$no ?></td>                                                    
@@ -236,6 +240,15 @@
                                                 </tr>                                        
                                                 <?php }}?>
                                             </tbody> 
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="4">TOTAL</td>
+                                                    <td style="text-align:right; font-weight:bold"><?= rupiah($totalDebit); ?></td>
+                                                    <td style="text-align:right; font-weight:bold"><?= rupiah($totalKredit); ?></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tfoot>
                                         </table>
 
                                     </div>

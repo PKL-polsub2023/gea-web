@@ -30,5 +30,20 @@ class Master_Kendaraan_Model extends CI_Model{
 		return $this->db->delete('dt_master_kendaraan', ['id_kendaraan' => $id_kendaraan]);
 	}
 
+	function dropKendaraan(){
+		$data = array();
+
+		$this->db->order_by("id_kendaraan", "DESC");
+		$query = $this->db->get("dt_master_kendaraan");
+		
+		$data[""] = "- Pilih No Polisi -";
+		foreach ($query->result() as $row) {
+			  $value = $row->ts . ' - ' . $row->plat_no;
+			  $data[$value] = $value;
+		}
+		
+		return $data;
+  }
+
 
 }

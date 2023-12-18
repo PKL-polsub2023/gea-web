@@ -30,5 +30,20 @@ class Master_Driver_Model extends CI_Model{
 		return $this->db->delete('dt_master_driver', ['id_driver' => $id_driver]);
 	}
 
+	function dropDriver(){
+		$data = array();
+
+		$this->db->order_by("id_driver", "DESC");
+		$query = $this->db->get("dt_master_driver");
+		
+		$data[""] = "- Pilih Driver -";
+		foreach ($query->result() as $row) {
+			  $value = $row->nama_driver;
+			  $data[$value] = $value;
+		}
+		
+		return $data;
+  }
+
 
 }

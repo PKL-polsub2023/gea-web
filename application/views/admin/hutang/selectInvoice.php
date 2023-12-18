@@ -15,7 +15,7 @@
                                     <!-- <h6 class="page-title">Data Ruangan</h6> -->
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Hutang</li>
+                                        <li class="breadcrumb-item active" aria-current="page">Invoice Hutang</li>
                                     </ol>
                                 </div>
                                 <div class="col-md-4">
@@ -37,9 +37,13 @@
                             <div class="col-12">
                                 <div class="card">
                                 <div class="col col-md-3 col-3 ms-4 mt-2">
+                                    <?php if ($jumlahHutang > 0) {?>
                                     <button type="button" class="btn btn-primary waves-effect waves-light"
-                                                data-bs-toggle="modal" data-bs-target="#cetak">Select Invoice Hutang
+                                                data-bs-toggle="modal" data-bs-target="#print">Cetak Invoice Hutang
                                     </button>
+                                    <?php 
+                                    } 
+                                    ?>
 
                                     </div>
                                     <div class="card-body">
@@ -116,22 +120,18 @@
                 </div>
                 <!-- End Page-content -->
 
-
- <?php
- foreach ($datamaster as $u) {
-    ?>
-     <!-- sample modal content -->
-  <div id="myModalz<?= $u['datakwitansi_id'] ?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div id="print" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                    <div class="modal-dialog">
                        <div class="modal-content">
                            <div class="modal-header">
-                               <h5 class="modal-title" id="myModalLabel">Faktur<?= $u['datakwitansi_id'] ?>"
+                               <h5 class="modal-title" id="myModalLabel">Invoice <?php echo $spbg?>
                                </h5>
                                <button type="button" class="btn-close" data-bs-dismiss="modal"
                                    aria-label="Close"></button>
                            </div>
                            <div class="modal-body">
-                            <form action="<?php echo base_url('hutang/faktur/'. $u['datakwitansi_id']);?>" method="POST" enctype="multipart/form-data" target="_blank"> 
+                            <form action="<?php echo base_url('hutang/invoice')?>" method="POST" enctype="multipart/form-data" target="_blank"> 
+                            <input type="text" name="mastersupplier_id" value="<?php echo $mastersupplier_id ?>" hidden>
                                <div class="row mb-3">
                                     <label class="col-sm-4 col-form-label" for="input-mask">No Invoice</label>
                                     <div class="col-sm-8">
@@ -166,76 +166,11 @@
                            </div>
                         </form>
                        </div>
-                       <!-- /.modal-content -->
+                 
                    </div>
-                   <!-- /.modal-dialog -->
+           
                </div>
-               <!-- /.modal -->
-    <?php
- }
- ?>
-
-   <!-- sample modal content -->
-   <div id="cetak" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                   <div class="modal-dialog">
-                       <div class="modal-content">
-                           <div class="modal-header">
-                               <h5 class="modal-title" id="myModalLabel">Select Invoice Hutang
-                               </h5>
-                               <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                   aria-label="Close"></button>
-                           </div>
-                           <div class="modal-body">
-                            <form action="<?php echo base_url('hutang/selectInvoice');?>" method="POST" enctype="multipart/form-data" target="_blank"> 
-                               <div class="row mb-3">
-                                   <label for="example-text-input" class="col-sm-4 col-form-label">Supplier</label>
-                                   <div class="col-sm-8">
-                                    <select onchange="supplier()" class="form-control" name="mastersupplier_id" id="mastersupplier_id">
-                                    <option value="">Pilih Supplier</option>
-                                    <?php foreach ($supplier as $u): ?>
-                                               <option value="<?= $u['mastersupplier_id'] ?>"><?= $u['namaspbg'] ?> - <?= $u['lokasispbg'] ?></option>
-                                           <?php endforeach ?>
-                                    </select>
-                                       <!-- <input class="form-control" type="text" placeholder="Artisanal kale" id="example-text-input">-->
-                                   </div>
-                               </div>
-
-
-
-                               <!-- <div class="row mb-3">
-                                   <label for="example-text-input" class="col-sm-4 col-form-label">Rentang Tanggal</label>
-                                   <div class="col-sm-8">
-                                    <div class="row">
-                                            <div class="col-sm-6">
-                                                <input type="date" name="fromdate" class="form-control">
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <input type="date" name="todate" class="form-control">
-                                            </div>
-                                    </div>
-                                        <input class="form-control currency" name="debit" type="text" placeholder="Debit" id="example-text-input" required>  
-                                       
-                                        <input type="text" name="debit_x" placeholder="0" id="debit" class="form-control currency" required/>
-                                        <input type="hidden" name="debit" class="form-control"/>                                                           
-                                   </div>
-                               </div> -->
-
-                          
-
-
-                           </div>
-                           <div class="modal-footer">
-                               <button type="button" class="btn btn-secondary waves-effect"
-                                   data-bs-dismiss="modal">Close</button>
-                               <button type="submit" id="cari"
-                                   class="btn btn-primary waves-effect waves-light" disabled>Cari</button>
-                           </div>
-                       </div>
-                       <!-- /.modal-content -->
-                   </div>
-                   <!-- /.modal-dialog -->
-               </div>
-               <!-- /.modal -->
+            
 
                
 
@@ -251,19 +186,6 @@
  
 
 
-<script>
-    function supplier()
-    {
-        var supplier = $('#mastersupplier_id').val();
-        if(supplier === "")
-        {
-            document.getElementById("cari").disabled = true;
-        }else{
-            document.getElementById("cari").disabled = false;
-            
-        }
-    }
-</script>
 
 
 

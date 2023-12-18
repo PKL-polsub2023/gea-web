@@ -9,6 +9,8 @@ class Data_kwitansi extends CI_Controller {
 		parent::__construct();
 		$this->load->helper('url');
 		$this->load->model('Datakwitansi_model');
+        $this->load->model('Master_Kendaraan_Model');
+        $this->load->model('Master_Driver_Model');
         $this->load->library('session');
 	}
 
@@ -38,9 +40,14 @@ class Data_kwitansi extends CI_Controller {
 
     public function tambah()
 	{
+        $data = [
+            'driver' => $this->Master_Driver_Model->dropDriver(),
+            'kendaraan' => $this->Master_Kendaraan_Model->dropKendaraan(),
+        ];
+
 		$this->load->view('aadmin_layout/header');
         $this->load->view('aadmin_layout/sidebar');
-        $this->load->view('aadmin_item/datakwitansi/tambah');
+        $this->load->view('aadmin_item/datakwitansi/tambah', $data);
         $this->load->view('aadmin_layout/footer'); 
 	} 
 
@@ -74,7 +81,9 @@ class Data_kwitansi extends CI_Controller {
 
         $data = array( 
             //'saldoawal'       => $this->Saldo_Awal_Model->lihat_no_jurnal($no_jurnal),
-            'edit'		        => $this->Datakwitansi_model->ubah($id)
+            'edit'		        => $this->Datakwitansi_model->ubah($id),
+            'driver' => $this->Master_Driver_Model->dropDriver(),
+            'kendaraan' => $this->Master_Kendaraan_Model->dropKendaraan(),
         ); 
 	
         $this->load->view('aadmin_layout/header');

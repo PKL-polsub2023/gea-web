@@ -64,34 +64,40 @@
 
                                                         <div class="mb-4">
                                                             <label class="form-label" for="input-mask">No Polisi</label>
-                                                            <input id="input-mask" name="no_polisi" class="form-control input-mask">                                                            
+                                                            <?php
+                                                                echo form_dropdown('no_polisi', $kendaraan, '', 'id="no_polisi" class="form-control input-mask" ');
+                                                            ?>       
+                                                            <!-- <input id="input-mask" name="no_polisi" class="form-control input-mask">                                                             -->
                                                         </div>   
 
                                                         <div class="mb-4">
                                                             <label class="form-label" for="input-mask">Nama Driver</label>
-                                                            <input id="input-mask" name="nama_driver" class="form-control input-mask">                                                            
+                                                            <?php
+                                                                echo form_dropdown('nama_driver', $driver, '', 'id="nama_driver" class="form-control input-mask" ');
+                                                            ?>      
+                                                            <!-- <input id="input-mask" name="nama_driver" class="form-control input-mask">                                                             -->
                                                         </div>   
 
                                                         <div class="mb-4">
-                                                            <label class="form-label" for="input-mask">Tekanan Awal</label>
+                                                            <label class="form-label" for="input-mask">Pressure Awal</label>
                                                             <input id="input-mask" name="tekananawal" type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" min="0" class="form-control input-mask">
                                                             Bar/Psi                                                            
                                                         </div>   
 
                                                         <div class="mb-4">
-                                                            <label class="form-label" for="input-mask">Tekanan Akhir</label>
+                                                            <label class="form-label" for="input-mask">Pressure Akhir</label>
                                                             <input id="input-mask" name="tekananakhir" type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" min="0" class="form-control input-mask">
                                                             Bar/Psi                                                            
                                                         </div>
                                                         
                                                         <div class="mb-4">
                                                             <label class="form-label" for="input-mask">Totalisator Awal</label>
-                                                            <input id="input-mask" name="totalisatorawal" type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" min="0" class="form-control input-mask">                                                            
+                                                            <input onkeyup="volume()" id="totalisator1" name="totalisatorawal" type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" min="0" class="form-control input-mask">                                                            
                                                         </div>
 
                                                         <div class="mb-4">
                                                             <label class="form-label" for="input-mask">Totalisator Akhir</label>
-                                                            <input id="input-mask" name="totalisatorakhir" type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" min="0" class="form-control input-mask">                                                            
+                                                            <input  onkeyup="volume()" id="totalisator2" name="totalisatorakhir" type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" min="0" class="form-control input-mask">                                                            
                                                         </div>
 
                                                         
@@ -110,7 +116,7 @@
 
                                                         <div class="mb-4">
                                                             <label class="form-label" for="input-mask">Volume Gas</label>
-                                                            <input id="volumegas" name="volumegas" type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" min="0" value="0" class="form-control input-mask">
+                                                            <input  style="background:#CCC;" id="volumegas" name="volumegas" type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" min="0" value="0" class="form-control input-mask" readonly>
                                                             LSP                                                            
                                                         </div>
 
@@ -148,6 +154,20 @@
                     </div> <!-- container-fluid -->
                 </div>
                 <!-- End Page-content -->
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                <script>
+                    function volume()
+                    {
+                        var awal = $("#totalisator1").val();
+                        var akhir = $("#totalisator2").val();
+                        var total = awal - akhir;
+                        $("#volumegas").val(total);
+                        document.getElementById("mastersupplier_id").value = null;
+                        document.getElementById("total").value = null;
+                        document.getElementById("hargasatuan").value = null;
+                        
+                    }
+                </script>
 
                                
       

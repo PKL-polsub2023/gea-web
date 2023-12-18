@@ -52,6 +52,7 @@ class Master_customer extends CI_Controller {
                     'namapic'       => $this->input->post('namapic'),
                     'notelp'       => $this->input->post('notelp'),
                     'radius'       => $this->input->post('radius'),
+                    'harga_jual'       => $this->input->post('harga_jual'),
                 );      
             
         $this->db->insert('dt_mastercustomer', $data);             
@@ -88,6 +89,7 @@ class Master_customer extends CI_Controller {
             'namapic'       => $this->input->post('namapic'),
             'notelp'       => $this->input->post('notelp'),
             'radius'       => $this->input->post('radius'),
+            'harga_jual'       => $this->input->post('harga_jual'),
 		);
 		$this->db->where("mastercustomer_id", $mastercustomer_id); // ubah id dan postnya
 		$this->db->update("dt_mastercustomer", $data);

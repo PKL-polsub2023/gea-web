@@ -18,6 +18,16 @@ class Jurnal_Masuk_Model extends CI_Model{
 
 	}
 
+	public function Lihatjurnalmasuk_filter($no_jurnal, $fromdate, $todate) {	
+		$no_jurnal = '%' . $no_jurnal . '%';
+		$query = $this->db->query("SELECT * FROM dt_jurnal_masuk 
+								   WHERE no_jurnal LIKE ? AND tanggal BETWEEN ? AND ? 
+								   ORDER BY jurnalmasuk_id DESC",
+								   array($no_jurnal, $fromdate, $todate));
+	
+		return $query->result_array();
+	}
+
 
 	public function lihat_detail_jurnal($no_jurnal){	
 

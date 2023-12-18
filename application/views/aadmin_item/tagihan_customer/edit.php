@@ -55,7 +55,7 @@
                                                             <label class="form-label" for="input-mask">Customer</label>
                                                             <?php
                                                                 $dropdownCustomer = $this->Tagihan_customer_model->dropdownCustomer();
-                                                                echo form_dropdown('mastercustomer_id', $dropdownCustomer, $edit['mastercustomer_id'], 'class="form-control input-mask" ');
+                                                                echo form_dropdown('mastercustomer_id', $dropdownCustomer, $edit['mastercustomer_id'],  ' id="mastercustomer_id" class="form-control input-mask" ');
                                                             ?>                                                            
                                                         </div>
 
@@ -68,18 +68,31 @@
                                                         </div>
 
                                                         <div class="mb-4">
+                                                            <label class="form-label" for="input-mask">No TS - No Polisi</label>
+                                                            <input id="no_ts" name="no_ts" value="<?= $edit['no_polisi'];?>" type="text" class="form-control input-mask" style="background:#CCC;" readonly >                                                            
+                                                        </div>
+
+
+                                                        <div class="mb-4">
                                                             <label class="form-label" for="input-mask">Tanggal Kirim</label>
                                                             <input id="input-mask" name="tanggalkirim" value="<?= $edit['tanggalkirim'];?>" type="date" class="form-control input-mask" style="background:#CCC;" readonly>                                                            
                                                         </div>
 
+                                                        
                                                         <div class="mb-4">
-                                                            <label class="form-label" for="input-mask">Tekanan Awal</label>
+                                                            <label class="form-label" for="input-mask">Tanggal Pulang</label>
+                                                            <input id="input-mask" name="tanggalpulang" value="<?= $edit['tanggalpulang'];?>" type="date" class="form-control input-mask">                                                            
+                                                        </div>
+
+
+                                                        <div class="mb-4">
+                                                            <label class="form-label" for="input-mask">Pressure Awal</label>
                                                             <input id="input-mask" name="tekananawal" value="<?= $edit['tekananawal'];?>"type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" class="form-control input-mask" style="background:#CCC;" readonly>
                                                                                                                         
                                                         </div>   
 
                                                         <div class="mb-4">
-                                                            <label class="form-label" for="input-mask">Tekanan Akhir</label>
+                                                            <label class="form-label" for="input-mask">Pressure Akhir</label>
                                                             <input id="input-mask" name="tekananakhir" value="<?= $edit['tekananakhir'];?>"type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" class="form-control input-mask" style="background:#CCC;" readonly>
                                                                                                                        
                                                         </div>
@@ -92,18 +105,48 @@
                                                         </div>
 
                                                         <div class="mb-4">
-                                                            <label class="form-label" for="input-mask">Preasure Keluar (P)</label>
-                                                            <input id="input-mask" name="preasure" value="<?= $edit['preasure'];?>"type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" class="form-control input-mask" >                                                            
+                                                            <label class="form-label" for="input-mask">Volume Pulang</label>
+                                                            <input onkeyup="hargaJual()" id="volumepulang" value="<?= $edit['volumepulang'];?>" name="volumepulang" type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" class="form-control input-mask" >                                                            
+                                                        </div>
+
+                                                        <div class="mb-4">
+                                                            <label class="form-label" for="input-mask">Temperature (t)</label>
+                                                            <input onkeyup="isi_sc()" id="t" name="t" type="text" value="<?= $edit['t'];?>" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" class="form-control input-mask" >                                                            
+                                                        </div>
+
+                                                        <div class="mb-4">
+                                                            <label class="form-label" for="input-mask">Pressure Out (P)</label>
+                                                            <input onkeyup="isi_k()" id="preasure" name="preasure" value="<?= $edit['preasure'];?>" type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" class="form-control input-mask" >                                                            
                                                         </div>
 
                                                         <div class="mb-4">
                                                             <label class="form-label" for="input-mask">Meter Awal (V1)</label>
-                                                            <input id="input-mask" name="meterawal" value="<?= $edit['meterawal'];?>"type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" class="form-control input-mask" >                                                            
+                                                            <input onkeyup="isi_vt()" id="meterawal" name="meterawal" value="<?= $edit['meterawal'];?>" type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" class="form-control input-mask" >                                                            
                                                         </div>
 
                                                         <div class="mb-4">
                                                             <label class="form-label" for="input-mask">Meter Akhir (V2)</label>
-                                                            <input id="input-mask" name="meterakhir" value="<?= $edit['meterakhir'];?>"type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" class="form-control input-mask" >                                                            
+                                                            <input onkeyup="isi_vt()" id="meterakhir" name="meterakhir" value="<?= $edit['meterakhir'];?>"type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" class="form-control input-mask" >                                                            
+                                                        </div>
+
+                                                        <div class="mb-4">
+                                                            <label class="form-label" for="input-mask">Vt</label>
+                                                            <input id="vt" name="vt" value="<?= $edit['vt'];?>" type="text" class="form-control input-mask" style="background:#CCC;" readonly >                                                            
+                                                        </div>
+
+                                                        <div class="mb-4">
+                                                            <label class="form-label" for="input-mask">K</label>
+                                                            <input id="k" name="k" type="text" value="<?= $edit['k'];?>" class="form-control input-mask" style="background:#CCC;" readonly >                                                            
+                                                        </div>
+
+                                                        <div class="mb-4">
+                                                            <label class="form-label" for="input-mask">Atmosphere Pressure</label>
+                                                            <input id="ap" name="ap" type="text" value="<?= $edit['ap'];?>" class="form-control input-mask" style="background:#CCC;" readonly >                                                            
+                                                        </div>
+
+                                                        <div class="mb-4">
+                                                            <label class="form-label" for="input-mask">Standard Condition</label>
+                                                            <input id="sc" name="sc" type="text" value="<?= $edit['sc'];?>" class="form-control input-mask" style="background:#CCC;" readonly >                                                            
                                                         </div>
 
                                                         <div class="mb-4">
@@ -113,13 +156,23 @@
 
                                                         <div class="mb-4">
                                                             <label class="form-label" for="input-mask">Ritase</label>
-                                                            <input id="input-mask" name="ritase" value="<?= $edit['ritase'];?>"type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" class="form-control input-mask" >                                                            
+                                                            <input id="input-mask" name="ritase" value="<?= $edit['ritase'];?>" type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" class="form-control input-mask" >                                                            
                                                         </div>
 
+                                                           <!-- hidden     -->
+                                                           <input id="hargacustomer" name="hargacustomer" type="text" class="form-control input-mask" hidden>                                                            
+                                                        <!-- end hidden -->
+
                                                         <div class="mb-4">
+                                                            <label class="form-label" for="input-mask">Harga Jual</label>
+                                                            <input style="background:#CCC;"  value="<?= $edit['harga'];?>" id="harga" name="harga" type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" class="form-control input-mask" readonly >                                                            
+                                                        </div>
+
+
+                                                        <!-- <div class="mb-4">
                                                             <label class="form-label" for="input-mask">Total (Rp)</label>
                                                             <input id="input-mask" name="total" value="<?= $edit['total'];?>" type="text" class="form-control input-mask" >                                                            
-                                                        </div>
+                                                        </div> -->
                                                         
                                                     </div>
                                                 </div>
@@ -151,6 +204,44 @@
                     </div> <!-- container-fluid -->
                 </div>
                 <!-- End Page-content -->
+
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                <script>
+                    function hargaJual()
+                    {
+                        var hargacustomer = $("#hargacustomer").val();
+                        var volumepulang = $("#volumepulang").val();
+                        var harga_jual = hargacustomer * volumepulang;
+                        $("#harga").val(harga_jual);
+                    }
+
+                    function isi_vt()
+                    {
+                        var meterawal = $("#meterawal").val();
+                        var meterakhir = $("#meterakhir").val();
+                        var vt = meterakhir - meterawal;
+                        vt = Math.round(vt * 100) / 100;
+                        $("#vt").val(vt);
+                    }
+
+                    function isi_k()
+                    {
+                        var preasure = parseFloat($("#preasure").val());    
+                        k = (1+(0.0002*preasure));
+                        ap = ((preasure+1.01325));
+                        // k = Math.round(k * 100) / 100;
+                        $("#k").val(k);
+                        $("#ap").val(ap);
+                    }
+
+                    function isi_sc()
+                    {
+                        var t = parseFloat($("#t").val());
+                        sc = ((273+27)/(273 + t));
+                        sc = Math.round(sc * 100) / 100;
+                        $("#sc").val(sc);
+                    }
+                </script>
 
                                
       

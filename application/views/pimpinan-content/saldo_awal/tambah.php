@@ -47,9 +47,8 @@
                                   <!-- <h6 class="page-title">Data Ruangan</h6> -->
                                   <ol class="breadcrumb m-0">
                                       <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                                      <li class="breadcrumb-item"><a href="#">Transaksi</a></li>
-                                      <li class="breadcrumb-item"><a href="#">Input Transaksi Harian</a></li>
-                                      <li class="breadcrumb-item active" aria-current="page">Tambah Jurnal</li>
+                                      <li class="breadcrumb-item"><a href="#">Customer</a></li>
+                                      <li class="breadcrumb-item active" aria-current="page">Data Customer</li>
                                   </ol>
                               </div>
                               <div class="col-md-4">
@@ -84,50 +83,14 @@
                                       <table class="table table-bordered" style="background-color: #ececf1; border: 2px solid #ccc;">
                                         <tbody>
                                         <tr>
-                                        
-                                        
-                                        </tr>
-                                        <tr>
-                                        <td style="width: 10%;">Jenis Transaksi</td>
-                                        <td style="width: 30%;">
-                                        <select id="example-text-input" class="form-control" name="jenis_transaksi">
-                                                <option value="1">Pemasukan (IN)</option> 
-                                                <option value="2">Pengeluaran (OUT)</option>
-                                                <!-- <option value="3">Pengeluaran Hutang (HUT)</option>
-                                                <option value="4">Pemasukan Piutang (PIU)</option> -->
-                                        </select> 
-                                        <!-- <input id="example-text-input" class="form-control" name="jenis_transaksi" type="text" placeholder="No Jurnal" required> -->
-                                        </td>
-
-                                        <!--
                                         <td style="width: 10%;">No Jurnal</td>
                                         <td style="width: 30%;"><input id="example-text-input" class="form-control" name="no_jurnal" type="text" placeholder="No Jurnal" required></td>
-                                        -->
-                                        
                                         <td style="width: 10%">keterangan</td>
                                         <td style="width: 30%" rowspan="2"><textarea rows="4" id="example-text-input" class="form-control" name="keterangan" placeholder="Keterangan"></textarea></td>
                                         </tr>
                                         <tr>
                                         <td style="width: 10%">Tanggal</td>
                                         <td style="width: 30%"><input id="example-text-input" class="form-control" name="tanggal" type="date" placeholder="Tanggal" /></td>
-                                        <td style="width: 79.3438px;">&nbsp;</td>
-                                        </tr>
-
-                                        <tr>
-                                        <td style="width: 10%">QTY</td>
-                                        <td style="width: 30%"><input id="example-text-input" class="form-control" name="qty" type="number" placeholder="QTY" /></td>
-                                        <td style="width: 10%">Status</td>
-                                        <td style="width: 30%">
-                                            <select id="example-text-input" class="form-control" name="status">
-                                                <option value="0">belum dibayar</option> 
-                                                <option value="1">sudah dibayar</option>
-                                            </select> 
-                                        </td>
-                                        </tr>
-
-                                        <tr>
-                                        <td style="width: 10%">Harga Satuan</td>
-                                        <td style="width: 30%"><input id="example-text-input" class="form-control" name="hargasatuan" type="number" placeholder="Harga Satuan" /></td>
                                         <td style="width: 79.3438px;">&nbsp;</td>
                                         </tr>
                                         </tbody>
@@ -137,48 +100,38 @@
                                                     <br>                                                   
                                                         <div data-repeater-list="group-a">
                                                             <div data-repeater-item class="row">
-                                                                <div  class="mb-6 col-lg-6">
+                                                                <div  class="mb-2 col-lg-2">
                                                                     <label class="form-label" for="name">Kode</label>
 
                                                                     <select name="mastercoa_id" id="mastercoa_id" class="form-control">
                                                                         <option value="">Pilih Akun</option>
                                                                         <?php foreach ($datacoa as $u): ?>
-                                                                            <option value="<?= $u['mastercoa_id'] ?>"><?= $u['kode'] ?> - <?= $u['nama'] ?> (<?= $u['jenis'] ?>)</option>
+                                                                            <option value="<?= $u['mastercoa_id'] ?>"><?= $u['kode'] ?> - <?= $u['nama'] ?></option>
                                                                         <?php endforeach ?>
                                                                     </select>
                                                                 </div>
                     
-                                                                <div  class="mb-6 col-lg-6">
+                                                                <div  class="mb-3 col-lg-4">
                                                                     <label class="form-label" for="email">Nama Rekening</label>
                                                                     <input type="text" name="namarek" id="namarek" class="form-control"/>
                                                                 </div>
                     
-                                                                <div  class="mb-6 col-lg-6">
+                                                                <div  class="mb-3 col-lg-3">
                                                                     <label class="form-label" for="subject">Debit</label>
-                                                                    <input type="text" name="debit_x" placeholder="0" id="debit_aw" class="form-control currency"/>
-                                                                    <input type="hidden" name="debit" class="form-control"/>
+                                                                    <input type="text" name="debit" value="0" id="debit" class="form-control"/>
                                                                 </div>
                     
-                                                                <div class="mb-6 col-lg-6">
+                                                                <div class="mb-3 col-lg-3">
                                                                     <label class="form-label" for="resume">Kredit</label>
-                                                                    <input type="text" name="kredit_x" placeholder="0" class="form-control currency" id="kredit_aw">
-                                                                    <input type="hidden" name="kredit" class="form-control" >
+                                                                    <input type="text" name="kredit" value="0" class="form-control" id="kredit">
+                                                                    
                                                                 </div>
-
-                                                                <!-- <div class="mb-6 col-lg-6">
-                                                                    <label class="form-label" for="nama">Nama</label>
-                                                                    <input type="text" name="nama_x" placeholder="..." class="form-control" id="nama">
-                                                                    <input type="hidden" name="nama" class="form-control" >
-                                                                </div> -->
-
-
-                                                                <div class="col-lg-6 col-sm-6 align-self-center">
+                                                                <div class="col-lg-1 col-sm-4 align-self-center">
                                                                     <div class="d-grid">
                                                                         <label class="form-label" for="resume"></label>                                                                        
                                                                     </div>    
                                                                 </div>
-                                                                <br>
-                                                                <!-- <br><br><br><br> -->
+
 
 
 
@@ -245,14 +198,137 @@
 <script src="https://act.webseitama.com/assets/dist/autocomplite/jquery-ui.js" type="text/javascript"></script>
 <script type="text/javascript" src="https://act.webseitama.com/assets/plugins/PrayTimes/PrayTimes.js"></script>
 
-
-
 <script type="text/javascript">
-    const url_getakun = "<?= site_url('jurnal_masuk/getakun') ?>";
+        $(document).ready(function(){
 
-    $('tfoot').hide();  
+
+            $('tfoot').hide()
+
+			$(document).keypress(function(event){
+		    	if (event.which == '13') {
+		      		event.preventDefault();
+			   	}
+			})
+
+ 
+            $('#mastercoa_id').change(function(){ 
+
+                if($(this).val() == '') reset()
+			        else {
+
+                            var id=$(this).val();
+                            $.ajax({
+                                url : "<?php echo site_url('jurnal_masuk/getakun');?>",
+                                method : "POST",
+                                data : {id: id},
+                                async : true,
+                                dataType : 'json',
+                                success: function(data){
+                                    
+                                    var html = '';
+                                    
+                                    var i;
+                                    for(i=0; i<data.length; i++){
+                                        
+                                        html  += data[i].nama;                            
+                                    
+                                    }
+                                    $('#namarek').val(html);
+                                    $('button#tambah').prop('disabled', false)
+            
+                                }
+                            });
+                        }
+                return false;
+            }); 
+
+
+
+
+            $(document).on('click', '#tambah', function(e){
+				const url_tambahjurnal = $('#content').data('url') + '/tambahjurnal'
+				const data_jurnalmasuk= {
+                    mastercoa_id: $('select[name="mastercoa_id"]').val(), 
+					namarek: $('input[name="namarek"]').val(),
+					debit: $('input[name="debit"]').val(),
+					kredit: $('input[name="kredit"]').val(),
+					//satuan: $('input[name="satuan"]').val(),
+					//sub_total: $('input[name="sub_total"]').val(),
+				}
+
+				// if(parseInt($('input[name="max_hidden"]').val()) <= parseInt(data_jurnalmasuk.jumlah)) {
+				// 	alert('stok tidak tersedia! stok tersedia : ' + parseInt($('input[name="max_hidden"]').val()))	
+				// } else {
+					$.ajax({
+						url: url_tambahjurnal,
+						type: 'POST',
+						data: data_jurnalmasuk,
+						success: function(data){
+							if($('select[name="mastercoa_id"]').val() == data_jurnalmasuk.mastercoa_id) $('option[value="' + data_jurnalmasuk.mastercoa_id + '"]').hide()
+							reset()
+
+							$('table#isi tbody').append(data)
+							$('tfoot').show()
+
+                            $('#totaldebit').html('<p align="left">Total Debit : <strong>' + hitung_totaldebit() + '</strong></p>')
+                            $('input[name="totaldebit_hidden"]').val(hitung_totaldebit())
+
+							$('#totalkredit').html('<p align="left">Total Kredit : <strong>' + hitung_totalkredit() + '</strong></p>')
+							$('input[name="totalkredit_hidden"]').val(hitung_totalkredit())
+						}
+					})
+				//}
+
+			})
+
+            $(document).on('click', '#tombol-hapus', function(){
+				$(this).closest('.row-isi').remove()
+
+				$('option[value="' + $(this).data('namarek') + '"]').show()
+
+				if($('tbody').children().length == 0) $('tfoot').hide()
+			})
+
+			$('button[type="submit"]').on('click', function(){
+				$('select[name="mastercoa_id"]').prop('disabled', true)
+				$('input[name="namarek"]').prop('disabled', true)
+				$('input[name="debit"]').prop('disabled', true)
+				$('input[name="kredit"]').prop('disabled', true)
+				//$('input[name="sub_total"]').prop('disabled', true)
+			})
+
+			function hitung_totalkredit(){
+				let totalkredit = 0;
+				$('.kredit').each(function(){
+					totalkredit += parseInt($(this).text())
+				})
+
+				return totalkredit;
+			}
+
+            function hitung_totaldebit(){
+				let totaldebit = 0;
+				$('.debit').each(function(){
+					totaldebit += parseInt($(this).text())
+				})
+
+				return totaldebit;
+			}
+
+			function reset(){
+				$('#mastercoa_id').val('')
+                $('#namarek').val('')
+				$('input[name="debit"]').val('')
+				$('input[name="kredit"]').val('')
+				//$('input[name="jumlah"]').val('')
+				//$('input[name="sub_total"]').val('')
+				//$('input[name="jumlah"]').prop('readonly', true)
+				$('button#tambah').prop('disabled', true)
+			}
+             
+        });
 </script>
-<script src="<?=base_url()?>/assets/js/crud.js"></script>
+
 <script>
 		// $(document).ready(function(){
 		// 	$('tfoot').hide()

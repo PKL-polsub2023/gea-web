@@ -23,7 +23,7 @@
                                     <div class="float-end d-none d-md-block">
                                         <div class="dropdown">                                                                
 
-										<button type="button" value="Go Back" onclick="history.back(-1)" class="btn btn-warning btn-mini">Kembali</button> 
+										<button type="button" value="Go Back" onclick="goBack()" class="btn btn-warning btn-mini">Kembali</button> 
 
                                         </div>
                                     </div>
@@ -120,7 +120,17 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.28.1/sweetalert2.all.min.js"></script>
  
 
-
+<script>
+function goBack() {
+  // Periksa apakah halaman sebelumnya menggunakan metode POST
+  if (document.referrer.includes("method=post")) {
+    window.history.back();
+  } else {
+    // Jika halaman sebelumnya tidak menggunakan metode POST, arahkan ke halaman tertentu
+    window.location.href = '<?php echo base_url()?>jurnal_masuk';
+  }
+}
+</script>
 
 
 

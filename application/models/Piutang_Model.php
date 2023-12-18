@@ -140,6 +140,38 @@ class Piutang_Model extends CI_Model{
 		return $this->db->delete('dt_mastercustomer', ['mastercustomer_id' => $mastercustomer_id]);
 	}
 
+	public function selectInvoice($mastercustomer_id, $fromdate, $todate){	
+
+		$query = $this->db->query("
+			SELECT * FROM dt_tagihan_customer
+			JOIN dt_mastercustomer ON dt_mastercustomer.mastercustomer_id = dt_tagihan_customer.mastercustomer_id
+			JOIN dt_suratjalan_customer ON dt_suratjalan_customer.suratjalan_customer_id = dt_tagihan_customer.suratjalan_customer_id
+			JOIN dt_datakwitansi ON dt_datakwitansi.datakwitansi_id = dt_suratjalan_customer.datakwitansi_id
+			WHERE dt_mastercustomer.mastercustomer_id = '".$mastercustomer_id."'
+			AND dt_datakwitansi.tanggal BETWEEN '".$fromdate."' AND '".$todate."'
+			ORDER BY dt_tagihan_customer.tagihan_customer_id DESC
+		");
+	
+		return $query->result_array();
+	}
+
+	public function selectInvoice2($mastercustomer_id, $fromdate, $todate, $statushutang){	
+
+		$query = $this->db->query("
+			SELECT * FROM dt_tagihan_customer
+			JOIN dt_mastercustomer ON dt_mastercustomer.mastercustomer_id = dt_tagihan_customer.mastercustomer_id
+			JOIN dt_suratjalan_customer ON dt_suratjalan_customer.suratjalan_customer_id = dt_tagihan_customer.suratjalan_customer_id
+			JOIN dt_datakwitansi ON dt_datakwitansi.datakwitansi_id = dt_suratjalan_customer.datakwitansi_id
+			WHERE dt_mastercustomer.mastercustomer_id = '".$mastercustomer_id."'
+			AND dt_datakwitansi.tanggal BETWEEN '".$fromdate."' AND '".$todate."'
+			AND dt_tagihan_customer.statushutang = '".$statushutang."'
+			ORDER BY dt_tagihan_customer.tagihan_customer_id DESC
+		");
+	
+		return $query->result_array();
+	}
+	
+
     
 
 

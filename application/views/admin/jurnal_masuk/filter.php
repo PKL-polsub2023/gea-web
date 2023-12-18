@@ -15,14 +15,16 @@
                                     <!-- <h6 class="page-title">Data Ruangan</h6> -->
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                                        <li class="breadcrumb-item"><a href="#">Laporan</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Detail Piutang</li>
+                                        <li class="breadcrumb-item"><a href="#">Transaksi</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Input Transaksi Harian</li>
                                     </ol>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="float-end d-none d-md-block">
+                                    <div class="float-end d-md-block">
                                         <div class="dropdown">                                                                
 
+                                            <!-- <a class="btn btn-primary" href="<?php echo base_url()?>jurnal_masuk/tambah" role="button">Tambah Jurnal Pemasukan</a>
+                                            <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#filter">Filter</button> -->
 
                                         </div>
                                     </div>
@@ -32,18 +34,10 @@
                         <!-- end page title -->
 
 
-                   
+
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
-
-                                    <div class="col col-md-3 col-3 ms-4 mt-2">
-                                    <button type="button" class="btn btn-primary waves-effect waves-light"
-                                                data-bs-toggle="modal" data-bs-target="#myModal">Select Invoice
-                                    </button>
-
-                                    </div>
-                              
                                     <div class="card-body">
 
                                         <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
@@ -51,11 +45,14 @@
                                             <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Nama Perusahaan</th>
-                                                <th>Alamat</th>
-                                                <th>Nama PIC</th>
-                                                <th>No Telp</th>
-                                                <th>Radius GEA to Lokasi</th>
+                                                <!-- <th>Nama Akun</th> -->
+                                                <th>No Jurnal</th>
+                                                <th>Tanggal</th>
+                                                <th>Jenis Transaksi</th>
+                                                <th>Total Debit</th>
+                                                <th>Total Kredit</th>
+                                                <th>Keterangan</th>
+                                                <th>Status </th>
                                                 <th style="text-align:center">Tindakan</th>                                            
                                             </tr>
                                             </thead>
@@ -63,36 +60,75 @@
 
                                                 <?php                                                 
                                                 $no = 0;
-                                                    if($datamaster){
-                                                        foreach($datamaster as $u){  
+                                                $totalDebit = 0;
+                                                $totalKredit = 0;
+                                                    if($datajurnalmasuk){
+                                                        foreach($datajurnalmasuk as $u){  
+                                                            $totalDebit += $u['tot_debit'];
+                                                            $totalKredit += $u['tot_kredit'];
                                                 ?>                                                            
                                                 <tr>
-                                                    <td width="5%" style="text-align:center"><?php echo ++$no ?></td>                                                    
-                                                    <td><?php echo $u['namaperusahaan'] ?></td> 
-                                                    <td><?php echo $u['alamat'] ?></td>
-                                                    <td><?php echo $u['namapic'] ?></td>
-                                                    <td><?php echo $u['notelp'] ?></td>
-                                                    <td><?php echo $u['radius'] ?></td>
-                                                    <td style="text-align:center;">
-                                                        <!-- <a href="<?= base_url('piutang/paid/' . $u['mastercustomer_id']) ?>" class="btn btn-success btn-sm">Paid</a>                                                     
-                                                        <a href="<?= base_url('piutang/pending/' . $u['mastercustomer_id']) ?>" class="btn btn-warning btn-sm">Pending</a>                                                     
-                                                        <a href="<?= base_url('piutang/unpayed/' . $u['mastercustomer_id']) ?>" class="btn btn-danger btn-sm">Unpayed</a>                                                      -->
-                                                        <!-- <a href="<?= base_url('piutang/invoice/' . $u['mastercustomer_id']) ?>" class="btn btn-info btn-sm">Invoice</a>   
-                                                        <a href="<?= base_url('piutang/isiinvoice/' . $u['mastercustomer_id']) ?>" class="btn btn-success btn-sm" target="_blank">PDF Invoice</a>                                                      -->
-                                                        <?php if ($u['jumlah_tagihan'] > 0) { ?>
-                                                            <a href="<?= base_url('piutang/invoice/' . $u['mastercustomer_id']) ?>" class="btn btn-info btn-sm">Tagihan Customer</a>   
-                                                            <a href="<?= base_url('piutang/isiinvoice/' . $u['mastercustomer_id']) ?>" class="btn btn-success btn-sm" target="_blank">Invoice</a>                                                     
-                                                        <?php } else { ?>
-                                                            <span>Tidak ada tagihan</span>
-                                                        <?php } ?>
+                                                    <td style="width: 1%;text-align:center"><?php echo ++$no ?></td>                                                    
+                                                    <!-- <td style="width: 10%;text-align:left"><?php echo $u['kode'] ?> - <?php echo $u['nama'] ?></td>  -->
+                                                    <td style="width: 10%;text-align:center"><?php echo $u['no_jurnal'] ?></td>
+                                                    <td style="width: 5%;text-align:center"><?php echo date ('d/m/Y', strtotime($u['tanggal'])) ?></td>
+                                                    <td style="width: 5%;text-align:center"><?php echo ($u['tipe_jurnal'] == 1) ? "Pemasukan" : "Pengeluaran";?></td>
+                                                    <!-- <td style="width: 10%;text-align:right"><?php echo "Rp " . number_format($u['tot_debit'], 2, ",", "."); ?></td> -->
+                                                    <td style="width: 10%;text-align:right"><?= rupiah($u['tot_debit']); ?></td>
+                                                    <td style="width: 10%;text-align:right"><?= rupiah($u['tot_kredit']); ?></td>
+                                                    <td style="width: 15%;text-align:center"><?php echo $u['keterangan'] ?></td>
+                                                    <td style="width: 15%;text-align:center"><?php echo ($u['status'] == 0) ? "belum bayar" : "sudah bayar";?></td>
+                                                    <td style="width: 5%;text-align:center">
+                                                        <!-- <button class="btn btn-primary waves-effect waves-light btn-sm" data-toggle="modal" data-target="#editModal-<?php echo $u['jurnalmasuk_id'] ?>"><i class="fa fa-edit"></i></button>                                                     
+                                                        <button class="btn btn-danger waves-effect waves-light btn-sm hapuscustomer" id='jurnalmasuk_id' data-toggle='modal' data-jurnalmasuk_id="<?=$u['jurnalmasuk_id']?>"><i class="fa fa-trash"></i></button> -->
+
+
+
+                                                        <?php if ($u['status_postingan_jurnal'] == ""){ ?>
+                                                       
+                                                            <a href="<?= base_url('jurnal_masuk/detail/' . $u['no_jurnal']) ?>" class="btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
+                                                            <a href="<?= base_url('jurnal_masuk/edit/' . $u['no_jurnal']) ?>" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>
+												            <a onclick="return confirm('apakah anda yakin?')" href="<?= base_url('jurnal_masuk/hapus/' . $u['no_jurnal']) ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+
+
+                                                    <?php } else if ($u['status_postingan_jurnal'] == "0"){ ?>
+
+                                                            <a href="<?= base_url('jurnal_masuk/detail/' . $u['no_jurnal']) ?>" class="btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
+                                                            <a href="<?= base_url('jurnal_masuk/edit/' . $u['no_jurnal']) ?>" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>
+                                                            <a onclick="return confirm('apakah anda yakin?')" href="<?= base_url('jurnal_masuk/hapus/' . $u['no_jurnal']) ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+
+                                                    <?php } else { ?>
+                                                        
+                                                            <a href="<?= base_url('jurnal_masuk/detail/' . $u['no_jurnal']) ?>" class="btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
+
+                                                    <?php } ?>
+
+
+
+
+                                                        
+
+
+                                                        
                                                     </td>
 
                                     
-                                                    </td>
+                                               
                                                 </tr>                                        
                                                 <?php }}?>
                                             </tbody> 
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="4">TOTAL</td>
+                                                    <td style="text-align:right; font-weight:bold"><?= rupiah($totalDebit); ?></td>
+                                                    <td style="text-align:right; font-weight:bold"><?= rupiah($totalKredit); ?></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tfoot>
                                         </table>
+
                                     </div>
                                 </div> 
                             </div> <!-- end col -->
@@ -103,28 +139,24 @@
                 </div>
                 <!-- End Page-content -->
 
-    <!-- sample modal content -->
-    <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+ <!-- sample modal content -->
+ <div id="filter" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                    <div class="modal-dialog">
                        <div class="modal-content">
                            <div class="modal-header">
-                               <h5 class="modal-title" id="myModalLabel">Select Invoice
+                               <h5 class="modal-title" id="myModalLabel">Filter Jurnal Transaksi
                                </h5>
                                <button type="button" class="btn-close" data-bs-dismiss="modal"
                                    aria-label="Close"></button>
                            </div>
                            <div class="modal-body">
-                            <form action="<?php echo base_url('piutang/selectInvoice');?>" method="POST" enctype="multipart/form-data" target="_blank"> 
+                            <form action="<?php echo base_url('jurnal_masuk/filter');?>" method="POST" enctype="multipart/form-data" target="_blank"> 
                                <div class="row mb-3">
-                                   <label for="example-text-input" class="col-sm-4 col-form-label">Customer</label>
+                                   <label for="example-text-input" class="col-sm-4 col-form-label">No Jurnal</label>
                                    <div class="col-sm-8">
-                                    <select onchange="button()" class="form-control" name="mastercustomer_id" id="mastercustomer_id">
-                                    <option value="">Pilih Customer</option>
-                                    <?php foreach ($customer as $u): ?>
-                                               <option value="<?= $u['mastercustomer_id'] ?>"><?= $u['namaperusahaan'] ?> - <?= $u['namapic'] ?></option>
-                                           <?php endforeach ?>
-                                    </select>
-                                       <!-- <input class="form-control" type="text" placeholder="Artisanal kale" id="example-text-input">-->
+                                        
+                                       <input class="form-control" type="text" placeholder="Nomor Jurnal" id="no_jurnal" name="no_jurnal">
                                    </div>
                                </div>
 
@@ -148,55 +180,33 @@
                                    </div>
                                </div>
 
-                               <div class="row mb-3">
-                                   <label for="example-text-input" class="col-sm-4 col-form-label">Status Piutang</label>
-                                   <div class="col-sm-8">
-                                    <select onchange="button()" class="form-control" name="statushutang" id="statushutang">
-                                    <option value="">Pilih Status Piutang</option>
-                                    <option value="All">Semua Status</option>
-                                    <option value="N">Belum Bayar</option>
-                                    <option value="Y">Sudah Bayar</option>
-                                    </select>
-                                       <!-- <input class="form-control" type="text" placeholder="Artisanal kale" id="example-text-input">-->
-                                   </div>
-                               </div>
-
-
                            </div>
                            <div class="modal-footer">
                                <button type="button" class="btn btn-secondary waves-effect"
                                    data-bs-dismiss="modal">Close</button>
                                <button type="submit" id="cari"
-                                   class="btn btn-primary waves-effect waves-light" disabled>Cari</button>
+                                   class="btn btn-primary waves-effect waves-light">Cari</button>
                            </div>
+                        </form>
                        </div>
                        <!-- /.modal-content -->
                    </div>
                    <!-- /.modal-dialog -->
                </div>
                <!-- /.modal -->
+               
+
+
+
+
+
+
+
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.28.1/sweetalert2.all.min.js"></script>
  
 
-<script>
-    function button()
-    {
-        var mastercustomer_id = $('#mastercustomer_id').val();
-        var fromdate = $('#fromdate').val();
-        var todate = $('#todate').val();
-        var statushutang = $('#statushutang').val();
-
-        if(mastercustomer_id != "" && fromdate != "" && todate != "" && statushutang != "")
-        {
-            document.getElementById("cari").disabled = false;
-        }else{
-            document.getElementById("cari").disabled = true;
-            
-        }
-    }
-</script>
 
 
 
@@ -205,7 +215,7 @@
 // fungsi untuk hapus data
           //pilih selector dari table id datacustomer dengan class .hapuscustomer
           $('#datatable').on('click','.hapuscustomer', function () {
-            var mastercoa_id  =   <?php echo $u['mastercoa_id'];?>;
+            var jurnalmasuk_id  =   <?php echo $u['jurnalmasuk_id'];?>;
             swal({
                 title: 'Konfirmasi',
                 text: "Anda ingin menghapus ",
@@ -230,7 +240,7 @@
                         }
                       })      
                     },    
-                    data:{mastercoa_id:mastercoa_id},
+                    data:{jurnalmasuk_id:jurnalmasuk_id},
                     success:function(data){
                       swal(
                         'Hapus',

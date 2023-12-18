@@ -113,7 +113,7 @@
         </table>
 
         <center>
-            <h2><u>INVOICE</u></h2>
+            <h2><u>FAKTUR</u></h2>
         </center>
 
         <table width="1000px">
@@ -124,7 +124,7 @@
                             <td class="data">Kepada Yth :</td>
                         </tr>
                         <tr>
-                        <td class="data"><?= $u['namaperusahaan'];?></td>
+                        <td class="data"><?= $u['namaspbg'];?></td>
                         </tr>
                     </table>
                 </th>
@@ -153,7 +153,7 @@
         <table class="data2">
             <tr>
                 <th style="width:5%;border-left:1px solid black;" class="data2">QTY</th>
-                <th style="width:40%" class="data2">Keterangan</th>
+                <th style="width:40%" class="data2">Nama Barang</th>
                 <th style="width:10%" class="data2">Volume</th>
                 <th style="width:10%" class="data2">Harga Satuan</th>
                 <th style="width:10%" class="data2">Discount</th>
@@ -162,11 +162,11 @@
          
             <tr>
                 <td class="data2" style="width:5%;text-align:center;;border-left:1px solid black;border-bottom:1px solid black;">1</td>
-                <td class="data2" style="width:40%;border-bottom:1px solid black;"><?php echo "Tagihan ".$u['namaperusahaan']." ".$u['tanggalkirim'] ?></td>
+                <td class="data2" style="width:40%;border-bottom:1px solid black;"><?php echo "Faktur ".$u['namaspbg']." ".$date2 ?></td>
                 <td class="data2" style="width:10%;border-bottom:1px solid black;"><?php echo $u['volumegas'] ?></td>
-                <td class="data2" style="width:10%;border-bottom:1px solid black;"><?php echo $u['harga'] ?></td>
+                <td class="data2" style="width:10%;border-bottom:1px solid black;"><?php echo $u['hargasatuan'] ?></td>
                 <td class="data2" style="width:10%;border-bottom:1px solid black;">-</td>
-                <td class="data2" style="width:30%;border-bottom:1px solid black;"><?php echo $total ?></td>
+                <td class="data2" style="width:30%;border-bottom:1px solid black;"><?php echo $rupiah ?></td>
             </tr>
             <tr>
                 <td colspan="2" rowspan="5">
@@ -184,7 +184,7 @@
                 </td>
 
                 <td class="total" colspan="3"> &nbsp;&nbsp; Subtotal</td>
-                <td style="border-bottom:1px solid black">: <?php echo $total ?></td>
+                <td style="border-bottom:1px solid black">: <?php echo $rupiah ?></td>
             </tr>
             <tr>
                 <td class="total" colspan="3"> &nbsp;&nbsp; Discount</td>
@@ -200,7 +200,7 @@
             </tr>
             <tr>
                 <td class="total" colspan="3"> &nbsp;&nbsp; Total</td>
-                <td style="border-bottom:1px solid black">: <?php echo $total ?> </td>
+                <td style="border-bottom:1px solid black">: <?php echo $rupiah ?> </td>
             </tr>
         </table>
 

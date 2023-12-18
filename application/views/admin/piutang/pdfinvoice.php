@@ -153,10 +153,11 @@
         <table class="data2">
             <tr>
                 <th style="width:5%;border-left:1px solid black;" class="data2">QTY</th>
-                <th style="width:40%" class="data2">Nama Barang</th>
-                <th style="width:10%" class="data2">Harga Satuan</th>
-                <th style="width:10%" class="data2">Discount</th>
-                <th style="width:30%" class="data2">Total</th>
+                <th style="width:40%" class="data2">Keterangan</th>
+                <th style="width:10%" class="data2">Volume</th>
+                <th style="width:15%" class="data2">Harga Satuan</th>
+                <th style="width:5%" class="data2">Discount</th>
+                <th style="width:25%" class="data2">Total</th>
             </tr>
             <?php                                                 
                 if($datamaster){
@@ -165,15 +166,16 @@
             <tr>
                 <td class="data2" style="width:5%;text-align:center;;border-left:1px solid black;border-bottom:1px solid black;">1</td>
                 <td class="data2" style="width:40%;border-bottom:1px solid black;"><?php echo "Tagihan ".$u['namaperusahaan']." ".$u['tanggalkirim'] ?></td>
-                <td class="data2" style="width:10%;border-bottom:1px solid black;"><?php echo $u['total'] ?></td>
-                <td class="data2" style="width:10%;border-bottom:1px solid black;">-</td>
+                <td class="data2" style="width:10%;border-bottom:1px solid black;"><?php echo $u['volumegas'] ?></td>
+                <td class="data2" style="width:15%;border-bottom:1px solid black;"><?php echo $u['harga'] ?></td>
+                <td class="data2" style="width:5%;border-bottom:1px solid black;">-</td>
                 <td class="data2" style="width:30%;border-bottom:1px solid black;"><?php echo $u['total'] ?></td>
             </tr>
             <?php }}?>
             <tr>
                 <td colspan="2" rowspan="5">
                 <p  class="norek">
-                    <i>
+                    <!-- <i>
                     Pembayaran Mohon ditransfer ke :
                     <br>
                     PT. Global Energy Agrapana
@@ -181,27 +183,27 @@
                     BCA Cabang Subang
                     <br>
                     Ac . 0556.138.138
-                </i>
+                </i> -->
                 </p>
                 </td>
 
-                <td class="total" colspan="2"> &nbsp;&nbsp; Subtotal</td>
+                <td class="total" colspan="3"> &nbsp;&nbsp; Subtotal</td>
                 <td style="border-bottom:1px solid black">: <?php echo $total ?></td>
             </tr>
             <tr>
-                <td class="total" colspan="2"> &nbsp;&nbsp; Discount</td>
+                <td class="total" colspan="3"> &nbsp;&nbsp; Discount</td>
                 <td style="border-bottom:1px solid black">: 0 </td>
             </tr>
             <tr>
-                <td class="total" colspan="2"> &nbsp;&nbsp; Pajak</td>
+                <td class="total" colspan="3"> &nbsp;&nbsp; Pajak</td>
                 <td style="border-bottom:1px solid black">: 0 </td>
             </tr>
             <tr>
-                <td class="total" colspan="2"> &nbsp;&nbsp; Biaya Pengiriman</td>
+                <td class="total" colspan="3"> &nbsp;&nbsp; Biaya Pengiriman</td>
                 <td style="border-bottom:1px solid black">: 0 </td>
             </tr>
             <tr>
-                <td class="total" colspan="2"> &nbsp;&nbsp; Total</td>
+                <td class="total" colspan="3"> &nbsp;&nbsp; Total</td>
                 <td style="border-bottom:1px solid black">: <?php echo $total ?> </td>
             </tr>
         </table>
@@ -216,7 +218,7 @@
             <tr>
                 <td class="font-normal" style="text-align:left;width:700px" rowspan="2">
                  <p  class="font-normal">
-                    <i>
+                    <!-- <i>
                     Note :
                     <br>
                     Bukti transfer mohon di emailkan ke
@@ -224,13 +226,15 @@
                     <b>globalenergyagrapana@gmail.com</b> atau di kirim
                     <br>
                     by <b>WA ke No.087834212541 sdri. Nining</b>
-                </i>
+                </i> -->
                 </p>
                 </td>
                 <td class="font-normal" style="height:60px"></td>
             </tr>
             <tr>
-                <td class="font-normal"><u>Bp Fredi Ginting</u><br>Direktur Utama</td>
+                <td class="font-normal">
+                    <!-- <u>Bp Fredi Ginting</u><br>Direktur Utama -->
+            </td>
             </tr>
         </table>
     </div>

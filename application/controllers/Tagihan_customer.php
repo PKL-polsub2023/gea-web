@@ -17,7 +17,7 @@ class Tagihan_customer extends CI_Controller {
 	public function index()
 	{     
         $data = array( 
-            'datamaster'		=> $this->Tagihan_customer_model->Lihatmaster()
+            'datamaster'		=> $this->Tagihan_customer_model->Lihatmaster(),
         );
 
         $role = $this->session->userdata('role');
@@ -47,21 +47,39 @@ class Tagihan_customer extends CI_Controller {
 	} 
 
     public function simpan()
-	{      
-      
+	{     
+        $vt =  $this->input->post('vt');
+        $k = $this->input->post('k');
+        $ap = $this->input->post('ap');
+        $sc = $this->input->post('sc');
+        $bbm = $this->input->post('bbm');
+        $ritase = $this->input->post('ritase');
+
+        $total = (($vt*$k*$ap*$sc)*($bbm+$ritase));
         $data=array(
                     'mastercustomer_id'       => $this->input->post('mastercustomer_id'),
                     'suratjalan_customer_id'       => $this->input->post('suratjalan_customer_id'),
-                    
+                    'tanggalpulang' => $this->input->post('tanggalpulang'),
                     'tekananawal'       => $this->input->post('tekananawal'),
                     'tekananakhir'       => $this->input->post('tekananakhir'),
                     'volumeberangkat'       => $this->input->post('volumeberangkat'),
+                    'volumepulang'       => $this->input->post('volumepulang'),
                     'preasure'       => $this->input->post('preasure'),
                     'meterawal'       => $this->input->post('meterawal'),
                     'meterakhir'       => $this->input->post('meterakhir'),
+
+                    't'       => $this->input->post('t'),
+                    'vt'       => $this->input->post('vt'),
+                    'k'       => $this->input->post('k'),
+                    'ap'       => $this->input->post('ap'),
+                    'sc'       => $this->input->post('sc'),
+                    'harga'       => $this->input->post('harga'),
+
+
                     'bbm'       => $this->input->post('bbm'),
                     'ritase'       => $this->input->post('ritase'),
-                    // 'total'       => $this->input->post('total'),
+                    
+                    'total_tagihan'       => $total,
                 );      
             
         $this->db->insert('dt_tagihan_customer', $data);             
@@ -90,18 +108,38 @@ class Tagihan_customer extends CI_Controller {
 	{
         $id =  $this->input->post("tagihan_customer_id");
 
+        $vt =  $this->input->post('vt');
+        $k = $this->input->post('k');
+        $ap = $this->input->post('ap');
+        $sc = $this->input->post('sc');
+        $bbm = $this->input->post('bbm');
+        $ritase = $this->input->post('ritase');
+
+        $total = (($vt*$k*$ap*$sc)*($bbm+$ritase));
+
 		$data = array(
                   'mastercustomer_id'       => $this->input->post('mastercustomer_id'),
                   'suratjalan_customer_id'       => $this->input->post('suratjalan_customer_id'),
                   
+                  'tanggalpulang' => $this->input->post('tanggalpulang'),
                   'tekananawal'       => $this->input->post('tekananawal'),
                   'tekananakhir'       => $this->input->post('tekananakhir'),
                   'volumeberangkat'       => $this->input->post('volumeberangkat'),
+                  'volumepulang'       => $this->input->post('volumepulang'),
                   'preasure'       => $this->input->post('preasure'),
                   'meterawal'       => $this->input->post('meterawal'),
                   'meterakhir'       => $this->input->post('meterakhir'),
                   'bbm'       => $this->input->post('bbm'),
                   'ritase'       => $this->input->post('ritase'),
+
+                  't'       => $this->input->post('t'),
+                  'vt'       => $this->input->post('vt'),
+                  'k'       => $this->input->post('k'),
+                  'ap'       => $this->input->post('ap'),
+                  'sc'       => $this->input->post('sc'),
+                  'harga'       => $this->input->post('harga'),
+
+                  'total_tagihan'       => $total,
                 //   'total'       => $this->input->post('total'),
 		);
 		$this->db->where("tagihan_customer_id", $id); // ubah id dan postnya
@@ -151,11 +189,30 @@ class Tagihan_customer extends CI_Controller {
                   $hasil = array(
                         'suratjalan_customer_id' => $row->suratjalan_customer_id,
                         'tanggalkirim' => $row->tanggalkirim,
+                        'tekananawal' => $row->tekananawal,
+                        'tekananakhir' => $row->tekananakhir,
+                        'volume' => $row->volumegas,
                         'total' => $row->total,
+                        'no_polisi' => $row->no_polisi,
                   );
             }
             echo json_encode($hasil);
       }
+
+      public function hargaJual(){
+        $mastercustomer_id = $this->input->post("mastercustomer_id");
+        $query = $this->db->query("
+              SELECT * FROM dt_mastercustomer 
+              WHERE mastercustomer_id = '".$mastercustomer_id."'
+        ");
+        foreach($query->result() as $row){
+              $hasil = array(
+                    'harga' => $row->harga_jual,
+              );
+        }
+        echo json_encode($hasil);
+  }
+
 
       function pdf($tagihan_customer_id){      
         $this->load->model('Piutang_Model');

@@ -47,7 +47,8 @@
                                                 <th>Volume Berangkat</th>
                                                 <th>Ritase</th>
                                                 <th>BBM</th>
-                                                <th>Total</th>
+                                                <th>Harga Jual</th>
+                                                <!-- <th>Total Tagihan</th> -->
                                                 <th style="text-align:center">Tindakan</th>                                            
                                             </tr>
                                             </thead>
@@ -66,7 +67,8 @@
                                                     <td><?php echo $u['volumeberangkat'] ?></td>
                                                     <td><?php echo $u['ritase'] ?></td>
                                                     <td><?php echo $u['bbm'] ?></td>
-                                                    <td><?php echo $u['total'] ?></td>
+                                                    <td><?php echo $u['harga'] ?></td>
+                                                    <!-- <td><?php echo $u['total_tagihan'] ?></td> -->
                                                     <td style="text-align:center">
 
                                                         <a href="<?= base_url('tagihan_customer/ubah/' . $u['tagihan_customer_id']) ?>" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>                                                     

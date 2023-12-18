@@ -269,6 +269,33 @@ class Jurnal_masuk extends CI_Controller {
         redirect('jurnal_masuk');
     }
 
+
+    public function filter()
+	{     
+        $fromdate =  $this->input->post('fromdate');
+        $todate =  $this->input->post('todate');
+        $no_jurnal =  $this->input->post('no_jurnal');
+
+        $data = array( 
+            'datajurnalmasuk'		=> $this->Jurnal_Masuk_Model->Lihatjurnalmasuk_filter($no_jurnal, $fromdate, $todate)
+        );   
+
+        $role = $this->session->userdata('role');
+        if($role == "akuntan")
+        {
+            $this->load->view('layout/header');
+            $this->load->view('layout/sidebar');
+            $this->load->view('admin/jurnal_masuk/filter',$data);
+            $this->load->view('layout/footer');
+        }else{
+            $this->load->view('pimpinan/header');
+            $this->load->view('pimpinan/sidebar');
+            $this->load->view('pimpinan-content/jurnal_masuk/index',$data);
+            $this->load->view('pimpinan/footer');
+        }
+		
+	} 
+
 }
 
 

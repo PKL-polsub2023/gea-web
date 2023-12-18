@@ -65,6 +65,31 @@ class Datakwitansi_model extends CI_Model{
             return $data;
       }
 
+	
+	  public function selectInvoice($mastersupplier_id){	
+
+		$query = $this->db->query("SELECT * FROM dt_datakwitansi
+		JOIN dt_mastersupplier ON dt_mastersupplier.mastersupplier_id = dt_datakwitansi.mastersupplier_id
+		WHERE dt_datakwitansi.mastersupplier_id = '".$mastersupplier_id."'
+		AND dt_datakwitansi.status = 'N';");
+
+		return $query->result_array();
+
+	}
+
+
+	public function count($mastersupplier_id){	
+
+		$query = $this->db->query("SELECT * FROM dt_datakwitansi
+		JOIN dt_mastersupplier ON dt_mastersupplier.mastersupplier_id = dt_datakwitansi.mastersupplier_id
+		WHERE dt_datakwitansi.mastersupplier_id = '".$mastersupplier_id."'
+		AND dt_datakwitansi.status = 'N';");
+
+		return $query->num_rows();
+
+	}
+	
+
 
     
 

@@ -52,7 +52,7 @@
                                                     <div>
 
                                                         <div class="mb-4">
-                                                            <label class="form-label" for="input-mask">Nama Customer</label>
+                                                            <label class="form-label" for="input-mask">Nama Perusahaan</label>
                                                             <input id="input-mask" name="namaperusahaan" class="form-control input-mask">                                                            
                                                         </div>
 
@@ -74,11 +74,7 @@
 
                                                         <div class="mb-4">
                                                             <label class="form-label" for="input-mask">Radius GEA ke Lokasi</label>
-                                                            <input id="input-mask" name="radius" class="form-control input-mask" type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" min="0">                                                            
-                                                        </div>   
-                                                        <div class="mb-4">
-                                                            <label class="form-label" for="input-mask">Harga Jual</label>
-                                                            <input id="input-mask" name="harga_jual" class="form-control input-mask">                                                            
+                                                            <input id="input-mask" name="radius" class="form-control input-mask" type="number" min="0">                                                            
                                                         </div>   
                                                         
                                                     </div>

@@ -24,6 +24,7 @@
                                         <div class="dropdown">                                                                
 
                                             <a class="btn btn-primary" href="<?php echo base_url()?>jurnal_masuk/tambah" role="button">Tambah Jurnal Pemasukan</a>
+                                            <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#filter">Filter</button>
 
                                         </div>
                                     </div>
@@ -59,8 +60,12 @@
 
                                                 <?php                                                 
                                                 $no = 0;
+                                                $totalDebit = 0;
+                                                $totalKredit = 0;
                                                     if($datajurnalmasuk){
                                                         foreach($datajurnalmasuk as $u){  
+                                                            $totalDebit += $u['tot_debit'];
+                                                            $totalKredit += $u['tot_kredit'];
                                                 ?>                                                            
                                                 <tr>
                                                     <td style="width: 1%;text-align:center"><?php echo ++$no ?></td>                                                    
@@ -108,10 +113,20 @@
                                                     </td>
 
                                     
-                                                    </td>
+                                               
                                                 </tr>                                        
                                                 <?php }}?>
                                             </tbody> 
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="4">TOTAL</td>
+                                                    <td style="text-align:right; font-weight:bold"><?= rupiah($totalDebit); ?></td>
+                                                    <td style="text-align:right; font-weight:bold"><?= rupiah($totalKredit); ?></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tfoot>
                                         </table>
 
                                     </div>
@@ -125,7 +140,60 @@
                 <!-- End Page-content -->
 
 
+ <!-- sample modal content -->
+ <div id="filter" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                   <div class="modal-dialog">
+                       <div class="modal-content">
+                           <div class="modal-header">
+                               <h5 class="modal-title" id="myModalLabel">Filter Jurnal Transaksi
+                               </h5>
+                               <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                   aria-label="Close"></button>
+                           </div>
+                           <div class="modal-body">
+                            <form action="<?php echo base_url('jurnal_masuk/filter');?>" method="POST" enctype="multipart/form-data" target="_blank"> 
+                               <div class="row mb-3">
+                                   <label for="example-text-input" class="col-sm-4 col-form-label">No Jurnal</label>
+                                   <div class="col-sm-8">
+                                        
+                                       <input class="form-control" type="text" placeholder="Nomor Jurnal" id="no_jurnal" name="no_jurnal">
+                                   </div>
+                               </div>
 
+
+
+                               <div class="row mb-3">
+                                   <label for="example-text-input" class="col-sm-4 col-form-label">Rentang Tanggal</label>
+                                   <div class="col-sm-8">
+                                    <div class="row">
+                                            <div class="col-sm-6">
+                                                <input  type="date" onchange="button()" id="fromdate" name="fromdate" class="form-control">
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input type="date" onchange="button()" id="todate" name="todate" class="form-control">
+                                            </div>
+                                    </div>
+                                       <!-- <input class="form-control currency" name="debit" type="text" placeholder="Debit" id="example-text-input" required>   -->
+                                       
+                                       <!-- <input type="text" name="debit_x" placeholder="0" id="debit" class="form-control currency" required/>
+                                        <input type="hidden" name="debit" class="form-control"/>                                                           -->
+                                   </div>
+                               </div>
+
+                           </div>
+                           <div class="modal-footer">
+                               <button type="button" class="btn btn-secondary waves-effect"
+                                   data-bs-dismiss="modal">Close</button>
+                               <button type="submit" id="cari"
+                                   class="btn btn-primary waves-effect waves-light">Cari</button>
+                           </div>
+                        </form>
+                       </div>
+                       <!-- /.modal-content -->
+                   </div>
+                   <!-- /.modal-dialog -->
+               </div>
+               <!-- /.modal -->
                
 
 

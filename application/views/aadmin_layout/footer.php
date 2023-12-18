@@ -155,16 +155,21 @@
                         data : {suratjalan_customer_id: suratjalan_customer_id},
                         cache:false,
                         success: function(data){
-                            $.each(data,function(suratjalan_customer_id, tanggalkirim, total){
+                            $.each(data,function(suratjalan_customer_id, tanggalkirim, total, tekananawal,tekananakhir, volume, no_polisi){
                                 $('[name="tanggalkirim"]').val(data.tanggalkirim);
+                                $('[name="tekananawal"]').val(data.tekananawal);
+                                $('[name="tekananakhir"]').val(data.tekananakhir);
                                 $('[name="total"]').val(data.total);
+                                $('[name="volumeberangkat"]').val(data.volume);
+                                $('[name="no_ts"]').val(data.no_polisi);
                             });
-                            
                         }
                     });
                     return false;
                 });
                 });
+
+
 
                 $(document).ready(function(){
                 $('#mastersupplier_id').on('change',function(){ 
@@ -191,10 +196,32 @@
                 });
 
                 $(document).ready(function(){
-                $('#volumegas').on('input',function(){ 
+                $('#volumegas').on('change',function(){ 
                     var hargasatuan =  $('[name="hargasatuan"]').val();
                     var volumegas =  $('[name="volumegas"]').val();
                     $('[name="total"]').val(hargasatuan * volumegas);
+                });
+                });
+
+
+                $(document).ready(function(){
+                $('#mastercustomer_id').on('change',function(){ 
+                // $('#datakwitansi_id').change(function(){ 
+                    var mastercustomer_id=$(this).val();
+                    $.ajax({
+                        type : "POST",
+                        url  : "<?php echo site_url('tagihan_customer/hargaJual')?>",
+                        dataType : "JSON",
+                        data : {mastercustomer_id: mastercustomer_id},
+                        cache:false,
+                        success: function(data){
+                            $.each(data,function(mastercustomer_id, harga){
+                                $('[name="hargacustomer"]').val(data.harga);
+                            });
+                            hargaJual()
+                        }
+                    });
+                    return false;
                 });
                 });
         </script>

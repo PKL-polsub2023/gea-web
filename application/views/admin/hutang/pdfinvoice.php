@@ -124,7 +124,7 @@
                             <td class="data">Kepada Yth :</td>
                         </tr>
                         <tr>
-                        <td class="data"><?= $u['namaperusahaan'];?></td>
+                        <td class="data"><?= $detail['namaspbg'];?></td>
                         </tr>
                     </table>
                 </th>
@@ -159,19 +159,23 @@
                 <th style="width:10%" class="data2">Discount</th>
                 <th style="width:25%" class="data2">Total</th>
             </tr>
-         
+            <?php                                                 
+                if($datamaster){
+                    foreach($datamaster as $u){  
+            ?>        
             <tr>
                 <td class="data2" style="width:5%;text-align:center;;border-left:1px solid black;border-bottom:1px solid black;">1</td>
-                <td class="data2" style="width:40%;border-bottom:1px solid black;"><?php echo "Tagihan ".$u['namaperusahaan']." ".$u['tanggalkirim'] ?></td>
+                <td class="data2" style="width:40%;border-bottom:1px solid black;"><?php echo "Tagihan ".$u['namaspbg']." ".$u['tanggal'] ?></td>
                 <td class="data2" style="width:10%;border-bottom:1px solid black;"><?php echo $u['volumegas'] ?></td>
-                <td class="data2" style="width:10%;border-bottom:1px solid black;"><?php echo $u['harga'] ?></td>
+                <td class="data2" style="width:10%;border-bottom:1px solid black;"><?php echo $u['hargasatuan'] ?></td>
                 <td class="data2" style="width:10%;border-bottom:1px solid black;">-</td>
-                <td class="data2" style="width:30%;border-bottom:1px solid black;"><?php echo $total ?></td>
+                <td class="data2" style="width:30%;border-bottom:1px solid black;"><?php echo $u['total'] ?></td>
             </tr>
+            <?php }}?>
             <tr>
                 <td colspan="2" rowspan="5">
-                <!-- <p  class="norek">
-                    <i>
+                <p  class="norek">
+                    <!-- <i>
                     Pembayaran Mohon ditransfer ke :
                     <br>
                     PT. Global Energy Agrapana
@@ -179,8 +183,8 @@
                     BCA Cabang Subang
                     <br>
                     Ac . 0556.138.138
-                </i>
-                </p> -->
+                </i> -->
+                </p>
                 </td>
 
                 <td class="total" colspan="3"> &nbsp;&nbsp; Subtotal</td>
@@ -230,7 +234,7 @@
             <tr>
                 <td class="font-normal">
                     <!-- <u>Bp Fredi Ginting</u><br>Direktur Utama -->
-                </td>
+            </td>
             </tr>
         </table>
     </div>
