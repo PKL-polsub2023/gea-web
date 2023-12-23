@@ -27,6 +27,9 @@
                                             <button type="button" class="btn btn-primary waves-effect waves-light"
                                                 data-bs-toggle="modal" data-bs-target="#myModal">Tambah Saldo Awal
                                             </button>
+                                            <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target=".bs-example-modal-center">
+                                            Import Excel Saldo Awal
+                                        </button>
 
                                         </div>
                                     </div>
@@ -34,6 +37,50 @@
                             </div>
                         </div>
                         <!-- end page title -->
+
+                        <!-- Modal Excel -->
+                        <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog"
+                    aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Import Data Excel</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                            <?php echo form_open_multipart('saldo_awal/import'); ?>
+                                <h5>Unduh Template</h5>
+                                <p>Melalui tombol berikut ini : 
+                                    <a href="<?php echo base_url('utility_saldo_template.xlsx'); ?>" class="btn btn-success btn-sm popover-test" title="Unduh template">utility_saldo_template.xlsx</a>
+                                </p>
+                                <hr>
+                                <div class="m-portlet__body">
+                                    <div class="form-group m-form__group">
+                                        <h5>Upload File Excel</h5>
+                                        <div></div>
+                                        <input name="import_data" type="file" class="form-control m-input" multiple required>
+                                    </div>
+                                    <hr>
+                                </div>
+
+                                <div class="m-portlet__foot m-portlet__foot--fit">
+                                    <div class="m-form__actions">
+                                        <?php echo form_submit('import_submit','Upload','class="btn btn-primary waves-effect waves-light"'); ?>
+                                    </div>
+                                </div>
+                                <?php echo form_close(); ?>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+            </div>
+                    
+                        <!-- End Modal Excel -->
+                    
 
 
 

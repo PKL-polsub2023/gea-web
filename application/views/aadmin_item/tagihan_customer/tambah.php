@@ -158,7 +158,7 @@
                                                         </div>
 
                                                         <!-- hidden     -->
-                                                            <input id="hargacustomer" name="hargacustomer" type="text" class="form-control input-mask">                                                            
+                                                            <input id="hargacustomer" name="hargacustomer" type="text" class="form-control input-mask" hidden>                                                            
                                                         <!-- end hidden -->
 
                                                         <div class="mb-4">

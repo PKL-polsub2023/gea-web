@@ -72,7 +72,7 @@
                                                     <td><?php echo $u['namaperusahaan'] ?></td> 
                                                     <td><?php echo $u['tagihan_customer_id'] ?></td> 
                                                     <td><?php echo $u['tanggal'] ?></td>
-                                                    <td><?php echo $u['tekananakhir'] - $u['tekananawal']?></td>
+                                                    <td><?php echo $u['volumegas']?></td>
 
                                                     <td><?php echo $u['total'] ?></td>
                                                     <td><?php 

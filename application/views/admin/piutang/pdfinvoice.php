@@ -165,11 +165,14 @@
             ?>        
             <tr>
                 <td class="data2" style="width:5%;text-align:center;;border-left:1px solid black;border-bottom:1px solid black;">1</td>
-                <td class="data2" style="width:40%;border-bottom:1px solid black;"><?php echo "Tagihan ".$u['namaperusahaan']." ".$u['tanggalkirim'] ?></td>
+                <td class="data2" style="width:40%;border-bottom:1px solid black;">
+                <?php echo "Tagihan " . $u['namaperusahaan'] . "<br>" . $u['tanggalkirim']; ?>
+                </td>
                 <td class="data2" style="width:10%;border-bottom:1px solid black;"><?php echo $u['volumegas'] ?></td>
-                <td class="data2" style="width:15%;border-bottom:1px solid black;"><?php echo $u['harga'] ?></td>
+                <td class="data2" style="width:15%;border-bottom:1px solid black;"><?php echo 'Rp ' . number_format($u['harga_jual'], 0, ',', '.') ?></td>
                 <td class="data2" style="width:5%;border-bottom:1px solid black;">-</td>
-                <td class="data2" style="width:30%;border-bottom:1px solid black;"><?php echo $u['total'] ?></td>
+                <td class="data2" style="width:30%;border-bottom:1px solid black;"><?php echo 'Rp ' . number_format($u['harga'], 0, ',', '.') ?></td>
+
             </tr>
             <?php }}?>
             <tr>
@@ -188,7 +191,7 @@
                 </td>
 
                 <td class="total" colspan="3"> &nbsp;&nbsp; Subtotal</td>
-                <td style="border-bottom:1px solid black">: <?php echo $total ?></td>
+                <td style="border-bottom:1px solid black">: <?php echo 'Rp ' . number_format($total, 0, ',', '.')  ?></td>
             </tr>
             <tr>
                 <td class="total" colspan="3"> &nbsp;&nbsp; Discount</td>
@@ -204,7 +207,7 @@
             </tr>
             <tr>
                 <td class="total" colspan="3"> &nbsp;&nbsp; Total</td>
-                <td style="border-bottom:1px solid black">: <?php echo $total ?> </td>
+                <td style="border-bottom:1px solid black">: <?php echo 'Rp ' . number_format($total, 0, ',', '.')  ?> </td>
             </tr>
         </table>
 

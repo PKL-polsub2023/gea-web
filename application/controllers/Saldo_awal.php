@@ -10,8 +10,15 @@ class Saldo_awal extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->model('Saldo_Awal_Model');
         $this->load->model('Saldo_Awal_Detail_Model');
+        $this->load->model('Master_COA_Model');
         $this->load->library('session');
 	}
+
+    function alert($alert, $alert_type, $url=NULL){
+        $this->session->set_userdata('alert_error', $alert);
+        $this->session->set_userdata('alert_error_type', $alert_type);		
+        if(!empty($url)){redirect($url);};
+    }
 
 	public function index()
 	{     
@@ -166,6 +173,94 @@ class Saldo_awal extends CI_Controller {
 		$this->db->update("dt_saldo_awal", $data);
 		redirect('saldo_awal');
 	}
+
+
+    function import(){
+        $fileName = time().$_FILES['import_data']['name'];
+     
+        $config['upload_path'] = './_uploads/excel/'; //buat folder dengan nama assets di root folder
+        $config['file_name'] = $fileName;
+        $config['remove_spaces'] = FALSE;
+        $config['allowed_types'] = 'xls|xlsx';
+        $config['max_size'] = 10000;
+        
+        $this->load->library('upload');
+        $this->upload->initialize($config);
+        
+        if(! $this->upload->do_upload('import_data') )
+        $this->alert('<strong>Status : </strong><br>'.$this->upload->display_errors(), 'alert-danger', 'superuser/peserta');
+        //echo $this->upload->display_errors();
+
+        $media = $this->upload->data('import_data');
+        $file = "./_uploads/excel/".$fileName;
+        $inputFileName = $file;
+        
+        $this->load->library(array('PHPExcel','PHPExcel/IOFactory'));
+    
+        try {
+            $inputFileType = IOFactory::identify($inputFileName);
+            $objReader = IOFactory::createReader($inputFileType);
+            $objPHPExcel = $objReader->load($inputFileName);
+        } catch(Exception $e) {
+            die('Error loading file "'.pathinfo($inputFileName,PATHINFO_BASENAME).'": '.$e->getMessage());
+        }
+        
+        $sheet = $objPHPExcel->getSheet(0);
+        $highestRow = $sheet->getHighestRow();
+        $highestColumn = $sheet->getHighestColumn();
+        
+        $berhasil = 0;
+        for ($row = 3; $row <= $highestRow; $row++){                  //  Read a row of data into an array                 
+            $rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row, NULL, TRUE, FALSE);
+
+            
+            $get_coa = $this->Master_COA_Model->get_coa($rowData[0][2]);
+            $mastercoa_id = $get_coa['mastercoa_id'];
+
+                $data = [
+                    "mastercoa_id"=> $mastercoa_id,
+                    "saldo_normal"=> $rowData[0][4],
+                    "uang"=> $rowData[0][4],
+                    "periode" => $rowData[0][6],
+                ];
+
+                    if($rowData[0][5] == 1)
+                    {
+                        $data = [     
+                            'mastercoa_id' => $data["mastercoa_id"],
+                            'saldo_normal' => $data["saldo_normal"],
+                            'debit' => $data["uang"],	
+                            'kredit' => 0.00,
+                            'periode' => $data["periode"],		
+                        ];
+                    }else{
+                        $data = [     
+                            'mastercoa_id' => $data["mastercoa_id"],
+                            'saldo_normal' => $data["saldo_normal"],
+                            'debit' => 0.00,
+                            'kredit' => $data["uang"],			
+                            'periode' => $data["periode"],
+                        ];
+                    }
+
+               
+                   
+                    // // $this->db->set('waktu_entri', 'NOW()', FALSE);
+                    $query = $this->db->insert("dt_saldo_awal", $data);
+                    
+                    $berhasil++;
+                
+            
+        }
+
+        // unlink($inputFileName);
+        // $this->alert('<strong>Success: </strong>
+        //     <br>Proses import berhasil, data yang berhasil masuk sebanyak <strong>'.$berhasil.' baris</strong>.
+        // ', 'alert-success', 'master_coa');
+        
+        
+    }
+
 
 
 

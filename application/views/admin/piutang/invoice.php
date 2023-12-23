@@ -66,7 +66,7 @@
                                                     <td><?php echo $u['namaperusahaan'] ?></td> 
                                                     <td><?php echo $u['tagihan_customer_id'] ?></td> 
                                                     <td><?php echo $u['tanggalkirim'] ?></td>
-                                                    <td><?php echo $u['tekananakhir'] - $u['tekananawal']?></td>
+                                                    <td><?php echo $u['volumegas']?></td>
 
                                                     <td><?php echo $u['total'] ?></td>
                                                     <td><?php echo $u['statushutang'] ?></td>
@@ -85,7 +85,7 @@
                                                             ?>                                   
                                                             <a href="<?= base_url('piutang/cetakinvoice/' . $u['tagihan_customer_id']) ?>" class="btn btn-success btn-sm" >Statement</a>                                                     
                                                             <a href="<?= base_url('piutang/cetakba/' . $u['tagihan_customer_id']) ?>" class="btn btn-success btn-sm" >Berita Acara</a> 
-                                                            <a href="<?= base_url('piutang/isiinvoice_satuan/' . $u['tagihan_customer_id']) ?>" class="btn btn-success btn-sm" target="_blank">PDF Invoice</a>                                                       
+                                                            <a href="<?= base_url('piutang/isiinvoice_satuan/' . $u['tagihan_customer_id']) ?>" class="btn btn-success btn-sm" target="_blank">Invoice</a>                                                       
                                                     </td>
 
                                     

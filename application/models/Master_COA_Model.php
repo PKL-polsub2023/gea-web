@@ -88,6 +88,19 @@ class Master_COA_Model extends CI_Model{
             return $data;
       }
 
+
+	  public function get_coa($kode) {	
+		$query = $this->db->query(" 
+			SELECT *, dt_kelompokakun.nama AS kelompokakun, dt_mastercoa.nama AS namacoa 
+			FROM dt_mastercoa
+			JOIN dt_kelompokakun ON dt_mastercoa.id_kelompokakun = dt_kelompokakun.id_kelompokakun
+			WHERE dt_mastercoa.kode = '$kode'
+		");
+	
+		return $query->row_array();
+	}
+	
+
     
 
 
