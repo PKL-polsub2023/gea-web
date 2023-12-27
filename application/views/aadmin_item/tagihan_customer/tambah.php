@@ -158,12 +158,15 @@
                                                         </div>
 
                                                         <!-- hidden     -->
-                                                            <input id="hargacustomer" name="hargacustomer" type="text" class="form-control input-mask" hidden>                                                            
+                                                        <div class="mb-4">
+                                                            <label class="form-label" for="input-mask">Harga Jual</label>
+                                                            <input style="background:#CCC;" id="hargacustomer" name="hargacustomer" type="text" class="form-control input-mask" class="form-control input-mask" readonly >                                                            
+                                                        </div>                                                         
                                                         <!-- end hidden -->
 
                                                         <div class="mb-4">
-                                                            <label class="form-label" for="input-mask">Harga Jual</label>
-                                                            <input style="background:#CCC;" id="harga" name="harga" type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" class="form-control input-mask" readonly >                                                            
+                                                            <label class="form-label" for="input-mask">Total (Sm<sup>3</sup>)</label>
+                                                            <input style="background:#CCC;" id="harga" name="harga" type="text" class="form-control input-mask" readonly >                                                            
                                                         </div>
 
 
@@ -208,23 +211,33 @@
                         var hargacustomer = $("#hargacustomer").val();
                         var volumepulang = $("#volumepulang").val();
                         var harga_jual = hargacustomer * volumepulang;
-                        $("#harga").val(harga_jual);
+                        // $("#harga").val(harga_jual);
                     }
 
                     function isi_vt()
                     {
+                        var t = parseFloat($("#t").val());
                         var meterawal = $("#meterawal").val();
                         var meterakhir = $("#meterakhir").val();
-                        var vt = meterakhir - meterawal;
-                        vt = Math.round(vt * 100) / 100;
+                        var vts = meterakhir - meterawal;
+                        vt = vts.toFixed(4);
                         $("#vt").val(vt);
+
+                        var preasure = parseFloat($("#preasure").val());    
+                        var ap = parseFloat($("#ap").val());  
+                        var aps = ap.toFixed(5);
+                        k = (1+(0.002*preasure));
+                        var total = (vt * (aps)*(300.15 / (273.15 + t)) * k);
+                        var totals = total.toFixed(3);
+                        $("#harga").val(totals);
+
                     }
 
                     function isi_k()
                     {
                         var preasure = parseFloat($("#preasure").val());    
-                        k = (1+(0.0002*preasure));
-                        ap = ((preasure+1.01325));
+                        k = (1+(0.002*preasure));
+                        ap = (1.01325 + preasure) / 1.01325
                         // k = Math.round(k * 100) / 100;
                         $("#k").val(k);
                         $("#ap").val(ap);

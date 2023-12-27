@@ -120,7 +120,7 @@
                                                             LSP                                                            
                                                         </div>
 
-                                                        <div class="mb-4">
+                                                        <div class="mb-4" style="display:none">
                                                             <label class="form-label" for="input-mask">Total (RP)</label>
                                                             <input id="total" name="total" type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" min="0" style="background:#CCC;" value="0" readonly class="form-control input-mask">                                                            
                                                         </div>
@@ -160,8 +160,9 @@
                     {
                         var awal = $("#totalisator1").val();
                         var akhir = $("#totalisator2").val();
-                        var total = awal - akhir;
-                        $("#volumegas").val(total);
+                        var total = akhir - awal;
+                        var roundedTotal = parseFloat(total.toFixed(4));
+                        $("#volumegas").val(roundedTotal);
                         document.getElementById("mastersupplier_id").value = null;
                         document.getElementById("total").value = null;
                         document.getElementById("hargasatuan").value = null;

@@ -77,6 +77,18 @@ class Datakwitansi_model extends CI_Model{
 
 	}
 
+	public function selectFaktur($mastersupplier_id){	
+
+		$query = $this->db->query("SELECT * FROM dt_datakwitansi
+		JOIN dt_mastersupplier ON dt_mastersupplier.mastersupplier_id = dt_datakwitansi.mastersupplier_id
+		WHERE dt_datakwitansi.mastersupplier_id = '".$mastersupplier_id."'
+		AND dt_datakwitansi.status = 'Y';");
+
+		return $query->result_array();
+
+	}
+
+
 
 	public function count($mastersupplier_id){	
 

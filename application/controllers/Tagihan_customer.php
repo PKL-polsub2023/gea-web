@@ -9,6 +9,7 @@ class Tagihan_customer extends CI_Controller {
 		parent::__construct();
 		$this->load->helper('url');
 		$this->load->model('Tagihan_customer_model');
+        $this->load->model('Piutang_Model');
         $this->load->library('session');
         
         $this->load->library('Pdf');
@@ -54,8 +55,9 @@ class Tagihan_customer extends CI_Controller {
         $sc = $this->input->post('sc');
         $bbm = $this->input->post('bbm');
         $ritase = $this->input->post('ritase');
-
-        $total = (($vt*$k*$ap*$sc)*($bbm+$ritase));
+        $harga = $this->input->post('harga');
+        $harga_jual = $this->input->post('hargacustomer');
+        $total = $harga * $harga_jual;
         $data=array(
                     'mastercustomer_id'       => $this->input->post('mastercustomer_id'),
                     'suratjalan_customer_id'       => $this->input->post('suratjalan_customer_id'),
@@ -75,10 +77,8 @@ class Tagihan_customer extends CI_Controller {
                     'sc'       => $this->input->post('sc'),
                     'harga'       => $this->input->post('harga'),
 
-
                     'bbm'       => $this->input->post('bbm'),
                     'ritase'       => $this->input->post('ritase'),
-                    
                     'total_tagihan'       => $total,
                 );      
             
@@ -96,11 +96,21 @@ class Tagihan_customer extends CI_Controller {
             //'saldoawal'       => $this->Saldo_Awal_Model->lihat_no_jurnal($no_jurnal),
             'edit'		        => $this->Tagihan_customer_model->ubah($id)
         ); 
+
+        $role = $this->session->userdata('role');
 	
-        $this->load->view('aadmin_layout/header');
-        $this->load->view('aadmin_layout/sidebar');
-        $this->load->view('aadmin_item/tagihan_customer/edit', $data);
-        $this->load->view('aadmin_layout/footer');
+        if($role == "admin"){
+            $this->load->view('aadmin_layout/header');
+            $this->load->view('aadmin_layout/sidebar');
+            $this->load->view('aadmin_item/tagihan_customer/edit', $data);
+            $this->load->view('aadmin_layout/footer');
+        }else if ($role == "akuntan"){
+            $this->load->view('layout/header');
+            $this->load->view('layout/sidebar');
+            $this->load->view('admin/piutang/edit', $data);
+            $this->load->view('layout/footer');
+        }
+      
 	}
 
 
@@ -114,37 +124,43 @@ class Tagihan_customer extends CI_Controller {
         $sc = $this->input->post('sc');
         $bbm = $this->input->post('bbm');
         $ritase = $this->input->post('ritase');
-
-        $total = (($vt*$k*$ap*$sc)*($bbm+$ritase));
-
+        $harga = $this->input->post('harga');
+        $harga_jual = $this->input->post('hargacustomer');
+        $total = $harga * $harga_jual;
 		$data = array(
-                  'mastercustomer_id'       => $this->input->post('mastercustomer_id'),
-                  'suratjalan_customer_id'       => $this->input->post('suratjalan_customer_id'),
-                  
-                  'tanggalpulang' => $this->input->post('tanggalpulang'),
-                  'tekananawal'       => $this->input->post('tekananawal'),
-                  'tekananakhir'       => $this->input->post('tekananakhir'),
-                  'volumeberangkat'       => $this->input->post('volumeberangkat'),
-                  'volumepulang'       => $this->input->post('volumepulang'),
-                  'preasure'       => $this->input->post('preasure'),
-                  'meterawal'       => $this->input->post('meterawal'),
-                  'meterakhir'       => $this->input->post('meterakhir'),
-                  'bbm'       => $this->input->post('bbm'),
-                  'ritase'       => $this->input->post('ritase'),
+            'mastercustomer_id'       => $this->input->post('mastercustomer_id'),
+            'suratjalan_customer_id'       => $this->input->post('suratjalan_customer_id'),
+            'tanggalpulang' => $this->input->post('tanggalpulang'),
+            'tekananawal'       => $this->input->post('tekananawal'),
+            'tekananakhir'       => $this->input->post('tekananakhir'),
+            'volumeberangkat'       => $this->input->post('volumeberangkat'),
+            'volumepulang'       => $this->input->post('volumepulang'),
+            'preasure'       => $this->input->post('preasure'),
+            'meterawal'       => $this->input->post('meterawal'),
+            'meterakhir'       => $this->input->post('meterakhir'),
 
-                  't'       => $this->input->post('t'),
-                  'vt'       => $this->input->post('vt'),
-                  'k'       => $this->input->post('k'),
-                  'ap'       => $this->input->post('ap'),
-                  'sc'       => $this->input->post('sc'),
-                  'harga'       => $this->input->post('harga'),
+            't'       => $this->input->post('t'),
+            'vt'       => $this->input->post('vt'),
+            'k'       => $this->input->post('k'),
+            'ap'       => $this->input->post('ap'),
+            'sc'       => $this->input->post('sc'),
+            'harga'       => $this->input->post('harga'),
 
-                  'total_tagihan'       => $total,
-                //   'total'       => $this->input->post('total'),
+            'bbm'       => $this->input->post('bbm'),
+            'ritase'       => $this->input->post('ritase'),
+            'total_tagihan'       => $total,
 		);
+
 		$this->db->where("tagihan_customer_id", $id); // ubah id dan postnya
 		$this->db->update("dt_tagihan_customer", $data);
-		redirect('tagihan_customer');
+        $role = $this->session->userdata('role');
+        if($role == "admin"){
+            redirect('tagihan_customer'); 
+        }else{
+
+            redirect('piutang'); 
+        }
+		
 	}
 
     public function hapus($id){

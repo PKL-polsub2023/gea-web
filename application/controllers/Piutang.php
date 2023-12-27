@@ -44,6 +44,12 @@ class Piutang extends CI_Controller {
             }
 	} 
 
+
+      public function view_data()
+      {
+          
+      }
+
       public function paid($mastercustomer_id){
             $data = array(
                   'datamaster' => $this->Piutang_Model->LihatMasterPaid($mastercustomer_id),
@@ -110,7 +116,7 @@ class Piutang extends CI_Controller {
 
       function cetakinvoice($tagihan_customer_id){   
             
-            $data = $this->Piutang_Model->DetailTagihan($tagihan_customer_id); 
+            
             
             $pdf = new TCPDF('L', 'mm', 'A4', true, 'UTF-8', false);
             $pdf->SetTitle('INVOICE');
@@ -141,16 +147,20 @@ class Piutang extends CI_Controller {
             $pdf->AddPage();          
     
             //$no_jurnal  = $this->input->post('no_jurnal');
+            $data = $this->Piutang_Model->DetailTagihan($tagihan_customer_id); 
             $vt = number_format($data['meterakhir'] - $data['meterawal'], 2);
             $k = (1+(0.0002*$data['preasure']));
             $p = $data['preasure'];
-            $t = 30;
-            $ap = ($p+1.01325)/1.01325;
-            $sc = (273+27)/(273+$data['t']);
+            $t =  $data['t'];
+            $ap = $data['ap'];
+            $sc = $data['sc'];
 
             $harga_jual = $data['harga_jual'];
-            $result = $vt * ((1.01325 + $p) / 1.01325) * (300.15 / (273.15 + $t)) * $k * $harga_jual;
-            $formatted_result = number_format($result * 10250, 0, ',', '.');
+            $result = $data['total_tagihan'];
+            $formatted_result = number_format($result, 0, ',', '.');
+
+            $format_tanggal = $data['tanggalkirim'];
+            $tanggal = date('d-F-Y', strtotime($format_tanggal));
             $html = '
                   <h1>STATEMENT OF FACT VOLUME OF GAS</h1>
                   <br>
@@ -161,12 +171,12 @@ class Piutang extends CI_Controller {
                         <tr>
                               <td width="100px">Location</td>
                               <td width="50px" align="center">=</td>
-                              <td></td>
+                              <td>'.$data['namaperusahaan'].'</td>
                         </tr>
                         <tr>
                               <td>Date</td>
                               <td align="center">=</td>
-                              <td></td>
+                              <td>'.$tanggal.'</td>
                         </tr>
                   </table>
                   <br>
@@ -205,14 +215,14 @@ class Piutang extends CI_Controller {
                         <tr>
                               <td>Standard Condition Temperature,(T)</td>
                               <td align="center">=</td>
-                              <td align="center" border="1" bgcolor="yellow">'.$sc.'</td>
+                              <td align="center" border="1" bgcolor="yellow">'.$data['t'].'</td>
                               <td><strong><sup>o</sup>C</strong></td>
                               <td></td>
                         </tr>
                         <tr>
-                              <td>Standard Condition Temperature,(T)</td>
+                              <td>Super Compression Factor, (K)</td>
                               <td align="center">=</td>
-                              <td align="center" border="1">(273+27)/(273+t)</td>
+                              <td align="center" border="1">(1+(0,002*p))</td>
                               <td><strong><sup>o</sup>C</strong></td>
                               <td><small style="font-size:8px;"><strong><i>Faktor Kompresibilitas, untuk P ≤ 4 bar, K dianggap sama dengan (1 + (0,002* p)</i></strong></small></td>
                         </tr>
@@ -226,7 +236,7 @@ class Piutang extends CI_Controller {
                         <tr>
                               <td>Atmosphere Pressure, P atm</td>
                               <td align="center">=</td>
-                              <td align="center" border="1">'.$ap.'</td>
+                              <td align="center" border="1">1.01325</td>
                               <td><strong>Barg</strong></td>
                               <td></td>
                         </tr>
@@ -336,7 +346,7 @@ class Piutang extends CI_Controller {
                               <td width="100px" align="right" rowspan="2"></td>
                               <td width="70px" align="center"  rowspan="2">=</td>
                               <td width="200px" align="center" bgcolor="orange" colspan="2">
-                              '.number_format(($vt * ((1.01325+$p) / 1.01325) * (300.15 / (273.15+$t)) * $k), 3).'
+                              '.$data['harga'].'
                               Sm<sup>3</sup></td>
                         </tr>
                         <tr>
@@ -583,7 +593,7 @@ class Piutang extends CI_Controller {
                               <td><u>Jumlah Yang Ditagih</u></td>
                               <td>:</td>
                               <td></td>
-                              <td align="right"><strong>'.number_format(($vt * ((1.01325+$p) / 1.01325) * (300.15 / (273.15+$t)) * $k), 3).'</strong></td>
+                              <td align="right"><strong>'.number_format($data['harga'], 3).'</strong></td>
                               <td><strong>&nbsp;&nbsp;<span>Sm<sup>3</sup></span></strong></td>
                         </tr>
                         <tr>
@@ -604,7 +614,7 @@ class Piutang extends CI_Controller {
                               <td><u>Jumlah Yang Ditagih</u></td>
                               <td>:</td>
                               <td><strong>Rp</strong></td>
-                              <td align="right"><strong>'.number_format((number_format(($vt * ((1.01325+$p) / 1.01325) * (300.15 / (273.15+$t)) * $k), 3) * 10250),0,',','.').'</strong></td>
+                              <td align="right"><strong>'.number_format($data['total_tagihan'],0,',','.').'</strong></td>
                         </tr>
                         <tr>
                               <td></td>
@@ -688,8 +698,8 @@ class Piutang extends CI_Controller {
             $getData =  $this->Piutang_Model->LihatMasterInvoice($mastercustomer_id);    
             $total = 0;
             foreach ($getData as $invoice) {
-            if (isset($invoice['harga'])) {
-                  $total += $invoice['harga'];
+            if (isset($invoice['total_tagihan'])) {
+                  $total += $invoice['total_tagihan'];
             } 
              }
 
@@ -1433,38 +1443,45 @@ class Piutang extends CI_Controller {
               '11' => 'Nov',
               '12' => 'Des'];
       $getData = $this->Piutang_Model->DetailTagihan($tagihan_customer_id);
+
       function terbilang($angka)
       {
-            $angka = floatval($angka);
-            $bilangan = array(
-                  '', 'satu', 'dua', 'tiga', 'empat', 'lima',
-                  'enam', 'tujuh', 'delapan', 'sembilan', 'sepuluh', 'sebelas'
-            );
-            if ($angka < 12) {
-                  return $bilangan[$angka];
-            } elseif ($angka < 20) {
-                  return terbilang($angka - 10) . ' belas';
-            } elseif ($angka < 100) {
-                  return terbilang($angka / 10) . ' puluh ' . terbilang($angka % 10);
-            } elseif ($angka < 200) {
-                  return 'seratus ' . terbilang($angka - 100);
-            } elseif ($angka < 1000) {
-                  return terbilang($angka / 100) . ' ratus ' . terbilang($angka % 100);
-            } elseif ($angka < 2000) {
-                  return 'seribu ' . terbilang($angka - 1000);
-            } elseif ($angka < 1000000) {
-                  return terbilang($angka / 1000) . ' ribu ' . terbilang($angka % 1000);
-            } elseif ($angka < 1000000000) {
-                  return terbilang($angka / 1000000) . ' juta ' . terbilang($angka % 1000000);
-            } elseif ($angka < 1000000000000) {
-                  return terbilang($angka / 1000000000) . ' milyar ' . terbilang($angka % 1000000000);
-            } else {
-                  return 'Angka terlalu besar';
-            }
+          $angka = abs((int)$angka);
+          $bilangan = array(
+              '', 'satu', 'dua', 'tiga', 'empat', 'lima',
+              'enam', 'tujuh', 'delapan', 'sembilan', 'sepuluh', 'sebelas'
+          );
+          
+          if ($angka < 12) {
+              return $bilangan[$angka];
+          } elseif ($angka < 20) {
+              return terbilang($angka - 10) . ' belas';
+          } elseif ($angka < 100) {
+              return terbilang($angka / 10) . ' puluh ' . terbilang($angka % 10);
+          } elseif ($angka < 200) {
+              return 'seratus ' . terbilang($angka - 100);
+          } elseif ($angka < 1000) {
+              return terbilang($angka / 100) . ' ratus ' . terbilang($angka % 100);
+          } elseif ($angka < 2000) {
+              return 'seribu ' . terbilang($angka - 1000);
+          } elseif ($angka < 1000000) {
+              return terbilang($angka / 1000) . ' ribu ' . terbilang($angka % 1000);
+          } elseif ($angka < 1000000000) {
+              return terbilang($angka / 1000000) . ' juta ' . terbilang($angka % 1000000);
+          } elseif ($angka < 1000000000000) {
+              return terbilang($angka / 1000000000) . ' milyar ' . terbilang($angka % 1000000000);
+          } else {
+              return 'Angka terlalu besar';
+          }
       }
-
-      $total = $getData['harga']; 
+      
+      $harga = $getData['total_tagihan'];
+      $harga_jual = $getData['harga_jual']; 
+      
+      $total = $harga;
       $total_terbilang = ucwords(terbilang($total));
+
+
       $total_rupiah = "Rp " . number_format($total, 0, ',', '.');
 
       $tanggal = $this->input->post('tanggal');
@@ -1532,10 +1549,10 @@ class Piutang extends CI_Controller {
             }
 
            
-            $this->load->view('layout/header');
-            $this->load->view('layout/sidebar');
+            // $this->load->view('layout/header');
+            // $this->load->view('layout/sidebar');
             $this->load->view('admin/piutang/selectInvoice',$data);
-            $this->load->view('layout/footer');
+            // $this->load->view('layout/footer');
 
       }
 
@@ -1550,7 +1567,6 @@ class Piutang extends CI_Controller {
                 
             // $this->db->insert('dt_invoice', $data);       
             // }
-
             $fromdate =  $this->input->post('fromdate');
             $todate =  $this->input->post('todate');
             $mastercustomer_id =  $this->input->post('mastercustomer_id');
@@ -1581,13 +1597,13 @@ class Piutang extends CI_Controller {
          
             $total = 0;
             foreach ($getData as $invoice) {
-            if (isset($invoice['harga'])) {
-                  $total += $invoice['harga'];
+            if (isset($invoice['total_tagihan'])) {
+                  $total += $invoice['total_tagihan'];
             } 
              }
 
             function terbilang($angka) {
-                  $angka = floatval($angka);
+                  $angka = abs((int)$angka);
                   $bilangan = array(
                   '', 'satu', 'dua', 'tiga', 'empat', 'lima',
                   'enam', 'tujuh', 'delapan', 'sembilan', 'sepuluh', 'sebelas'
@@ -1648,10 +1664,7 @@ class Piutang extends CI_Controller {
                         'dd'=>$dd2,
                   );
             }
-            var_dump($data);
-
             $this->load->view('admin/piutang/pdfinvoice',$data);
-      
       }
 }
 

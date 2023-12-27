@@ -37,15 +37,110 @@
                             <div class="col-12">
                                 <div class="card">
 
-                                    <div class="col col-md-3 col-3 ms-4 mt-2">
+                                    <!-- <div class="col col-md-3 col-3 ms-4 mt-2">
                                     <button type="button" class="btn btn-primary waves-effect waves-light"
                                                 data-bs-toggle="modal" data-bs-target="#myModal">Select Invoice
                                     </button>
 
-                                    </div>
-                              
-                                    <div class="card-body">
+                                    </div> -->
 
+                                    <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <!-- <h4 class="card-title mb-4">Form Laporan Account Ledger</h4> -->
+
+                                       
+                                            <div class="row">
+                                                <div class="col-lg-2">
+                                                    <div>
+                                                        <div class="mb-2">
+                                                            <label class="form-label" for="input-date1">Dari Tanggal</label>
+                                                            <input class="form-control" type="date" name="fromDate" id="fromDate">
+                                                            <!-- <span class="text-muted">e.g "dd/mm/yyyy"</span> -->
+                                                        </div>                                                    
+                                                    </div>
+                                                </div>                                             
+                                                
+
+                                                <div class="col-lg-2">
+                                                    <div class="mt-2 mt-lg-0">
+                                                        <div class="mb-2">
+                                                            <label class="form-label" for="input-email">Sampai Tanggal</label>
+                                                            <input class="form-control" type="date" name="toDate" id="toDate">  
+                                                        </div>
+                                                        
+                                                    </div>                                                    
+                                                </div>
+
+                                                <div class="col-lg-2">
+                                                    <div class="mt-2 mt-lg-0">
+                                                        <div class="mb-2">
+                                                            <label class="form-label" for="input-email">Customer</label>
+                                                            <select onchange="button()" class="form-control" name="mastercustomer_id" id="mastercustomer_id">
+                                                            <option value="">Pilih Customer</option>
+                                                            <?php foreach ($customer as $u): ?>
+                                                                    <option value="<?= $u['mastercustomer_id'] ?>"><?= $u['namaperusahaan'] ?> - <?= $u['namapic'] ?></option>
+                                                                <?php endforeach ?>
+                                                            </select>
+                                                        </div>
+                                                        
+                                                    </div>                                                    
+                                                </div>
+
+                                                <div class="col-lg-2">
+                                                    <div class="mt-2 mt-lg-0">
+                                                        <div class="mb-2">
+                                                            <label class="form-label" for="input-email">Status</label>
+                                                            <select onchange="button()" class="form-control" name="statushutang" id="statushutang">
+                                                                <option value="">Pilih Status Piutang</option>
+                                                                <option value="All">Semua Status</option>
+                                                                <option value="N">Belum Bayar</option>
+                                                                <option value="Y">Sudah Bayar</option>
+                                                                </select>
+                                                        </div>
+                                                        
+                                                    </div>                                                    
+                                                </div>
+
+
+                                                <div class="col-lg-4">
+                                                    <div class="mt-2">
+                                                        <div class="mb-4"><br>
+
+                                                        <button class="btn btn-info btn-mini" class="easyui-linkbutton" name="view" id="viewData">Tampilkan</button>
+                                                        <button class="btn btn-info btn-mini" name="cetak" id="cetak" class="easyui-linkbutton"  data-bs-toggle="modal" data-bs-target="#myModals">Cetak</button>
+
+                                                            <!-- <button type="button" class="btn btn-info btn-mini"name="cari" id="cari" class="easyui-linkbutton" data-options="iconCls:'icon-search'">Pencarian</button>
+                                                            <button type="button" class="btn btn-info btn-mini" name="cetak" id="cetak" class="easyui-linkbutton" data-options="iconCls:'icon-print'">Cetak</button> -->
+
+
+                                                            <!-- <button type="submit" class="btn btn-info btn-mini">Cetak PDF</button> -->
+                                                            <button onclick="reset()" type="button" id="reset" value="Go Back" class="btn btn-warning btn-mini">Kembali</button>  
+                                                        </div>
+                                                        
+                                                    </div>                                                    
+                                                </div>
+
+
+
+                                          
+                                            
+
+                                                
+                                            </div>
+
+                                        
+                                
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                    <div class="card-body" id="tampildata">
+
+                                    </div>
+
+                                    <div class="card-body" id="tampildata1">
                                         <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                         
                                             <thead>
@@ -104,7 +199,7 @@
                 <!-- End Page-content -->
 
     <!-- sample modal content -->
-    <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <!-- <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                    <div class="modal-dialog">
                        <div class="modal-content">
                            <div class="modal-header">
@@ -118,13 +213,13 @@
                                <div class="row mb-3">
                                    <label for="example-text-input" class="col-sm-4 col-form-label">Customer</label>
                                    <div class="col-sm-8">
-                                    <select onchange="button()" class="form-control" name="mastercustomer_id" id="mastercustomer_id">
+                                    <select class="form-control" name="mastercustomer_id" id="mastercustomer_id">
                                     <option value="">Pilih Customer</option>
                                     <?php foreach ($customer as $u): ?>
                                                <option value="<?= $u['mastercustomer_id'] ?>"><?= $u['namaperusahaan'] ?> - <?= $u['namapic'] ?></option>
                                            <?php endforeach ?>
                                     </select>
-                                       <!-- <input class="form-control" type="text" placeholder="Artisanal kale" id="example-text-input">-->
+                                     
                                    </div>
                                </div>
 
@@ -135,29 +230,25 @@
                                    <div class="col-sm-8">
                                     <div class="row">
                                             <div class="col-sm-6">
-                                                <input  type="date" onchange="button()" id="fromdate" name="fromdate" class="form-control">
+                                                <input  type="date" id="fromdate" name="fromdate" class="form-control">
                                             </div>
                                             <div class="col-sm-6">
-                                                <input type="date" onchange="button()" id="todate" name="todate" class="form-control">
+                                                <input type="date" id="todate" name="todate" class="form-control">
                                             </div>
                                     </div>
-                                       <!-- <input class="form-control currency" name="debit" type="text" placeholder="Debit" id="example-text-input" required>   -->
-                                       
-                                       <!-- <input type="text" name="debit_x" placeholder="0" id="debit" class="form-control currency" required/>
-                                        <input type="hidden" name="debit" class="form-control"/>                                                           -->
+                                                                                
                                    </div>
                                </div>
 
                                <div class="row mb-3">
                                    <label for="example-text-input" class="col-sm-4 col-form-label">Status Piutang</label>
                                    <div class="col-sm-8">
-                                    <select onchange="button()" class="form-control" name="statushutang" id="statushutang">
+                                    <select class="form-control" name="statushutang" id="statushutang">
                                     <option value="">Pilih Status Piutang</option>
                                     <option value="All">Semua Status</option>
                                     <option value="N">Belum Bayar</option>
                                     <option value="Y">Sudah Bayar</option>
                                     </select>
-                                       <!-- <input class="form-control" type="text" placeholder="Artisanal kale" id="example-text-input">-->
                                    </div>
                                </div>
 
@@ -170,33 +261,74 @@
                                    class="btn btn-primary waves-effect waves-light" disabled>Cari</button>
                            </div>
                        </div>
+                   
+                   </div>       
+    </div> -->
+               <!-- /.modal -->
+
+
+                              <!-- sample modal content -->
+    <div id="myModals" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                   <div class="modal-dialog">
+                       <div class="modal-content">
+                           <div class="modal-header">
+                               <h5 class="modal-title" id="myModalLabel">Print Select Invoice
+                               </h5>
+                               <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                   aria-label="Close"></button>
+                           </div>
+                           <div class="modal-body">
+                            <form action="<?php echo base_url('piutang/printSelectInvoice');?>" method="POST" enctype="multipart/form-data" target="_blank"> 
+                                        <input type="text" id="cetak1" name="mastercustomer_id" value="" hidden >
+                                        <input type="text" id="cetak2" name="statushutang" value="" hidden >
+                                        <input type="text" id="cetak3" name="fromdate" value="" hidden >
+                                        <input type="text" id="cetak4" name="todate" value="" hidden >
+                                        
+
+                               <div class="row mb-3">
+                                    <label class="col-sm-4 col-form-label" for="input-mask">No Invoice</label>
+                                    <div class="col-sm-8">
+                                    <input onkeyup="cek()" id="no_invoice" name="no_invoice" class="form-control input-mask">    
+                                    </div>
+                                                                                                          
+                                </div>
+
+
+                                <div class="row mb-3">
+                                    <label class="col-sm-4 col-form-label" for="input-mask">Tanggal</label>
+                                    <div class="col-sm-8">
+                                    <input onchange="cek()" id="tanggal" name="tanggal" class="form-control input-mask" type="date">     
+                                    </div>
+                                                                                           
+                                </div>
+                                                        
+                                <div class="row mb-3">
+                                    <label class="col-sm-4 col-form-label" for="input-mask">Due Date</label>
+                                    <div class="col-sm-8">
+                                    <input onchange="cek()" id="dd" name="dd" class="form-control input-mask" type="date"> 
+                                    </div>                                                 
+                                </div>   
+            
+
+                           </div>
+                           <div class="modal-footer">
+                               <button type="button" class="btn btn-secondary waves-effect"
+                                   data-bs-dismiss="modal">Close</button>
+                               <button type="submit" id="cari"
+                                   class="btn btn-primary waves-effect waves-light" disabled>Print</button>
+                           </div>
+                        </form>
+                       </div>
                        <!-- /.modal-content -->
                    </div>
                    <!-- /.modal-dialog -->
                </div>
                <!-- /.modal -->
 
+
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.28.1/sweetalert2.all.min.js"></script>
- 
 
-<script>
-    function button()
-    {
-        var mastercustomer_id = $('#mastercustomer_id').val();
-        var fromdate = $('#fromdate').val();
-        var todate = $('#todate').val();
-        var statushutang = $('#statushutang').val();
-
-        if(mastercustomer_id != "" && fromdate != "" && todate != "" && statushutang != "")
-        {
-            document.getElementById("cari").disabled = false;
-        }else{
-            document.getElementById("cari").disabled = true;
-            
-        }
-    }
-</script>
 
 
 
@@ -252,6 +384,81 @@
             });
 
 
+</script>
+
+
+<script>
+        document.getElementById("viewData").onclick = function() {
+            let fromDate = document.getElementById('fromDate').value
+            let toDate = document.getElementById('toDate').value
+            let mastercustomer_id = document.getElementById('mastercustomer_id').value
+            let statushutang = document.getElementById('statushutang').value
+
+            if (fromDate === '' || toDate === '' || mastercustomer_id === '' || statushutang === '') {
+                alert('Nilai masukan tidak boleh kosong! Periksa kembali inputan anda')
+            } else if (fromDate > toDate) {
+                alert("Tanggal awal tidak boleh lebih besar dari tanggal akhir.");
+            } else {
+                getData(fromDate, toDate, mastercustomer_id, statushutang)
+            }
+        };
+
+        function getData(fromDate, toDate, mastercustomer_id, statushutang) {
+            let url = "<?= site_url('piutang/selectInvoice') ?>"
+            
+          
+            document.getElementById('tampildata').value = ""
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: {
+                    'fromdate': fromDate,
+                    'todate': toDate,
+                    'mastercustomer_id' : mastercustomer_id,
+                    'statushutang' : statushutang,
+                },
+                cache: false,
+                success: function(data) {
+                    dt = document.getElementById('tampildata');
+
+                    let insertedContent = document.querySelector(".insertedContent");
+                    if (insertedContent) {
+                        insertedContent.parentNode.removeChild(insertedContent);
+                    }
+                    dt.insertAdjacentHTML('afterbegin', "<span class ='insertedContent'>" + data + "</span>");
+                       // Inisialisasi Datatables pada tabel yang baru dimasukkan
+                    $('#filter').DataTable();
+                    document.getElementById('tampildata1').style.display = "none";
+                    document.getElementById('tampildata').style.display = "block";
+                    $('#cetak1').val(mastercustomer_id);
+                    $('#cetak2').val(statushutang);
+                    $('#cetak3').val(fromDate);
+                    $('#cetak4').val(toDate);
+                }
+            })
+        }
+
+        function reset()
+        {
+            document.getElementById('tampildata').style.display = "none";
+            document.getElementById('tampildata1').style.display = "block";
+
+        }
+
+        function cek()
+    {
+        var no_invoice = $('#no_invoice').val();
+        var dd = $('#dd').val();
+        var tanggal = $('#tanggal').val();
+
+        if(no_invoice != "" && dd != "" && tanggal != "")
+        {
+            document.getElementById("cari").disabled = false;
+        }else{
+            document.getElementById("cari").disabled = true;
+            
+        }
+    }
 </script>
 
 

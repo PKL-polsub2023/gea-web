@@ -3,14 +3,55 @@
 <!-- ============================================================== -->
             <!-- Start right Content here -->
             <!-- ============================================================== -->
-                                    <div class="table-responsive">
-                                        <table id="filter" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                    
+            <div class="main-content">
+
+                <div class="page-content">
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="page-title-box">
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <!-- <h6 class="page-title">Data Ruangan</h6> -->
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Detail Piutang</li>
+                                    </ol>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="float-end d-none d-md-block">
+                                        <div class="dropdown">                                                                
+
+                                            <!-- <a class="btn btn-primary" href="<?php echo base_url()?>tagihan_customer/tambah" role="button">Tambah Tagihan Customer</a> -->
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end page title -->
+
+
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                <div class="col col-md-3 col-3 ms-4 mt-2">
+                                    <?php if($jumlahPiutang > 0) {?>
+                                    <button type="button" class="btn btn-primary waves-effect waves-light"
+                                                data-bs-toggle="modal" data-bs-target="#myModal">Print Invoice
+                                    </button>
+                                    <?php } ?>
+                                    </div>
+                                    <div class="card-body">
+                                    <h3>Invoice</h3>
+                                        <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                        
                                             <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>ID Customer</th>
-                                                <!-- <th>ID Invoice (Tagihan)</th> -->
+                                                <th>Customer</th>
+                                                <th>ID Invoice (Tagihan)</th>
                                                 <th>Tanggal</th>
                                                 <th>Total Volume Gas</th>
                                                 <th>Jumlah Tagihan</th>
@@ -28,12 +69,12 @@
                                                 ?>                                                            
                                                 <tr>
                                                     <td width="5%" style="text-align:center"><?php echo ++$no ?></td>                                                    
-                                                    <td><?php echo $u['mastercustomer_id'] ?></td> 
-                                                    <!-- <td><?php echo $u['tagihan_customer_id'] ?></td>  -->
+                                                    <td><?php echo $u['namaperusahaan'] ?></td> 
+                                                    <td><?php echo $u['tagihan_customer_id'] ?></td> 
                                                     <td><?php echo $u['tanggal'] ?></td>
                                                     <td><?php echo $u['volumegas']?></td>
 
-                                                    <td>Rp <?php echo number_format($u['total_tagihan'], 0, ',', '.'); ?></td>
+                                                    <td><?php echo $u['total'] ?></td>
                                                     <td><?php 
                                                       if($u["statushutang"] == "N"){
                                                         ?>
@@ -59,7 +100,6 @@
                                                                 <?php
                                                             }
                                                             ?>                                   
-                                                              <a href="<?= base_url('tagihan_customer/ubah/' . $u['tagihan_customer_id']) ?>" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i>Ubah Pressure Out</a> 
                                                             <a href="<?= base_url('piutang/cetakinvoice/' . $u['tagihan_customer_id']) ?>" class="btn btn-success btn-sm" >Statement</a>                                                     
                                                             <a href="<?= base_url('piutang/cetakba/' . $u['tagihan_customer_id']) ?>" class="btn btn-success btn-sm" >Berita Acara</a> 
                                                             <a href="<?= base_url('piutang/isiinvoice_satuan/' . $u['tagihan_customer_id']) ?>" class="btn btn-success btn-sm" target="_blank">Invoice</a>                                                       
@@ -71,13 +111,89 @@
                                                 <?php }}?>
                                             </tbody> 
                                         </table>
-                                     </div>
+
+                                    </div>
+                                </div> 
+                            </div> <!-- end col -->
+                        </div> <!-- end row -->
+                        
+
+                    </div> <!-- container-fluid -->
+                </div>
+                <!-- End Page-content -->
+
+
+
+                <!-- sample modal content -->
+    <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                   <div class="modal-dialog">
+                       <div class="modal-content">
+                           <div class="modal-header">
+                               <h5 class="modal-title" id="myModalLabel">Print Select Invoice
+                               </h5>
+                               <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                   aria-label="Close"></button>
+                           </div>
+                           <div class="modal-body">
+                            <form action="<?php echo base_url('piutang/printSelectInvoice');?>" method="POST" enctype="multipart/form-data" target="_blank"> 
+                                        <input type="text" name="mastercustomer_id" value="<?= $mastercustomer_id;?>" hidden>
+                                        <input type="text" name="statushutang" value="<?= $statushutang;?>" hidden>
+                                        <input type="text" name="fromdate" value="<?= $fromdate;?>" class="form-control" hidden>
+                                        <input type="text" name="todate" value="<?= $todate;?>" class="form-control" hidden>
+                                        
+
+                               <div class="row mb-3">
+                                    <label class="col-sm-4 col-form-label" for="input-mask">No Invoice</label>
+                                    <div class="col-sm-8">
+                                    <input onkeyup="button()" id="no_invoice" name="no_invoice" class="form-control input-mask">    
+                                    </div>
+                                                                                                          
+                                </div>
+
+
+                                <div class="row mb-3">
+                                    <label class="col-sm-4 col-form-label" for="input-mask">Tanggal</label>
+                                    <div class="col-sm-8">
+                                    <input onchange="button()" id="tanggal" name="tanggal" class="form-control input-mask" type="date">     
+                                    </div>
+                                                                                           
+                                </div>
+                                                        
+                                <div class="row mb-3">
+                                    <label class="col-sm-4 col-form-label" for="input-mask">Due Date</label>
+                                    <div class="col-sm-8">
+                                    <input onchange="button()" id="dd" name="dd" class="form-control input-mask" type="date"> 
+                                    </div>                                                 
+                                </div>   
+            
+
+                           </div>
+                           <div class="modal-footer">
+                               <button type="button" class="btn btn-secondary waves-effect"
+                                   data-bs-dismiss="modal">Close</button>
+                               <button type="submit" id="cari"
+                                   class="btn btn-primary waves-effect waves-light" disabled>Print</button>
+                           </div>
+                        </form>
+                       </div>
+                       <!-- /.modal-content -->
+                   </div>
+                   <!-- /.modal-dialog -->
+               </div>
+               <!-- /.modal -->
+
+
+
+
+
+
+
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.28.1/sweetalert2.all.min.js"></script>
  
 
-<!-- <script>
+<script>
     function button()
     {
         var no_invoice = $('#no_invoice').val();
@@ -92,7 +208,7 @@
             
         }
     }
-</script> -->
+</script>
 
 
 

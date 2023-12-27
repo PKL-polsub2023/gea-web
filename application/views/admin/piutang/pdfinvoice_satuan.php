@@ -154,7 +154,7 @@
             <tr>
                 <th style="width:5%;border-left:1px solid black;" class="data2">QTY</th>
                 <th style="width:40%" class="data2">Keterangan</th>
-                <th style="width:10%" class="data2">Volume</th>
+                <th style="width:10%" class="data2">Volume (Sm<sup>3</sup>)</th>
                 <th style="width:10%" class="data2">Harga Satuan</th>
                 <th style="width:10%" class="data2">Discount</th>
                 <th style="width:25%" class="data2">Total</th>
@@ -165,7 +165,7 @@
                 <td class="data2" style="width:40%;border-bottom:1px solid black;">
                 <?php echo "Tagihan " . $u['namaperusahaan'] . "<br>" . $u['tanggalkirim']; ?>
                 </td>
-                <td class="data2" style="width:10%;border-bottom:1px solid black;"><?php echo $u['volumegas'] ?></td>
+                <td class="data2" style="width:10%;border-bottom:1px solid black;"><?php echo $u['harga'] ?></td>
                 <td class="data2" style="width:10%;border-bottom:1px solid black;"><?php echo 'Rp ' . number_format($u['harga_jual'], 0, ',', '.') ?></td>
                 <td class="data2" style="width:10%;border-bottom:1px solid black;">-</td>
                 <td class="data2" style="width:30%;border-bottom:1px solid black;"><?php echo $total?></td>

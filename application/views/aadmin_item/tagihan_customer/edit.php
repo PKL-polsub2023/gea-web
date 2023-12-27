@@ -158,21 +158,19 @@
                                                             <label class="form-label" for="input-mask">Ritase</label>
                                                             <input id="input-mask" name="ritase" value="<?= $edit['ritase'];?>" type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" class="form-control input-mask" >                                                            
                                                         </div>
-
-                                                           <!-- hidden     -->
-                                                           <input id="hargacustomer" name="hargacustomer" type="text" class="form-control input-mask" hidden>                                                            
-                                                        <!-- end hidden -->
-
                                                         <div class="mb-4">
                                                             <label class="form-label" for="input-mask">Harga Jual</label>
-                                                            <input style="background:#CCC;"  value="<?= $edit['harga'];?>" id="harga" name="harga" type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" class="form-control input-mask" readonly >                                                            
+                                                            <input style="background:#CCC;" value=""  id="hargacustomer" name="hargacustomer" type="text" class="form-control input-mask" readonly >                                                            
                                                         </div>
 
 
-                                                        <!-- <div class="mb-4">
-                                                            <label class="form-label" for="input-mask">Total (Rp)</label>
-                                                            <input id="input-mask" name="total" value="<?= $edit['total'];?>" type="text" class="form-control input-mask" >                                                            
-                                                        </div> -->
+            
+
+                                                        <div class="mb-4">
+                                                            <label class="form-label" for="input-mask">Total (Sm<sup>3</sup>)</label>
+                                                            <input style="background:#CCC;" value="<?= $edit['harga'];?>" id="harga" name="harga" type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" class="form-control input-mask" readonly >                                                            
+                                                        </div>
+
                                                         
                                                     </div>
                                                 </div>
@@ -207,28 +205,58 @@
 
                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                 <script>
+                $(document).ready(function() {
+                    var mastercustomer_id = $('#mastercustomer_id').val();
+                    $.ajax({
+                        type: "POST",
+                        url: "<?php echo site_url('tagihan_customer/hargaJual')?>",
+                        dataType: "JSON",
+                        data: { mastercustomer_id: mastercustomer_id },
+                        cache: false,
+                        success: function(data) {
+                            $.each(data, function(mastercustomer_id, harga) {
+                                $('[name="hargacustomer"]').val(data.harga);
+                            });
+                        }
+                    });
+                    return true;
+                });
+
+                </script>
+                <script>
                     function hargaJual()
                     {
                         var hargacustomer = $("#hargacustomer").val();
                         var volumepulang = $("#volumepulang").val();
                         var harga_jual = hargacustomer * volumepulang;
-                        $("#harga").val(harga_jual);
+                        // $("#harga").val(harga_jual);
                     }
 
                     function isi_vt()
                     {
+                        var t = parseFloat($("#t").val());
                         var meterawal = $("#meterawal").val();
                         var meterakhir = $("#meterakhir").val();
-                        var vt = meterakhir - meterawal;
-                        vt = Math.round(vt * 100) / 100;
+                        var vts = meterakhir - meterawal;
+                        vt = vts.toFixed(4);
+                        console.log(vt);
                         $("#vt").val(vt);
+
+                        var preasure = parseFloat($("#preasure").val());    
+                        var ap = parseFloat($("#ap").val());  
+                        var aps = ap.toFixed(5);
+                        k = (1+(0.002*preasure));
+                        var total = (vt * (aps)*(300.15 / (273.15 + t)) * k);
+                        var totals = total.toFixed(3);
+                        $("#harga").val(totals);
+
                     }
 
                     function isi_k()
                     {
                         var preasure = parseFloat($("#preasure").val());    
-                        k = (1+(0.0002*preasure));
-                        ap = ((preasure+1.01325));
+                        k = (1+(0.002*preasure));
+                        ap = (1.01325 + preasure) / 1.01325
                         // k = Math.round(k * 100) / 100;
                         $("#k").val(k);
                         $("#ap").val(ap);
@@ -242,6 +270,7 @@
                         $("#sc").val(sc);
                     }
                 </script>
+
 
                                
       
