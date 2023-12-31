@@ -47,7 +47,7 @@
                                                 <th>Volume Berangkat</th>
                                                 <th>Ritase</th>
                                                 <th>BBM</th>
-                                                <th>Harga Jual</th>
+                                                <th>V (sm<sup>3</sup>)</th>
                                                 <!-- <th>Total Tagihan</th> -->
                                                 <th style="text-align:center">Tindakan</th>                                            
                                             </tr>

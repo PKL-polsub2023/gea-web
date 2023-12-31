@@ -162,7 +162,7 @@
                                                         </div>
                                                         <div class="mb-4">
                                                             <label class="form-label" for="input-mask">Harga Jual</label>
-                                                            <input style="background:#CCC;" value=""  id="hargacustomer" name="hargacustomer" type="text" class="form-control input-mask" readonly >                                                            
+                                                            <input style="background:#CCC;" value="<?= $edit['satuan'];?>"  id="hargacustomer" name="hargacustomer" type="text" class="form-control input-mask" readonly >                                                            
                                                         </div>
 
 
@@ -205,7 +205,7 @@
                 <!-- End Page-content -->
 
                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                <script>
+                <!-- <script>
                 $(document).ready(function() {
                     var mastercustomer_id = $('#mastercustomer_id').val();
                     $.ajax({
@@ -223,7 +223,7 @@
                     return true;
                 });
 
-                </script>
+                </script> -->
                 <script>
                     function hargaJual()
                     {

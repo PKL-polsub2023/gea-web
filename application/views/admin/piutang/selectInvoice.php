@@ -13,6 +13,8 @@
                                                 <!-- <th>ID Invoice (Tagihan)</th> -->
                                                 <th>Tanggal</th>
                                                 <th>Total Volume Gas</th>
+                                                <th>Pressure Out (P)</th>
+                                                <th>V (sm <sup>3</sup>)</th>
                                                 <th>Jumlah Tagihan</th>
                                                 <th>Status</th>
 
@@ -30,9 +32,10 @@
                                                     <td width="5%" style="text-align:center"><?php echo ++$no ?></td>                                                    
                                                     <td><?php echo $u['mastercustomer_id'] ?></td> 
                                                     <!-- <td><?php echo $u['tagihan_customer_id'] ?></td>  -->
-                                                    <td><?php echo $u['tanggal'] ?></td>
+                                                    <td><?php echo date('d-m-Y', strtotime($u['tanggal'])); ?></td>
                                                     <td><?php echo $u['volumegas']?></td>
-
+                                                    <td><?php echo $u['preasure']?></td>
+                                                    <td><?php echo $u['harga']?></td>
                                                     <td>Rp <?php echo number_format($u['total_tagihan'], 0, ',', '.'); ?></td>
                                                     <td><?php 
                                                       if($u["statushutang"] == "N"){

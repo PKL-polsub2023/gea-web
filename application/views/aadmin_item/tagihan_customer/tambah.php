@@ -241,6 +241,7 @@
                         // k = Math.round(k * 100) / 100;
                         $("#k").val(k);
                         $("#ap").val(ap);
+                        isi_vt();
                     }
 
                     function isi_sc()

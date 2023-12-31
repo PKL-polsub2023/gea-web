@@ -106,18 +106,19 @@
 
                                                 <div class="col-lg-4">
                                                     <div class="mt-2">
-                                                        <div class="mb-4"><br>
-
-                                                        <button class="btn btn-info btn-mini" class="easyui-linkbutton" name="view" id="viewData">Tampilkan</button>
-                                                        <button class="btn btn-info btn-mini" name="cetak" id="cetak" class="easyui-linkbutton"  data-bs-toggle="modal" data-bs-target="#myModals">Cetak</button>
-
-                                                            <!-- <button type="button" class="btn btn-info btn-mini"name="cari" id="cari" class="easyui-linkbutton" data-options="iconCls:'icon-search'">Pencarian</button>
-                                                            <button type="button" class="btn btn-info btn-mini" name="cetak" id="cetak" class="easyui-linkbutton" data-options="iconCls:'icon-print'">Cetak</button> -->
-
-
-                                                            <!-- <button type="submit" class="btn btn-info btn-mini">Cetak PDF</button> -->
-                                                            <button onclick="reset()" type="button" id="reset" value="Go Back" class="btn btn-warning btn-mini">Kembali</button>  
+                                                        <br>
+                                                        <div class="row">
+                                                                <div class="col-lg-3 me-2">
+                                                                <button class="btn btn-info btn-mini" class="easyui-linkbutton" name="view" id="viewData">Tampilkan</button>
+                                                                </div>
+                                                                <div class="col-lg-2 me-2" style="display:none" id="div-cetak">
+                                                                <button class="btn btn-info btn-mini" name="cetak" id="cetak" data-bs-toggle="modal" data-bs-target="#myModals">Cetak</button>
+                                                                </div>
+                                                                <div class="col-lg-2">
+                                                                <button onclick="reset()" type="button" id="reset" value="Go Back" class="btn btn-warning btn-mini">Kembali</button>  
+                                                                </div>
                                                         </div>
+                                                     
                                                         
                                                     </div>                                                    
                                                 </div>
@@ -405,7 +406,7 @@
 
         function getData(fromDate, toDate, mastercustomer_id, statushutang) {
             let url = "<?= site_url('piutang/selectInvoice') ?>"
-            
+            document.getElementById('div-cetak').style.display = "block";
           
             document.getElementById('tampildata').value = ""
             $.ajax({
@@ -442,6 +443,7 @@
         {
             document.getElementById('tampildata').style.display = "none";
             document.getElementById('tampildata1').style.display = "block";
+            document.getElementById('div-cetak').style.display = "none";
 
         }
 

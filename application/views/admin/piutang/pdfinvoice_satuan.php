@@ -166,7 +166,7 @@
                 <?php echo "Tagihan " . $u['namaperusahaan'] . "<br>" . $u['tanggalkirim']; ?>
                 </td>
                 <td class="data2" style="width:10%;border-bottom:1px solid black;"><?php echo $u['harga'] ?></td>
-                <td class="data2" style="width:10%;border-bottom:1px solid black;"><?php echo 'Rp ' . number_format($u['harga_jual'], 0, ',', '.') ?></td>
+                <td class="data2" style="width:10%;border-bottom:1px solid black;"><?php echo 'Rp ' . number_format($u['satuan'], 0, ',', '.') ?></td>
                 <td class="data2" style="width:10%;border-bottom:1px solid black;">-</td>
                 <td class="data2" style="width:30%;border-bottom:1px solid black;"><?php echo $total?></td>
             </tr>

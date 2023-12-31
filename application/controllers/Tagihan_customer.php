@@ -76,6 +76,7 @@ class Tagihan_customer extends CI_Controller {
                     'ap'       => $this->input->post('ap'),
                     'sc'       => $this->input->post('sc'),
                     'harga'       => $this->input->post('harga'),
+                    'satuan' => $harga_jual,
 
                     'bbm'       => $this->input->post('bbm'),
                     'ritase'       => $this->input->post('ritase'),
@@ -145,6 +146,7 @@ class Tagihan_customer extends CI_Controller {
             'ap'       => $this->input->post('ap'),
             'sc'       => $this->input->post('sc'),
             'harga'       => $this->input->post('harga'),
+            'satuan' => $harga_jual,
 
             'bbm'       => $this->input->post('bbm'),
             'ritase'       => $this->input->post('ritase'),

@@ -55,7 +55,7 @@
                                                             <label class="form-label" for="input-mask">Customer</label>
                                                             <?php
                                                                 $dropdownCustomer = $this->Tagihan_customer_model->dropdownCustomer();
-                                                                echo form_dropdown('mastercustomer_id', $dropdownCustomer, $edit['mastercustomer_id'],  ' id="mastercustomer_id" class="form-control input-mask" ');
+                                                                echo form_dropdown('mastercustomer_id', $dropdownCustomer, $edit['mastercustomer_id'],  ' id="mastercustomer_id" class="form-control input-mask" onchange="changeJual()" ');
                                                             ?>                                                            
                                                         </div>
 
@@ -160,7 +160,7 @@
                                                         </div>
                                                         <div class="mb-4">
                                                             <label class="form-label" for="input-mask">Harga Jual</label>
-                                                            <input style="background:#CCC;" value=""  id="hargacustomer" name="hargacustomer" type="text" class="form-control input-mask" readonly >                                                            
+                                                            <input style="background:#CCC;" value="<?= $edit['satuan'];?>"  id="hargacustomer" name="hargacustomer" type="text" class="form-control input-mask" readonly >                                                            
                                                         </div>
 
 
@@ -204,7 +204,7 @@
                 <!-- End Page-content -->
 
                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                <script>
+                <!-- <script>
                 $(document).ready(function() {
                     var mastercustomer_id = $('#mastercustomer_id').val();
                     $.ajax({
@@ -220,10 +220,27 @@
                         }
                     });
                     return true;
-                });
+                }); -->
 
                 </script>
                 <script>
+                    function changeJual()
+                    {
+                        var mastercustomer_id = $('#mastercustomer_id').val();
+                     $.ajax({
+                        type: "POST",
+                        url: "<?php echo site_url('tagihan_customer/hargaJual')?>",
+                        dataType: "JSON",
+                        data: { mastercustomer_id: mastercustomer_id },
+                        cache: false,
+                        success: function(data) {
+                            $.each(data, function(mastercustomer_id, harga) {
+                                $('[name="hargacustomer"]').val(data.harga);
+                            });
+                        }
+                    });
+                    
+                    }
                     function hargaJual()
                     {
                         var hargacustomer = $("#hargacustomer").val();
@@ -239,7 +256,6 @@
                         var meterakhir = $("#meterakhir").val();
                         var vts = meterakhir - meterawal;
                         vt = vts.toFixed(4);
-                        console.log(vt);
                         $("#vt").val(vt);
 
                         var preasure = parseFloat($("#preasure").val());    
@@ -260,6 +276,7 @@
                         // k = Math.round(k * 100) / 100;
                         $("#k").val(k);
                         $("#ap").val(ap);
+                        isi_vt();
                     }
 
                     function isi_sc()
