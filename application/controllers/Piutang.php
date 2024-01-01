@@ -1707,6 +1707,15 @@ class Piutang extends CI_Controller {
 
             // $this->load->view('admin/piutang/pdfinvoice',$data);
       }
+
+
+      public function detailPiutang($id)
+      {
+            $this->load->view('layout/header');
+            $this->load->view('layout/sidebar');
+            $this->load->view('admin/piutang/detail/index');
+            $this->load->view('layout/footer');
+      }
 }
 
 

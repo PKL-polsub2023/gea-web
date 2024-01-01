@@ -154,7 +154,7 @@
                 <th  style="width:400px">
                     <table>
                         <tr>    
-                            <td  class="data">No Invoice : <?= $no_invoice;?></td>
+                            <td  class="data">No Faktur : <?= $no_invoice;?></td>
                             
                         </tr>
                         <tr>

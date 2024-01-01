@@ -298,7 +298,7 @@
                                 <div class="row mb-3">
                                     <label class="col-sm-4 col-form-label" for="input-mask">Tanggal</label>
                                     <div class="col-sm-8">
-                                    <input onchange="cek()" id="tanggal" name="tanggal" class="form-control input-mask" type="date">     
+                                    <input onchange="cek()" id="tanggal" name="tanggal" class="form-control input-mask" type="date" readonly>     
                                     </div>
                                                                                            
                                 </div>
@@ -306,7 +306,7 @@
                                 <div class="row mb-3">
                                     <label class="col-sm-4 col-form-label" for="input-mask">Due Date</label>
                                     <div class="col-sm-8">
-                                    <input onchange="cek()" id="dd" name="dd" class="form-control input-mask" type="date"> 
+                                    <input onchange="cek()" id="dd" name="dd" class="form-control input-mask" type="date" readonly> 
                                     </div>                                                 
                                 </div>   
             
@@ -435,6 +435,8 @@
                     $('#cetak2').val(statushutang);
                     $('#cetak3').val(fromDate);
                     $('#cetak4').val(toDate);
+                    $('#tanggal').val(fromDate);
+                    $('#dd').val(toDate);
                 }
             })
         }
