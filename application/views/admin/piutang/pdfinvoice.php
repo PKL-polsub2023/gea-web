@@ -26,6 +26,7 @@
       .data{
         font-size:16pt;
         width:100%;
+        text-align:left;
       }
 
       .data, .th, .td {
@@ -36,26 +37,33 @@
       .data2{
         margin-top:2em;
         width:100%;
-        font-size:16pt;
+        font-size:12pt;
       }
 
-      .data2, .th, .td {
+      .data2, .th, .td { 
+        font-size:12pt;
       height: 80px;
       border-top:1px solid black;
       border-right:1px solid black;
-      /* border-bottom:1px solid black; */
+      border-bottom:1px solid black;
       /* border-left:1px solid black; */
       border-collapse: collapse;
       }
 
+
+
+     
+
+      
+
       .norek{
-        font-size:16pt;
+        font-size:14pt;
       }
 
+
       .total, .th, .td {
-        font-size:16pt;
+        font-size:12pt;
       height: 50px;
-      border-top:1px solid black;
       border-bottom:1px solid black; 
       border-left:1px solid black; 
       border-collapse: collapse;
@@ -64,7 +72,7 @@
       .nominal, .th, .td {
         margin-top:2em;
         width:100%;
-        font-size:16pt;
+        font-size:12pt;
       height: 60px;
       border-top:1px solid black;
       border-right:1px solid black;
@@ -74,13 +82,18 @@
       }
 
       .font-normal{
-        font-size:16pt;
+        font-size:12pt;
         font-weight:100;
         margin-top:1em;
       }
 
-</style>
+      .th-header{
+        text-align:right;
+      }
 
+
+
+</style>
 <div class="main">
     <div>
         <table  style="border-bottom:2px solid black;">
@@ -92,19 +105,19 @@
                 <th style="width:40%">
                 <table>
                     <tr>
-                        <th><p style="text-align:right;font-size:18pt;">PT GLOBAL ENERGY AGRAPANA</p></th>
+                        <th class="th-header"><p style="font-size:18pt;">PT GLOBAL ENERGY AGRAPANA</p></th>
                     </tr>
                     <tr>
-                        <td> <p style="font-weight:100;text-align:right;font-size:18pt;">Jl. Otto Iskandardinata No 138 RT 50 RW 13</p></td>
+                        <td class="th-header"> <p style="font-weight:100;font-size:18pt;">Jl. Otto Iskandardinata No 138 RT 50 RW 13</p></td>
                     </tr>
                     <tr>
-                        <td style="height:1em"> <p style="font-weight:100;text-align:right;font-size:18pt;">Telp . 0260-4250402</p></td>
+                        <td class="th-header" style="height:1em"> <p style="font-weight:100;font-size:18pt;">Telp . 0260-4250402</p></td>
                     </tr>
                     <tr>
-                        <td><p style="font-weight:100;text-align:right;font-size:18pt;">Kel.Karanganyar Kec.Subang Kabupaten Subang</p></td>
+                        <td class="th-header"><p style="font-weight:100;font-size:18pt;">Kel.Karanganyar Kec.Subang Kabupaten Subang</p></td>
                     </tr>
                     <tr>
-                        <td><p style="font-weight:100;text-align:right;font-size:18pt;">Email : globalenergyagrapana@gmail.com</p></td>
+                        <td class="th-header"><p style="font-weight:100;font-size:18pt;">Email : globalenergyagrapana@gmail.com</p></td>
                     </tr>
                 </table>
                
@@ -112,9 +125,9 @@
             </tr>
         </table>
 
-        <center>
+        <div style="text-align:center">
             <h2><u>INVOICE</u></h2>
-        </center>
+        </div>
 
         <table width="1000px">
             <tr>
@@ -155,28 +168,28 @@
                 <th style="width:5%;border-left:1px solid black;" class="data2">QTY</th>
                 <th style="width:40%" class="data2">Keterangan</th>
                 <th style="width:10%" class="data2">Volume</th>
-                <th style="width:15%" class="data2">Harga Satuan</th>
-                <th style="width:5%" class="data2">Discount</th>
-                <th style="width:25%" class="data2">Total</th>
+                <th style="width:10%" class="data2">Harga Satuan</th>
+                <th style="width:15%" class="data2">Discount</th>
+                <th style="width:20%" class="data2">Total</th>
             </tr>
             <?php                                                 
                 if($datamaster){
                     foreach($datamaster as $u){  
             ?>        
             <tr>
-                <td class="data2" style="width:5%;text-align:center;;border-left:1px solid black;border-bottom:1px solid black;">1</td>
-                <td class="data2" style="width:40%;border-bottom:1px solid black;">
+                <td class="data2" style="width:5%;text-align:center;border-left:1px solid black;">1</td>
+                <td class="data2" style="width:40%">
                 <?php echo "Tagihan " . $u['namaperusahaan'] . "<br>" . $u['tanggalkirim']; ?>
                 </td>
-                <td class="data2" style="width:10%;border-bottom:1px solid black;"><?php echo $u['harga'] ?></td>
-                <td class="data2" style="width:15%;border-bottom:1px solid black;"><?php echo 'Rp ' . number_format($u['satuan'], 0, ',', '.') ?></td>
-                <td class="data2" style="width:5%;border-bottom:1px solid black;">-</td>
-                <td class="data2" style="width:30%;border-bottom:1px solid black;"><?php echo 'Rp ' . number_format($u['total_tagihan'], 0, ',', '.') ?></td>
+                <td class="data2" style="width:10%"><?php echo $u['harga'] ?></td>
+                <td class="data2" style="width:15%"><?php echo number_format($u['satuan'], 0, ',', '.') ?></td>
+                <td class="data2" style="width:5%">-</td>
+                <td class="data2" style="width:30%"><?php echo 'Rp ' . number_format($u['total_tagihan'], 0, ',', '.') ?></td>
 
             </tr>
             <?php }}?>
             <tr>
-                <td colspan="2" rowspan="5">
+                <td style="border-bottom:1px solid white" colspan="2" rowspan="5">
                 <p  class="norek">
                     <!-- <i>
                     Pembayaran Mohon ditransfer ke :
@@ -243,9 +256,9 @@
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
     window.print();
 });
-</script>
+</script> -->

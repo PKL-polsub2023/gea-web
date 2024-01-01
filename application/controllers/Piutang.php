@@ -752,9 +752,21 @@ class Piutang extends CI_Controller {
                   'dd'=>$dd2,
             );
 
-         
+            $mpdf = new \Mpdf\Mpdf(
+                  [
+                        'mode' => 'utf-8', 
+                        'format' => 'Legal',
+                    ]
+             );
+      
+            $data['judul'] = $data['no_invoice'];
+            $data['isi'] = 'Ini adalah isi contoh untuk file PDF.';
+      
+            $html = $this->load->view('admin/piutang/pdfinvoice', $data, true);
+            $mpdf->WriteHTML($html);
+            $mpdf->Output('Piutang-'.$data['no_invoice'].'.pdf', 'I');
 
-            $this->load->view('admin/piutang/pdfinvoice',$data);
+            // $this->load->view('admin/piutang/pdfinvoice',$data);
       
       }
 
@@ -1499,9 +1511,23 @@ class Piutang extends CI_Controller {
             'dd' => $dd2,
       );
 
+      $mpdf = new \Mpdf\Mpdf(
+            [
+                  'mode' => 'utf-8', 
+                  'format' => 'Legal',
+              ]
+       );
+
+      $data['judul'] = $data['no_invoice'];
+      $data['isi'] = 'Ini adalah isi contoh untuk file PDF.';
+
+      $html = $this->load->view('admin/piutang/pdfinvoice_satuan', $data, true);
+      $mpdf->WriteHTML($html);
+      $mpdf->Output('Piutang-'.$data['no_invoice'].'.pdf', 'I');
 
 
-      $this->load->view('admin/piutang/pdfinvoice_satuan', $data);
+
+      // $this->load->view('admin/piutang/pdfinvoice_satuan', $data);
       }
 
 
@@ -1664,7 +1690,22 @@ class Piutang extends CI_Controller {
                         'dd'=>$dd2,
                   );
             }
-            $this->load->view('admin/piutang/pdfinvoice',$data);
+
+            $mpdf = new \Mpdf\Mpdf(
+                  [
+                        'mode' => 'utf-8', 
+                        'format' => 'Legal',
+                    ]
+             );
+      
+            $data['judul'] = $data['no_invoice'];
+            $data['isi'] = 'Ini adalah isi contoh untuk file PDF.';
+      
+            $html = $this->load->view('admin/piutang/pdfinvoice',$data, true);
+            $mpdf->WriteHTML($html);
+            $mpdf->Output('Piutang-'.$data['no_invoice'].'.pdf', 'I');
+
+            // $this->load->view('admin/piutang/pdfinvoice',$data);
       }
 }
 

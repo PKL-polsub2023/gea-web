@@ -214,8 +214,25 @@ class Hutang extends CI_Controller {
                 'date2' => $date2,
                 'rupiah' => $total_rupiah,
           );
+
+
+           
+             $mpdf = new \Mpdf\Mpdf(
+                  [
+                        'mode' => 'utf-8', 
+                        'format' => 'Legal',
+                    ]
+             );
+
+            $data['judul'] = $data['no_invoice'];
+            $data['isi'] = 'Ini adalah isi contoh untuk file PDF.';
+
+            $html = $this->load->view('admin/hutang/faktur', $data, true);
+            $mpdf->WriteHTML($html);
+            $mpdf->Output('Faktur-'.$data['no_invoice'].'.pdf', 'I');
+
           
-          $this->load->view('admin/hutang/faktur', $data);
+      //     $this->load->view('admin/hutang/faktur', $data);
           }
 
           public function selectInvoice()
