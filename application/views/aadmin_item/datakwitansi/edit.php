@@ -110,7 +110,7 @@
 
                                                         <div class="mb-4">
                                                             <label class="form-label" for="input-mask">Harga Satuan Supplier</label>
-                                                            <input id="hargasatuan" name="hargasatuan" value="<?= $edit['hargasatuan'];?>" class="form-control input-mask" style="background:#CCC;" readonly>                                                            
+                                                            <input id="hargasatuan" name="hargasatuan" value="<?= $edit['satuan_harga'];?>" class="form-control input-mask" style="background:#CCC;" readonly>                                                            
                                                         </div>
 
                                                         <div class="mb-4">

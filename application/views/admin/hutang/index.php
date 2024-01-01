@@ -76,7 +76,7 @@
                                                     <td><?php echo $u['nama_driver'] ?></td>
                                                     <td><?php echo $u['lokasispbg'] ?></td>
                                                     <td><?php echo $u['volumegas'] ?></td>
-                                                    <td><?php echo $u['total'] ?></td>
+                                                    <td><?php echo 'Rp ' . number_format($u['total'], 0, ',', '.') ?></td>
                                                     <td><?php echo ($u['status'] == 'N') ? "belum bayar" : "dibayar";?></td>
                                                     <td style="text-align:center">
                                                         <?php

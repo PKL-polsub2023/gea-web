@@ -63,7 +63,7 @@
                                                     <td><?php echo $u['namaspbg'] ?></td> 
                                                     <td><?php echo $u['lokasispbg'] ?></td>
                                                     <td><?php echo $u['jarakspbg'] ?></td>
-                                                    <td><?php echo $u['hargasatuan'] ?></td>
+                                                    <td><?php echo 'Rp ' . number_format($u['hargasatuan'], 0, ',', '.') ?></td>
                                                     <td style="text-align:center">
                                                         <a href="<?= base_url('master_supplier/ubah/' . $u['mastersupplier_id']) ?>" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>                                                     
                                                         <a onclick="return confirm('apakah anda yakin?')" href="<?= base_url('master_supplier/hapus/' . $u['mastersupplier_id']) ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>

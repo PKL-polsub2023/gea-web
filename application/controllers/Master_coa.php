@@ -163,12 +163,19 @@ class Master_coa extends CI_Controller {
         $berhasil = 0;
         for ($row = 3; $row <= $highestRow; $row++){                  //  Read a row of data into an array                 
             $rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row, NULL, TRUE, FALSE);
-
+            if($rowData[0][4] == 0)
+            {
+                $jenis = null;
+            }else{
+                $jenis = $rowData[0][4];
+            }
             $data = [
                 "id_kelompokakun"=> $rowData[0][1],
                 "kode"=> $rowData[0][2],
                 "nama"=> $rowData[0][3],
+                "jenis" => $jenis,
             ];
+
 
                 
                     $data = [
@@ -176,6 +183,7 @@ class Master_coa extends CI_Controller {
                         'id_kelompokakun' => $data["id_kelompokakun"],
                         'kode' => $data["kode"],
                         'nama' => $data["nama"],
+                        'parent_id' => $data["jenis"],
 									
                     ];
                     // $this->db->set('waktu_entri', 'NOW()', FALSE);

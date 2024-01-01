@@ -85,7 +85,8 @@ class Saldo_Awal_Model extends CI_Model{
 
 	public function datacoa(){
 
-    	$query = $this->db->get('dt_mastercoa');
+    	$this->db->order_by('kode', 'asc');
+$query = $this->db->get('dt_mastercoa');
 
     	return $query->result_array();
 

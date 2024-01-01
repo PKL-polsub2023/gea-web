@@ -66,7 +66,7 @@
                                                     <td><?php echo $u['alamat'] ?></td>
                                                     <td><?php echo $u['namapic'] ?></td>
                                                     <td><?php echo $u['notelp'] ?></td>
-                                                    <td><?php echo $u['harga_jual'] ?></td>
+                                                    <td><?php echo 'Rp ' . number_format($u['harga_jual'], 0, ',', '.') ?></td>
                                                     <td><?php echo $u['radius'] ?></td>
                                                     <td style="text-align:center">
                                                         <a href="<?= base_url('master_customer/ubah/' . $u['mastercustomer_id']) ?>" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>                                                     

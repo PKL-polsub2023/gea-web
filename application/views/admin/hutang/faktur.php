@@ -164,7 +164,7 @@
                 <td class="data2" style="width:5%;text-align:center;;border-left:1px solid black;border-bottom:1px solid black;">1</td>
                 <td class="data2" style="width:40%;border-bottom:1px solid black;"><?php echo "Faktur ".$u['namaspbg']." ".$date2 ?></td>
                 <td class="data2" style="width:10%;border-bottom:1px solid black;"><?php echo $u['volumegas'] ?></td>
-                <td class="data2" style="width:10%;border-bottom:1px solid black;"><?php echo $u['hargasatuan'] ?></td>
+                <td class="data2" style="width:10%;border-bottom:1px solid black;"><?php echo 'Rp ' . number_format($u['satuan_harga'], 0, ',', '.') ?></td>
                 <td class="data2" style="width:10%;border-bottom:1px solid black;">-</td>
                 <td class="data2" style="width:30%;border-bottom:1px solid black;"><?php echo $rupiah ?></td>
             </tr>

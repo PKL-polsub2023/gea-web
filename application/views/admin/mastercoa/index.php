@@ -44,57 +44,59 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
-
-                                        <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                       <div class="table-responsive">
+                                       <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                         
-                                            <thead>
+                                        <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th colspan="2">Kode</th>
+                                            <th>Nama Akun</th>
+                                            <th>Jenis</th>
+                                            <th>Kelompok</th>
+                                            <th>Bank</th>
+                                            <th>No Rekening</th>
+                                            <th>Atas Nama</th>
+                                            <th style="text-align:center">Tindakan</th>                                            
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <?php                                                 
+                                            $no = 0;
+                                                if($datamastercoa){
+                                                    foreach($datamastercoa as $u){  
+                                            ?>                                                            
                                             <tr>
-                                                <th>No</th>
-                                                <th colspan="2">Kode</th>
-                                                <th>Nama Akun</th>
-                                                <th>Jenis</th>
-                                                <th>Kelompok</th>
-                                                <th>Bank</th>
-                                                <th>No Rekening</th>
-                                                <th>Atas Nama</th>
-                                                <th style="text-align:center">Tindakan</th>                                            
-                                            </tr>
-                                            </thead>
-                                            <tbody>
+                                                <td width="5%" style="text-align:center"><?php echo ++$no ?></td>                                                    
+                                                <?php 
+                                                    if($u['parent_id'] == NULL){
+                                                        echo '<td colspan="2" class="text-center" style="background: #EEE;">'.$u['kode'].'</td>';
+                                                    }else{
+                                                        echo '<td width="50px" class="text-center" style="background: #DDD;"><i class="fa fa-angle-double-right"></i></td>';
+                                                        echo '<td width="50px" class="text-center" style="background: #DDD;">'.$u['kode'].'</td>';
+                                                    }
+                                                ?>
+                                                <td><?php echo $u['namacoa'] ?></td>
+                                                <td><?php echo ($u['parent_id'] == NULL) ? "PRI" : "SEC";?></td>
+                                                <td><?php echo $u['kelompokakun'] ?></td>
+                                                <td><?php echo $u['bank'] ?></td>
+                                                <td><?php echo $u['norekening'] ?></td>
+                                                <td><?php echo $u['atasnama'] ?></td>
+                                                <td style="text-align:center">
+                                                    <a href="<?= base_url('master_coa/ubah/' . $u['mastercoa_id']) ?>" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>                                                     
+                                                    <a onclick="return confirm('apakah anda yakin?')" href="<?= base_url('master_coa/hapus/' . $u['mastercoa_id']) ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                                    <!-- <button class='btn btn-danger hapuscustomer' id='mastercoa_id' data-toggle='modal' data-mastercoa_id="<?=$u['mastercoa_id']?>">Hapus</button> -->
+                                                </td>
 
-                                                <?php                                                 
-                                                $no = 0;
-                                                    if($datamastercoa){
-                                                        foreach($datamastercoa as $u){  
-                                                ?>                                                            
-                                                <tr>
-                                                    <td width="5%" style="text-align:center"><?php echo ++$no ?></td>                                                    
-                                                    <?php 
-                                                        if($u['parent_id'] == NULL){
-                                                            echo '<td colspan="2" class="text-center" style="background: #EEE;">'.$u['kode'].'</td>';
-                                                        }else{
-                                                            echo '<td width="50px" class="text-center" style="background: #DDD;"><i class="fa fa-angle-double-right"></i></td>';
-                                                            echo '<td width="50px" class="text-center" style="background: #DDD;">'.$u['kode'].'</td>';
-                                                        }
-                                                    ?>
-                                                    <td><?php echo $u['namacoa'] ?></td>
-                                                    <td><?php echo ($u['parent_id'] == NULL) ? "PRI" : "SEC";?></td>
-                                                    <td><?php echo $u['kelompokakun'] ?></td>
-                                                    <td><?php echo $u['bank'] ?></td>
-                                                    <td><?php echo $u['norekening'] ?></td>
-                                                    <td><?php echo $u['atasnama'] ?></td>
-                                                    <td style="text-align:center">
-                                                        <a href="<?= base_url('master_coa/ubah/' . $u['mastercoa_id']) ?>" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>                                                     
-                                                        <a onclick="return confirm('apakah anda yakin?')" href="<?= base_url('master_coa/hapus/' . $u['mastercoa_id']) ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
-                                                        <!-- <button class='btn btn-danger hapuscustomer' id='mastercoa_id' data-toggle='modal' data-mastercoa_id="<?=$u['mastercoa_id']?>">Hapus</button> -->
-                                                    </td>
-
+                                
+                                                </td>
+                                            </tr>                                        
+                                            <?php }}?>
+                                        </tbody> 
+                                    </table>
+                                       </div>                 
                                     
-                                                    </td>
-                                                </tr>                                        
-                                                <?php }}?>
-                                            </tbody> 
-                                        </table>
 
                                     </div>
                                 </div> 

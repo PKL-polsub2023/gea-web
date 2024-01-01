@@ -65,6 +65,7 @@ class Data_kwitansi extends CI_Controller {
                     'totalisatorawal'       => $this->input->post('totalisatorawal'),
                     'totalisatorakhir'       => $this->input->post('totalisatorakhir'),
                     'volumegas'       => $this->input->post('volumegas'),
+                    'satuan_harga'       => $this->input->post('hargasatuan'),
                     'total'       => $this->input->post('total'),
                     'status'       => 'N',
                 );      
@@ -108,6 +109,7 @@ class Data_kwitansi extends CI_Controller {
                   'totalisatorawal'       => $this->input->post('totalisatorawal'),
                   'totalisatorakhir'       => $this->input->post('totalisatorakhir'),
                   'volumegas'       => $this->input->post('volumegas'),
+                  'satuan_harga'       => $this->input->post('hargasatuan'),
                   'total'       => $this->input->post('total'),
 		);
 		$this->db->where("datakwitansi_id", $id); // ubah id dan postnya

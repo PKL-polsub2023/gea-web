@@ -215,8 +215,8 @@ class Saldo_awal extends CI_Controller {
 
             
             $get_coa = $this->Master_COA_Model->get_coa($rowData[0][2]);
+         
             $mastercoa_id = $get_coa['mastercoa_id'];
-
                 $data = [
                     "mastercoa_id"=> $mastercoa_id,
                     "saldo_normal"=> $rowData[0][4],
@@ -253,6 +253,7 @@ class Saldo_awal extends CI_Controller {
             
         }
 
+        redirect('saldo_awal');
         // unlink($inputFileName);
         // $this->alert('<strong>Success: </strong>
         //     <br>Proses import berhasil, data yang berhasil masuk sebanyak <strong>'.$berhasil.' baris</strong>.
