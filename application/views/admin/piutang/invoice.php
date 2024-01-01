@@ -90,7 +90,7 @@
                                                             <a href="<?= base_url('piutang/cetakinvoice/' . $u['tagihan_customer_id']) ?>" class="btn btn-success btn-sm" >Statement</a>                                                     
                                                             <a href="<?= base_url('piutang/cetakba/' . $u['tagihan_customer_id']) ?>" class="btn btn-success btn-sm" >Berita Acara</a> 
                                                             <a href="<?= base_url('piutang/isiinvoice_satuan/' . $u['tagihan_customer_id']) ?>" class="btn btn-success btn-sm" target="_blank">Invoice</a>
-                                                            <a href="<?= base_url('piutang/detailPiutang/' . $u['tagihan_customer_id']) ?>" class="btn btn-info btn-sm">Detail Piutang</a>                                                  
+                                                                                                         
                                                     </td>
 
                                     
