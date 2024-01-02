@@ -133,7 +133,7 @@
                            <div class="modal-body">
                             <form action="<?php echo base_url('hutang/faktur/'. $u['datakwitansi_id']);?>" method="POST" enctype="multipart/form-data" target="_blank"> 
                                <div class="row mb-3">
-                                    <label class="col-sm-4 col-form-label" for="input-mask">No Invoice</label>
+                                    <label class="col-sm-4 col-form-label" for="input-mask">No Faktur</label>
                                     <div class="col-sm-8">
                                     <input id="input-mask" name="no_invoice" class="form-control input-mask">    
                                     </div>

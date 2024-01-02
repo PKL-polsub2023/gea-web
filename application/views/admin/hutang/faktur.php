@@ -174,7 +174,7 @@
         <table class="zz">
             <tr>
                 <th style="width:5%;border-left:1px solid black;" class="data2">QTY</th>
-                <th style="width:40%" class="data2">Nama Barang</th>
+                <th style="width:40%" class="data2">Keterangan</th>
                 <th style="width:10%" class="data2">Volume</th>
                 <th style="width:10%" class="data2">Harga Satuan</th>
                 <th style="width:15%" class="data2">Discount</th>
