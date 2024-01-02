@@ -114,7 +114,28 @@
                                                                 <div class="col-lg-2 me-2" style="display:none" id="div-cetak">
                                                                 <button class="btn btn-info btn-mini" name="cetak" id="cetak" data-bs-toggle="modal" data-bs-target="#myModals">Cetak</button>
                                                                 </div>
-                                                                <div class="col-lg-2">
+
+                                                                <div class="col-lg-3 me-2"  id="div-cetak-stat" style="display:none">
+                                                                <form action="<?php echo base_url('piutang/rekapStat');?>" method="POST" enctype="multipart/form-data"> 
+                                                                <input type="text" id="cetak1" name="mastercustomer_id" value="" hidden >
+                                                                <input type="text" id="cetak2" name="statushutang" value="" hidden >
+                                                                <input type="text" id="cetak3" name="fromdate" value="" hidden >
+                                                                <input type="text" id="cetak4" name="todate" value="" hidden >
+                                                                <button class="btn btn-info btn-mini">Statement</button>
+                                                                </form>
+                                                                </div>
+
+                                                                <div class="col-lg-3 me-2 mt-2"  id="div-cetak-ba" style="display:none">
+                                                                <form action="<?php echo base_url('piutang/rekapBa');?>" method="POST" enctype="multipart/form-data"> 
+                                                                <input type="text" id="cetak1-ba" name="mastercustomer_id" value="" hidden  >
+                                                                <input type="text" id="cetak2-ba" name="statushutang" value="" hidden  >
+                                                                <input type="text" id="cetak3-ba" name="fromdate" value="" hidden  >
+                                                                <input type="text" id="cetak4-ba" name="todate" value="" hidden  >
+                                                                <button class="btn btn-info btn-mini">Berita Acara</button>
+                                                                </form>
+                                                                </div>
+
+                                                                <div class="col-lg-2" id="div-kembali">
                                                                 <button onclick="reset()" type="button" id="reset" value="Go Back" class="btn btn-warning btn-mini">Kembali</button>  
                                                                 </div>
                                                         </div>
@@ -147,6 +168,7 @@
                                             <thead>
                                             <tr>
                                                 <th>No</th>
+                                                <th>ID Customer</th>
                                                 <th>Nama Perusahaan</th>
                                                 <th>Alamat</th>
                                                 <th>Nama PIC</th>
@@ -163,7 +185,8 @@
                                                         foreach($datamaster as $u){  
                                                 ?>                                                            
                                                 <tr>
-                                                    <td width="5%" style="text-align:center"><?php echo ++$no ?></td>                                                    
+                                                    <td width="5%" style="text-align:center"><?php echo ++$no ?></td>     
+                                                    <td width="5%"><?php echo $u['mastercustomer_id'] ?></td>                                               
                                                     <td><?php echo $u['namaperusahaan'] ?></td> 
                                                     <td><?php echo $u['alamat'] ?></td>
                                                     <td><?php echo $u['namapic'] ?></td>
@@ -407,7 +430,9 @@
         function getData(fromDate, toDate, mastercustomer_id, statushutang) {
             let url = "<?= site_url('piutang/selectInvoice') ?>"
             document.getElementById('div-cetak').style.display = "block";
-          
+            document.getElementById('div-cetak-stat').style.display = "block";
+            document.getElementById('div-cetak-ba').style.display = "block";
+            document.getElementById('div-kembali').classList.add('mt-2');
             document.getElementById('tampildata').value = ""
             $.ajax({
                 type: 'POST',
@@ -437,6 +462,11 @@
                     $('#cetak4').val(toDate);
                     $('#tanggal').val(fromDate);
                     $('#dd').val(toDate);
+
+                    $('#cetak1-ba').val(mastercustomer_id);
+                    $('#cetak2-ba').val(statushutang);
+                    $('#cetak3-ba').val(fromDate);
+                    $('#cetak4-ba').val(toDate);
                 }
             })
         }
@@ -446,6 +476,9 @@
             document.getElementById('tampildata').style.display = "none";
             document.getElementById('tampildata1').style.display = "block";
             document.getElementById('div-cetak').style.display = "none";
+            document.getElementById('div-cetak-stat').style.display = "none";
+            document.getElementById('div-cetak-ba').style.display = "none";
+            document.getElementById('div-kembali').classList.remove('mt-2');
 
         }
 
