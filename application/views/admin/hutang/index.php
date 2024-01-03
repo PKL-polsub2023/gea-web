@@ -141,7 +141,7 @@
                                 </div>
 
 
-                                <div class="row mb-3">
+                                <!-- <div class="row mb-3">
                                     <label class="col-sm-4 col-form-label" for="input-mask">Tanggal</label>
                                     <div class="col-sm-8">
                                     <input id="input-mask" name="tanggal" class="form-control input-mask" type="date">     
@@ -154,7 +154,7 @@
                                     <div class="col-sm-8">
                                     <input id="input-mask" name="dd" class="form-control input-mask" type="date"> 
                                     </div>                                                 
-                                </div>   
+                                </div>    -->
             
 
                            </div>

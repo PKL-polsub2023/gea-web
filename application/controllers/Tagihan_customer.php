@@ -291,6 +291,7 @@ class Tagihan_customer extends CI_Controller {
         //$pdf->writeHTML($html, true, false, true, false, '');
         //$pdf->Output('Beritaacara.pdf', 'I');
     }
+    
 
 
 

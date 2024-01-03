@@ -49,22 +49,21 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <!-- <h4 class="card-title mb-4">Form Laporan Account Ledger</h4> -->
-
                                        
-                                            <div class="row">
-                                                <div class="col-lg-2">
+                                            <!-- <div class="row">
+                                                <div class="col col-6 col-lg-2">
                                                     <div>
                                                         <div class="mb-2">
                                                             <label class="form-label" for="input-date1">Dari Tanggal</label>
                                                             <input class="form-control" type="date" name="fromDate" id="fromDate">
-                                                            <!-- <span class="text-muted">e.g "dd/mm/yyyy"</span> -->
+                                                          
                                                         </div>                                                    
                                                     </div>
                                                 </div>                                             
                                                 
 
-                                                <div class="col-lg-2">
-                                                    <div class="mt-2 mt-lg-0">
+                                                <div class="col col-6 col-lg-2">
+                                                    <div class=" mt-lg-0">
                                                         <div class="mb-2">
                                                             <label class="form-label" for="input-email">Sampai Tanggal</label>
                                                             <input class="form-control" type="date" name="toDate" id="toDate">  
@@ -73,7 +72,8 @@
                                                     </div>                                                    
                                                 </div>
 
-                                                <div class="col-lg-2">
+
+                                                <div class=" col col-6 col-lg-2">
                                                     <div class="mt-2 mt-lg-0">
                                                         <div class="mb-2">
                                                             <label class="form-label" for="input-email">Customer</label>
@@ -88,7 +88,7 @@
                                                     </div>                                                    
                                                 </div>
 
-                                                <div class="col-lg-2">
+                                                <div class="col col-6 col-lg-2">
                                                     <div class="mt-2 mt-lg-0">
                                                         <div class="mb-2">
                                                             <label class="form-label" for="input-email">Status</label>
@@ -102,67 +102,59 @@
                                                         
                                                     </div>                                                    
                                                 </div>
+                                               
 
-
-                                                <div class="col-lg-4">
+                                                <div class="col col-6 col-lg-4">
                                                     <div class="mt-2">
                                                         <br>
                                                         <div class="row">
                                                                 <div class="col-lg-3 me-2">
-                                                                <button class="btn btn-info btn-mini" class="easyui-linkbutton" name="view" id="viewData">Tampilkan</button>
+                                                                    <button class="btn btn-info btn-mini" class="easyui-linkbutton" name="view" id="viewData">Tampilkan</button>
                                                                 </div>
+
                                                                 <div class="col-lg-2 me-2" style="display:none" id="div-cetak">
-                                                                <button class="btn btn-info btn-mini" name="cetak" id="cetak" data-bs-toggle="modal" data-bs-target="#myModals">Cetak</button>
+                                                                    <button class="btn btn-info btn-mini" name="cetak" id="cetak" data-bs-toggle="modal" data-bs-target="#myModals">Cetak</button>
                                                                 </div>
 
                                                                 <div class="col-lg-3 me-2"  id="div-cetak-stat" style="display:none">
-                                                                <form action="<?php echo base_url('piutang/rekapStat');?>" method="POST" enctype="multipart/form-data"> 
-                                                                <input type="text" id="cetak1" name="mastercustomer_id" value="" hidden >
-                                                                <input type="text" id="cetak2" name="statushutang" value="" hidden >
-                                                                <input type="text" id="cetak3" name="fromdate" value="" hidden >
-                                                                <input type="text" id="cetak4" name="todate" value="" hidden >
-                                                                <button class="btn btn-info btn-mini">Statement</button>
-                                                                </form>
+                                                                    <form action="<?php echo base_url('piutang/rekapStat');?>" method="POST" enctype="multipart/form-data"> 
+                                                                    <input type="text" id="cetak1-stat" name="mastercustomer_id" value="" hidden >
+                                                                    <input type="text" id="cetak2-stat" name="statushutang" value="" hidden >
+                                                                    <input type="text" id="cetak3-stat" name="fromdate" value="" hidden >
+                                                                    <input type="text" id="cetak4-stat" name="todate" value="" hidden >
+                                                                    <button class="btn btn-info btn-mini">Statement</button>
+                                                                    </form>
                                                                 </div>
 
                                                                 <div class="col-lg-3 me-2 mt-2"  id="div-cetak-ba" style="display:none">
-                                                                <form action="<?php echo base_url('piutang/rekapBa');?>" method="POST" enctype="multipart/form-data"> 
-                                                                <input type="text" id="cetak1-ba" name="mastercustomer_id" value="" hidden  >
-                                                                <input type="text" id="cetak2-ba" name="statushutang" value="" hidden  >
-                                                                <input type="text" id="cetak3-ba" name="fromdate" value="" hidden  >
-                                                                <input type="text" id="cetak4-ba" name="todate" value="" hidden  >
-                                                                <button class="btn btn-info btn-mini">Berita Acara</button>
-                                                                </form>
+                                                                    <form action="<?php echo base_url('piutang/rekapBa');?>" method="POST" enctype="multipart/form-data"> 
+                                                                    <input type="text" id="cetak1-ba" name="mastercustomer_id" value="" hidden  >
+                                                                    <input type="text" id="cetak2-ba" name="statushutang" value="" hidden  >
+                                                                    <input type="text" id="cetak3-ba" name="fromdate" value="" hidden  >
+                                                                    <input type="text" id="cetak4-ba" name="todate" value="" hidden  >
+                                                                    <button class="btn btn-info btn-mini">Berita Acara</button>
+                                                                    </form>
                                                                 </div>
 
                                                                 <div class="col-lg-2" id="div-kembali">
-                                                                <button onclick="reset()" type="button" id="reset" value="Go Back" class="btn btn-warning btn-mini">Kembali</button>  
+                                                                    <button onclick="reset()" type="button" id="reset" value="Go Back" class="btn btn-warning btn-mini">Kembali</button>  
                                                                 </div>
+                                                                
                                                         </div>
-                                                     
-                                                        
                                                     </div>                                                    
                                                 </div>
-
-
-
-                                          
-                                            
-
-                                                
-                                            </div>
-
-                                        
-                                
+                                            </div> -->
+                                         
                                     </div>
                                 </div>
                             </div>
                         </div>
-                                    <div class="card-body" id="tampildata">
+                                    <!-- <div class="card-body" id="tampildata">
 
-                                    </div>
+                                    </div> -->
 
                                     <div class="card-body" id="tampildata1">
+                                   
                                         <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                         
                                             <thead>
@@ -199,8 +191,8 @@
                                                         <!-- <a href="<?= base_url('piutang/invoice/' . $u['mastercustomer_id']) ?>" class="btn btn-info btn-sm">Invoice</a>   
                                                         <a href="<?= base_url('piutang/isiinvoice/' . $u['mastercustomer_id']) ?>" class="btn btn-success btn-sm" target="_blank">PDF Invoice</a>                                                      -->
                                                         <?php if ($u['jumlah_tagihan'] > 0) { ?>
-                                                            <a href="<?= base_url('piutang/invoice/' . $u['mastercustomer_id']) ?>" class="btn btn-info btn-sm">Tagihan Customer</a>   
-                                                            <a href="<?= base_url('piutang/isiinvoice/' . $u['mastercustomer_id']) ?>" class="btn btn-success btn-sm" target="_blank">Invoice</a>                                                     
+                                                            <a href="<?= base_url('piutang/invoice/' . $u['mastercustomer_id']) ?>" class="btn btn-info btn-sm">Invoice</a>   
+                                                            <!-- <a href="<?= base_url('piutang/isiinvoice/' . $u['mastercustomer_id']) ?>" class="btn btn-success btn-sm" target="_blank">Invoice</a>                                                      -->
                                                         <?php } else { ?>
                                                             <span>Tidak ada tagihan</span>
                                                         <?php } ?>
@@ -411,7 +403,7 @@
 </script>
 
 
-<script>
+<!-- <script>
         document.getElementById("viewData").onclick = function() {
             let fromDate = document.getElementById('fromDate').value
             let toDate = document.getElementById('toDate').value
@@ -467,6 +459,12 @@
                     $('#cetak2-ba').val(statushutang);
                     $('#cetak3-ba').val(fromDate);
                     $('#cetak4-ba').val(toDate);
+
+                    
+                    $('#cetak1-stat').val(mastercustomer_id);
+                    $('#cetak2-stat').val(statushutang);
+                    $('#cetak3-stat').val(fromDate);
+                    $('#cetak4-stat').val(toDate);
                 }
             })
         }
@@ -496,7 +494,7 @@
             
         }
     }
-</script>
+</script> -->
 
 
 

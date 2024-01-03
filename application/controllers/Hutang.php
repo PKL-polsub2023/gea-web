@@ -81,7 +81,8 @@ class Hutang extends CI_Controller {
 
       public function validasi_y($id){
             $data = array(
-                  "status" => "Y"
+                  "status" => "Y",
+                  "tanggalbayar" => date('Y-m-d'),
             );
 
             $this->db->where("datakwitansi_id", $id);
@@ -194,12 +195,12 @@ class Hutang extends CI_Controller {
           $total_terbilang = ucwords(terbilang($total));
           $total_rupiah = "Rp " . number_format($total, 0, ',', '.');
     
-          $tanggal = $this->input->post('tanggal');
+          $tanggal = $getData['tanggalbayar'];
           $tanggal1 = explode("-", $tanggal);
-          $tanggal2 = $tanggal1[2]."-".$bulam[$tanggal1[1]]."-".$tanggal1[0];
-          $dd = $this->input->post('dd');
-          $dd1 = explode("-", $dd);
-          $dd2 = $dd1[2]."-".$bulam[$dd1[1]]."-".$dd1[0];
+          $tanggal2 = $tanggal1[0]."-".$bulam[$tanggal1[1]]."-".$tanggal1[2];
+      //     $dd = $this->input->post('dd');
+      //     $dd1 = explode("-", $dd);
+      //     $dd2 = $dd1[2]."-".$bulam[$dd1[1]]."-".$dd1[0];
 
           $date = $getData['tanggal'];
           $date1 = explode("-", $date);
@@ -210,7 +211,7 @@ class Hutang extends CI_Controller {
                 'terbilang' => $total_terbilang,
                 'no_invoice' => $this->input->post('no_invoice'),
                 'tanggal' => $tanggal2,
-                'dd' => $dd2,
+            //     'dd' => $dd2,
                 'date2' => $date2,
                 'rupiah' => $total_rupiah,
           );

@@ -132,12 +132,10 @@
         </table>
 
         <div style="text-align:center">
-            <h2><u>FAKTUR</u></h2>
+            <h2><u>INVOICE</u></h2>
         </div>
-            
-     
 
-        <table class="bio" width="1000px">
+        <table width="1000px">
             <tr>
                 <th  style="width:300px;vertical-align:top;">
                     <table>
@@ -145,7 +143,7 @@
                             <td class="data">Kepada Yth :</td>
                         </tr>
                         <tr>
-                        <td class="data"><?= $u['namaspbg'];?></td>
+                        <td class="data"><?= $data['namaperusahaan'];?></td>
                         </tr>
                     </table>
                 </th>
@@ -154,15 +152,15 @@
                 <th  style="width:400px">
                     <table>
                         <tr>    
-                            <td  class="data">No Faktur : <?= $no_invoice;?></td>
+                            <td  class="data">No Invoice : <?= $data['no_invoice'];?></td>
                             
                         </tr>
                         <tr>
-                            <td  class="data">Tanggal Bayar : <?= $tanggal; ?></td>
+                            <td  class="data">Tanggal : <?= $data['tanggal']; ?></td>
                         </tr>
-                        <!-- <tr>
-                            <td  class="data">Due Date : <?= $dd;?></td>
-                        </tr> -->
+                        <tr>
+                            <td  class="data">Due Date : <?= $data['dd'];?></td>
+                        </tr>
                         <tr>
                             <td  class="data">No PO :</td>
                         </tr>
@@ -183,14 +181,16 @@
          
             <tr>
                 <td class="data2" style="width:5%;text-align:center;border-left:1px solid black">1</td>
-                <td class="data2" style="width:40%"><?php echo "Faktur ".$u['namaspbg']." ".$date2 ?></td>
-                <td class="data2" style="width:10%"><?php echo $u['volumegas'] ?></td>
-                <td class="data2" style="width:10%"><?php echo number_format($u['satuan_harga'], 0, ',', '.') ?></td>
+                <td class="data2" style="width:40%">
+                <?php echo "Tagihan " . $data['namaperusahaan'] . "<br>" . $data['tgl_dari'] . " - " .$data['tgl_ke']; ?>
+                </td>
+                <td class="data2" style="width:10%"><?php echo $data['volume'] ?></td>
+                <td class="data2" style="width:10%"><?php echo number_format($data['harga_jual'], 0, ',', '.') ?></td>
                 <td class="data2" style="width:15%">-</td>
-                <td class="data2" style="width:20%"><?php echo $rupiah ?></td>
+                <td class="data2" style="width:20%"><?php echo number_format($data['total_all'],0,',','.')?></td>
             </tr>
             <tr>
-                <td style="border:none;" colspan="2" rowspan="5">
+                <td colspan="2" rowspan="5">
                 <!-- <p  class="norek">
                     <i>
                     Pembayaran Mohon ditransfer ke :
@@ -205,7 +205,7 @@
                 </td>
 
                 <td class="total" colspan="3"> &nbsp;&nbsp; Subtotal</td>
-                <td style="border-bottom:1px solid black">: <?php echo $rupiah ?></td>
+                <td style="border-bottom:1px solid black">: <?php echo number_format($data['total_all'],0,',','.')?></td>
             </tr>
             <tr>
                 <td class="total" colspan="3"> &nbsp;&nbsp; Discount</td>
@@ -221,7 +221,7 @@
             </tr>
             <tr>
                 <td class="total" colspan="3"> &nbsp;&nbsp; Total</td>
-                <td style="border-bottom:1px solid black">: <?php echo $rupiah ?> </td>
+                <td style="border-bottom:1px solid black">:<?php echo number_format($data['total_all'],0,',','.')?> </td>
             </tr>
         </table>
 
@@ -257,9 +257,3 @@
     </div>
 </div>
 
-<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function() {
-    window.print();
-});
-</script> -->

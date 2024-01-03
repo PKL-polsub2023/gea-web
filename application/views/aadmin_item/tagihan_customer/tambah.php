@@ -13,8 +13,8 @@
                                     <!-- <h6 class="page-title">Data Ruangan</h6> -->
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                                        <li class="breadcrumb-item"><a href="#">Input Surat Jalan Customer</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Tambah Surat Jalan Customer</li>
+                                        <li class="breadcrumb-item"><a href="#">Tagihan Customer</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Tambah Tagihan Customer</li>
                                     </ol>
                                 </div>
                                 <div class="col-md-4">
