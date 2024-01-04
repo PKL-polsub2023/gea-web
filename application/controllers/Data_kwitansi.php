@@ -129,7 +129,8 @@ class Data_kwitansi extends CI_Controller {
 
       public function validasi_y($id){
             $data = array(
-                  "status" => "Y"
+                  "status" => "Y",
+                  "tanggalbayar" => date('Y-m-d'),
             );
 
             $this->db->where("datakwitansi_id", $id);
