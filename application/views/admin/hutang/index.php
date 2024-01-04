@@ -135,7 +135,7 @@
                                <div class="row mb-3">
                                     <label class="col-sm-4 col-form-label" for="input-mask">No Faktur</label>
                                     <div class="col-sm-8">
-                                    <input id="input-mask" name="no_invoice" class="form-control input-mask">    
+                                    <input value="<?php echo $u['faktur'];?>" id="input-mask" name="no_invoice" class="form-control input-mask">    
                                     </div>
                                                                                                           
                                 </div>

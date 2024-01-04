@@ -139,22 +139,11 @@
                                         <label class="col-sm-4 col-form-label" for="input-mask">No Invoice</label>
                                             <div class="col-sm-8">
                                                 <input  id="v1"  name="no_invoice" class="form-control input-mask" required>    
+                                                <input  id="v2" name="tanggal" class="form-control input-mask" type="date" value="<?php echo $fromdate; ?>" hidden> 
+                                                <input  id="v3" name="dd" class="form-control input-mask" type="date" value="<?php echo $todate; ?>" hidden>     
                                             </div>
                                                                                                           
                                     </div>
-                                    <div class="row mb-3">
-                                        <label class="col-sm-4 col-form-label" for="input-mask">Tanggal</label>
-                                            <div class="col-sm-8">
-                                                <input  id="v2" name="tanggal" class="form-control input-mask" type="date" required>     
-                                            </div>                                             
-                                    </div>
-                                                        
-                                    <div class="row mb-3">
-                                        <label class="col-sm-4 col-form-label" for="input-mask">Due Date</label>
-                                            <div class="col-sm-8">
-                                                <input  id="v3" name="dd" class="form-control input-mask" type="date" required> 
-                                            </div>                                                 
-                                    </div>   
                                 </div>
 
                                 <div class="modal-footer">
@@ -207,12 +196,14 @@
                                                    </td>
                                                     <td>
                                                     <?php if($inv['status'] == "N") { ?>
-                                                    <a onclick="return confirm('Anda Yakin Akan Memverifikasi Invoice?')" href="<?= base_url('invoice/validasi_y/' . $inv['id_invoice']) ?>" class="btn btn-success btn-sm" style="width:35px;"><i class="fa fa-check"></i></a>                                                                                                         
+                                                        <button onclick="validasi('<?=$inv['id_invoice'] ?>')" href="#" class="btn btn-success btn-sm" style="width:35px;"><i class="fa fa-check"></i></button>
+                                                        <button onclick="deleteInvoice('<?=$inv['id_invoice'] ?>')" href="#" class="btn btn-danger btn-sm" style="width:35px;"><i class="fa fa-trash"></i></button>
+                                                    <!-- <a onclick="return confirm('Anda Yakin Akan Memverifikasi Invoice?')" href="<?= base_url('invoice/validasi_y/' . $inv['id_invoice']) ?>" class="btn btn-success btn-sm" style="width:35px;"><i class="fa fa-check"></i></a>                                                                                                          -->
                                                     <?php } ?>
                                                     
-                                                    <a href="<?= base_url('invoice/cetakinvoice/' . $inv['id_invoice']) ?>" class="btn btn-success btn-sm" >Invoice</a>   
-                                                    <a href="<?= base_url('invoice/cetakstat/' . $inv['id_invoice']) ?>" class="btn btn-success btn-sm" >Statement</a>       
-                                                    <a href="<?= base_url('invoice/cetakba/' . $inv['id_invoice']) ?>" class="btn btn-success btn-sm" >Berita Acara</a>        
+                                                    <a href="<?= base_url('invoice/cetakinvoice/' . $inv['id_invoice']) ?>" class="btn btn-success btn-sm" target="_blank" >Invoice</a>   
+                                                    <a href="<?= base_url('invoice/cetak_stat/' . $inv['id_invoice']) ?>" class="btn btn-success btn-sm" target="_blank" >Statement</a>       
+                                                    <a href="<?= base_url('invoice/cetakba/' . $inv['id_invoice']) ?>" class="btn btn-success btn-sm" target="_blank" >Berita Acara</a>        
 
                                                     </td>
             
@@ -228,6 +219,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.28.1/sweetalert2.all.min.js"></script>
  
+
 
 <!-- <script>
     function button()

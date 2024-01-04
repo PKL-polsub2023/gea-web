@@ -217,6 +217,14 @@ class Hutang extends CI_Controller {
           );
 
 
+          $no_faktur = [
+            'faktur' => $this->input->post('no_invoice'),
+          ];
+          
+          $this->db->where("datakwitansi_id", $id);
+          $this->db->update("dt_datakwitansi", $no_faktur);
+
+
            
              $mpdf = new \Mpdf\Mpdf(
                   [

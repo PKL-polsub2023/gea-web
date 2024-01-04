@@ -46,9 +46,13 @@ class Invoice_Model extends CI_Model{
             ");
 
 		return $query->row_array();
-
-
-
 	}
+
+      public function hapus($id)
+      {
+          $this->db->where('id_invoice',$id); 
+          return $this->db->delete('dt_invoice');
+          
+      }
 
 }

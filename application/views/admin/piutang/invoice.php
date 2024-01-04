@@ -363,6 +363,7 @@
                     dt.insertAdjacentHTML('afterbegin', "<span class ='insertedContent'>" + data + "</span>");
                        // Inisialisasi Datatables pada tabel yang baru dimasukkan
                     $('#filter').DataTable();
+                    $('#riwayat-invoice').DataTable();
                 
                 }
             })
@@ -394,7 +395,115 @@
             
         }
     }
+
+    function validasi(id)
+    {
+        let fromDate = document.getElementById('fromDate').value
+        let toDate = document.getElementById('toDate').value
+        let mastercustomer_id = document.getElementById('mastercustomer_id').value
+
+        swal({
+                title: 'Konfirmasi',
+                text: "Anda Ingin Konfirmasi Invoice? ",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Konfirmasi',
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                cancelButtonText: 'Tidak',
+                reverseButtons: true
+              }).then((result) => {
+                if (result.value) {
+                  $.ajax({
+                    url:"<?=base_url('invoice/validasi_y')?>",  
+                    method:"post",
+                    beforeSend :function () {
+                    swal({
+                        title: 'Menunggu',
+                        html: 'Memproses data',
+                        onOpen: () => {
+                          swal.showLoading()
+                        }
+                      })      
+                    },    
+                    data:{id:id},
+                    success:function(data){
+                      swal(
+                        'Konfirmasi',
+                        'Berhasil Konfirmasi',
+                        'success'
+                      )
+                      getData(fromDate, toDate, mastercustomer_id)
+                   
+                    //   location.reload(true);
+                      //datatable.ajax.reload(null, false)
+                    }
+                  })
+              } else if (result.dismiss === swal.DismissReason.cancel) {
+                  swal(
+                    'Batal',
+                    'Anda membatalkan Konfirmasi',
+                    'error'
+                  )
+                }
+              })
+    }
+
+
+    function deleteInvoice(id)
+    {
+        let fromDate = document.getElementById('fromDate').value
+        let toDate = document.getElementById('toDate').value
+        let mastercustomer_id = document.getElementById('mastercustomer_id').value
+
+        swal({
+                title: 'Hapus',
+                text: "Anda Ingin Menghapus Invoice? ",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Konfirmasi',
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                cancelButtonText: 'Tidak',
+                reverseButtons: true
+              }).then((result) => {
+                if (result.value) {
+                  $.ajax({
+                    url:"<?=base_url('invoice/hapusInvoice')?>",  
+                    method:"post",
+                    beforeSend :function () {
+                    swal({
+                        title: 'Menunggu',
+                        html: 'Memproses data',
+                        onOpen: () => {
+                          swal.showLoading()
+                        }
+                      })      
+                    },    
+                    data:{id:id},
+                    success:function(data){
+                      swal(
+                        'Dihapus',
+                        'Berhasil Dihapus',
+                        'success'
+                      )
+                      getData(fromDate, toDate, mastercustomer_id)
+                   
+                    //   location.reload(true);
+                      //datatable.ajax.reload(null, false)
+                    }
+                  })
+              } else if (result.dismiss === swal.DismissReason.cancel) {
+                  swal(
+                    'Batal',
+                    'Anda Membatalkan Hapus Invoice',
+                    'error'
+                  )
+                }
+              })
+    }
 </script>
+
 
 
 

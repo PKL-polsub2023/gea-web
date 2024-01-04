@@ -16,7 +16,16 @@ class Invoice extends CI_Controller {
 		//$this->load->model('Dashboard_Model');
 	}
 
-	public function validasi_y($id){
+	public function hapusInvoice()
+    {
+         $id = $this->input->post('id');
+         $data = $this->Invoice_Model->hapus($id);
+         echo json_encode($data);
+    }
+
+	public function validasi_y(){
+
+		$id =  $this->input->post('id');
 		$invoice = $this->Invoice_Model->detailData($id);
 		$mastercustomer_id = $invoice['mastercustomer_id'];
 		$data = array(
@@ -25,7 +34,9 @@ class Invoice extends CI_Controller {
 
 		$this->db->where("id_invoice", $id);
 		$this->db->update("dt_invoice", $data);
-		redirect("piutang/invoice/" .$mastercustomer_id);
+
+		echo json_encode($data);
+		// redirect("piutang/invoice/" .$mastercustomer_id);
   }
 
 
